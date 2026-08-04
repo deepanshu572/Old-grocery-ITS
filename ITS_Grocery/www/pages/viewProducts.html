@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITS-grocery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+    integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+    integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  <div class="main margin_box animate-fade-in">
+    <div class="back_btn" onclick="location.href='home.html'">
+      <div class="back_btn_arrow">
+        <i class="ti ti-arrow-narrow-left"></i>
+      </div>
+      <div class="wrap_top_prd">
+        <h5 id="selectedPrdHeading"></h5>
+        <small id="noOfPrd"></small>
+      </div>
+    </div>
+
+    <div class="reuse_product product_design_sec_wrap search_data_wrap">
+      <div class="search_data product_wrapper" id="getAllProductData">
+
+      </div>
+    </div>
+
+
+
+
+
+    <div class="footer_tab">
+      <div class="foot_tab" onclick="location.href = 'home.html'">
+        <i class="ri-home-5-line"></i>
+      </div>
+      <div class="foot_tab" onclick="location.href = 'category.html'">
+        <i class="ri-apps-fill"></i>
+      </div>
+      <div class="foot_tab circle"></div>
+      <div class="foot_tab" onclick="location.href = 'orders.html'">
+        <i class="ri-shopping-bag-4-line"></i>
+      </div>
+      <div class="foot_tab" onclick="location.href = 'profile.html'">
+        <i class="ri-user-3-line"></i>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="cartPopup">
+    <div class="cart_popup" onclick="location.href='cart.html'">
+
+      <div class="cart_left">
+        <h6>View cart</h6>
+        <p><b id="cartQty"></b> item</p>
+      </div>
+
+      <div class="cart_right">
+        <i class="ti ti-chevrons-right"></i>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="offcanvas offcanvas-bottom varient_data_canvas" tabindex="-1" id="offcanvasVarient"
+    aria-labelledby="offcanvasVarientLabel">
+    <div class="offcanvas-body small">
+      <h4>Select Varient</h4>
+      <div class="varient_data" id="varientData"></div>
+    </div>
+  </div>
+
+
+  <div class="reuse_category wrap_category2">
+    <div class="category_wrap reuse_wrap_head">
+      <h4>Top Rated</h4>
+      <div class="category_box_design" id="catgory99Store1">
+      </div>
+    </div>
+  </div>
+
+
+  <script src="../cordova.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="../assets/js/script.js"></script>
+  <script>
+    const typeName = Number(localStorage.getItem("prdType"));
+    console.log("typeName", typeName);
+    console.log("typeName", typeof typeName);
+
+    getAllProductData();
+  </script>
+</body>
+
+</html>

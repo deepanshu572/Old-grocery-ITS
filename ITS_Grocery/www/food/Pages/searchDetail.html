@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APP</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+      <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+  </head>
+  <body>
+    <div class="main animate-fade-in margin_box">
+      <div class="header_nav searchDetail">
+        <div class="category_left_head">
+          <i class="bi bi-chevron-left"></i>
+          <h4 id="searchQuery"></h4>
+        </div>
+        <div onclick="location.href = 'search.html'" class="search_bar">
+          <img src="../assets/image/icons/search2.svg" alt="" />
+        </div>
+      </div>
+      <!-- <div class="filter_data_tab">
+        <div class="filter_tab_box">
+          <button><i class="bi bi-sliders"></i> Filter <i class="bi bi-caret-down-fill"></i></button>
+        </div>
+        <div class="filter_tab_box">
+          <button> Sort by <i class="bi bi-caret-down-fill"></i></button>
+        </div>
+       
+      
+      </div> -->
+      <div class="related_prd reuse_head_prd">
+        <h4>recomended for you</h4>
+        <div class="wrapper_products">
+          <div class="product_wrap" id="recomendation"></div>
+        </div>
+      </div>
+      <div class="search_data reuse_head_prd">
+         <h4>All Restaurants</h4>
+        <div class="product2_wrapper">
+          <div class="product_container" id="prdSearch2"></div>
+        </div>
+      </div>
+    </div>
+    <script src="../../cordova.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      getInputValue();
+      searchDataFetch();
+
+      
+    </script>
+  </body>
+</html>

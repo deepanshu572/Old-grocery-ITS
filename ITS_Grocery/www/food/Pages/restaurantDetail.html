@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITS-Food</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+  </head>
+  <body>
+    <div class="main animate-fade-in">
+      <div class="top_header_wrapper topShop">
+        <div class="header_nav " onclick="history.back()">
+          <div class="category_left_head">
+            <i class="bi bi-chevron-left"></i>
+            <h4>Dessert</h4>
+          </div>
+        
+        </div>
+        <div class="shop_data bottom_product_txt" id="shopDetail"></div>
+      </div>
+      <div class="crausel_detail_shop" id="shopDetailCrousel"></div>
+
+      <div class="home_search">
+        <div class="home_search_wrap">
+          <!-- <label for=""
+            >Search for
+            <div class="animate_wrap">
+              <p class="animate_Inp" id="animateInp">‘Bread’</p>
+              <p class="animate_Inp" id="animateInp">‘Bread’</p>
+              <p class="animate_Inp" id="animateInp">‘Bread’</p>
+              <p class="animate_Inp" id="animateInp">‘Bread’</p>
+            </div>
+          </label> -->
+          <input type="text" id="searchResturant" placeholder="Search for ‘Bread’" />
+
+          <div class="line"></div>
+          <button>
+            <img src="../assets/image/icons/mic.svg" alt="" />
+          </button>
+        </div>
+      </div>
+      <!-- <div class="filters_btn">
+        <button
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasFilterOption1"
+          aria-controls="offcanvasFilterOption1"
+        >
+          Filter <i class="bi bi-funnel"></i>
+        </button>
+        <button
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasFilterOption1"
+          aria-controls="offcanvasFilterOption2"
+        >
+          Sort by <i class="bi bi-chevron-down"></i>
+        </button>
+        <button
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasFilterOption1"
+          aria-controls="offcanvasFilterOption3"
+        >
+          Veg/Non-Veg <i class="bi bi-chevron-down"></i>
+        </button>
+        <button
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasFilterOption1"
+          aria-controls="offcanvasFilterOption4"
+        >
+          Cost <i class="bi bi-chevron-down"></i>
+        </button>
+      </div> -->
+      <div class="filter_data_tab">
+        <div class="filter_tab_box">
+          <button
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasFilterOption1"
+            aria-controls="offcanvasFilterOption1"
+          >
+            <i class="bi bi-sliders"></i> Filter <b id="countFilter"></b>
+            <i class="bi bi-caret-down-fill"></i>
+          </button>
+        </div>
+    
+      </div>
+
+      <div class="shop_detail_product selectedPrd">
+        <div class="header_detail">
+          <h4>Looking for “<b id="prdName"></b>”</h4>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="resturant_product_wrapper" id="selectedProduct"></div>
+      </div>
+      <div class="shop_detail_product">
+        <div class="header_detail">
+          <h4>Recomendation for you</h4>
+          <i class="bi bi-chevron-down"></i>
+        </div>
+        <div class="resturant_product_wrapper" id="resturantProduct"></div>
+      </div>
+    </div>
+
+    <!-- filter1 -->
+    <div
+      class="offcanvas offcanvas-bottom reuse_modal_box filter_reuse modalResturant"
+      tabindex="-1"
+      id="offcanvasFilterOption1"
+      aria-labelledby="offcanvasFilterOption1Label"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">Filter</h5>
+
+        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="content_filter">
+          <div class="filter_modal">
+            <input type="hidden" id="selectedFoodType" value="veg">
+<input type="hidden" id="selectedSort" value="relevance">
+            <!-- Left Menu -->
+            <div class="left_wrap">
+              <div
+                class="filter_sidebar active_sort"
+                onclick="handleFilter('foodType', this)"
+              >
+                <div class="line_box"></div>
+                <div class="filter_tab">Veg/Non-Veg</div>
+              </div>
+
+              <div class="filter_sidebar" onclick="handleFilter('sort', this)">
+                <div class="line_box"></div>
+                <div class="filter_tab">Sort</div>
+              </div>
+            </div>
+
+            <!-- Right Content -->
+            <div id="rightFilter"></div>
+          </div>
+        </div>
+        <div class="modal_fixed_bottom">
+          <button class="active" onclick="clearFilters()">Clear Filter</button>
+          <button onclick="handleApplyFilter()">Apply</button>
+        </div>
+      </div>
+    </div>
+    <!-- filter2 -->
+    <div
+      class="offcanvas offcanvas-bottom"
+      tabindex="-1"
+      id="offcanvasFilterOption2"
+      aria-labelledby="offcanvasFilterOption2Label"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasFilterOption2Label">
+          Offcanvas bottom
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body small">...</div>
+    </div>
+
+    <!-- add cart box -->
+
+    <div
+      class="offcanvas offcanvas-bottom modalResturant"
+      tabindex="-1"
+      id="offcanvasProductModal"
+      aria-labelledby="offcanvasProductModalLabel"
+    >
+      <div class="offcanvas-header reuse_header_modal_box">
+        <div class="left_modal_head">
+          <img id="PrdImage" src="" alt="" />
+          <h5 class="offcanvas-title" id="offcanvasProductModalLabel">
+            <span id="prdNameModal">Chicken Biryani</span>
+          </h5>
+        </div>
+        <button
+          type="button"
+          class="btn_close_custom"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="modalResturant_tedy_sec">
+          <img src="../assets/image/icons/tedy.svg" alt="" />
+          <div class="txt_tedy">
+            <h5>
+              Hi, we’ve preselected some popular choices to help you place the
+              order faster!
+            </h5>
+          </div>
+        </div>
+        <div class="modal_resturant_select_role">
+          <h5>
+            Qantity : Select any
+            <p id="num">1</p>
+          </h5>
+          <div class="selection_wrap" id="varientData"></div>
+        </div>
+        <div class="modal_fixed_bottom" id="btnWrapper">
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- product detail box -->
+
+    <div
+      class="offcanvas offcanvas-bottom product_box prd_box_modal"
+      tabindex="-1"
+      id="offcanvasProductBox"
+      aria-labelledby="offcanvasProductBoxLabel"
+    >
+      <div class="offcanvas-body small" id="ProductData"></div>
+    </div>
+    <script src="../../cordova.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      getProduct();
+      getResturantData();
+
+    
+    </script>
+  </body>
+</html>

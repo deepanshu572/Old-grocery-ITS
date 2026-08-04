@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+        <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+  
+  </head>
+  <body>
+    <div class="main product_main">
+      <div class="product_detail_box">
+        <div class="product_detail_head">
+          <div class="arrow" onclick="location.href='home.html'"><i class="ti ti-chevron-left"></i></div>
+          <div class="like_btn"  onclick="location.href='search.html'"><i class="ti ti-search"></i></div>
+        </div>
+        <div class="owl-carousel owl-carousel4 product_detail_carousel" id="productDetailCrousel">
+            
+       
+        </div>
+          <div class="rating_desc">
+            <small>4.5</small>
+            <i class="ti ti-star-filled gold"></i>
+            <i class="ti ti-star-filled gold"></i>
+            <i class="ti ti-star-filled gold"></i>
+            <i class="ti ti-star-filled gold"></i>
+            <i class="ti ti-star"></i>
+          </div>
+      </div>
+      <div class="product_desc">
+        <div class="product_top_txt">
+          <div class="time">
+            <i class="ti ti-clock-hour-2"></i>
+            <p>16 minutes</p>
+          </div>
+        
+        </div>
+        <div class="product_txt_detail">
+          <div class="product_txt_left">
+            <h3 id="prdTxt"></h3>
+            <p id="prdQty"></p>
+          </div>
+          <div class="product_disc" id="prdDisc"></div>
+        </div>
+        <div class="product_txt_price">
+          <h4 id="prdSelling"></h4>
+          <p>MRP <del id="prdMrp"></del> (Incl. of all taxes)</p>
+        </div>
+       
+        <div class="product_select_wrap">
+          <h4>Select Varient</h4>
+
+          <div class="product_select_varient" id="varientData1">
+            <!-- <div class="select_varient_box">
+              <div class="top_select">5% OFF</div>
+              <div class="bottom_select">
+                <h4>10 kg</h4>
+                <div class="bottom_tab">
+                  <h5>₹471</h5>
+                  <p>MRP <del>₹699</del></p>
+                </div>
+              </div>
+            </div>
+            <div class="select_varient_box active_varient">
+              <div class="top_select">5% OFF</div>
+              <div class="bottom_select">
+                <h4>10 kg</h4>
+                <div class="bottom_tab">
+                  <h5>₹471</h5>
+                  <p>MRP <del>₹699</del></p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+         <div class="product_graph product_dets_exp">
+           <h5>Expiry Date 12 Apr 2026</h5>
+            <p>Manufactured date 13 Jan 2026</p>
+        </div>
+         <div class="product_graph">
+            <i class="ti ti-chart-dots-2"></i>
+            <p>3,000+ people ordered this in the last 15 days </p>
+        </div>
+        <div class="product_description_sec">
+          <h5 onclick="toggleSystem()">
+            View Product Detail <i class="ti ti-caret-down-filled"></i>
+          </h5>
+          <div
+            class="desc_toggle"
+            id="descToggle"
+          
+          >
+            <p id="descTxt">
+             
+            </p>
+          </div>
+        </div>
+    
+      </div>
+       <div class="reuse_product product_design_sec_wrap related_product slider_reuse ">
+          <div class=" reuse_header_for_all">
+            <h5>You may also like</h5>
+          </div>
+          <div class="product_wrapper" id="productRelatedData"></div>
+         
+        </div>
+        <div class="product_detail_footer">
+          <div class="left_product_detail_left">
+            <small id="footerQty"></small>
+            <div class="price_product_detail">
+              <h5 id="footerPrice"></h5>
+              <p>MRP <del id="footerMrp"></del></p>
+            </div>
+            <small>inclusive of all taxes</small>
+          </div>
+          <div class="left_product_detail_right" id="addCartBtn">
+           
+          </div>
+        </div>
+    </div>
+
+    
+
+        <div
+      class="offcanvas offcanvas-bottom varient_data_canvas"
+      tabindex="-1"
+      id="offcanvasVarient"
+      aria-labelledby="offcanvasVarientLabel"
+    >
+      <div class="offcanvas-body small">
+        <h4>Select Varient</h4>
+        <div class="varient_data" id="varientData"></div>
+      </div>
+    </div>
+
+     <div id="cartPopup">
+      <div
+        class="cart_popup"
+        onclick="location.href='cart.html'">
+
+        <div class="cart_left">
+          <h6>View cart</h6>
+          <p><b id="cartQty"></b> item</p>
+        </div>
+
+        <div class="cart_right">
+          <i class="ti ti-chevrons-right"></i>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+
+   <script src="../cordova.js"></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="../assets/js/owl.carousel.min.js"></script>
+
+    <script src="../assets/js/pageRender.js"></script>
+    <script src="../assets/js/script.js"></script>
+
+  <script>
+  getSingleProduct();
+    
+ </script>
+</html>

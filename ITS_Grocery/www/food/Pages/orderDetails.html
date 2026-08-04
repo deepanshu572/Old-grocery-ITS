@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITS-Food</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <div class="main animate-fade-in margin_box">
+      <div class="header_nav">
+        <a href="orders.html" class="category_left_head">
+          <img src="../assets/image/icons/leftArrow.svg" alt="" />
+          <h4>OrdersDetail</h4>
+        </a>
+      </div>
+      <div class="order_detail_wrap">
+        <div class="order_deliver_status">
+            <div class="icon_status">
+                <img src="../assets/image/icons/box.svg" alt="">
+            </div>
+            <h5>Your order is : <b id="status"></b></h5>
+        </div>
+        <div class="orderDetailData" id="orderDetailData"></div>
+        <div id="ordersData"></div>
+          <div class="cart_data_sec4 order_Detail_bill" id="billData">
+         
+        </div>
+      </div>
+      
+    </div>
+    <script src="../../cordova.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+             getOrderDetail();
+             getOrderCalcData();
+
+    </script>
+  </body>
+</html>

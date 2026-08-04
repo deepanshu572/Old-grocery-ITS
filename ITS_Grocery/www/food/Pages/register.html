@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ITS-Food</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+    <div class="main">
+        <div class="login_form animate-fade-in">
+          <h4>Create your new <br> account.</h4>
+          <p>Create an account to start looking for the food you like</p>
+          <form onsubmit="handleRegister(event)" class="form_input">
+            <div class="form_inp">
+              <label for="name">Full Name</label>
+              <div class="inp">
+              <input type="text" id="name" placeholder="Enter name">
+              </div>
+            </div>
+            <div class="form_inp">
+              <label for="mob">Mobile no</label>
+              <div class="inp">
+              <input type="tel" id="mob" maxlength="10" placeholder="Enter number">
+              </div>
+            </div>
+            <div class="form_inp">
+              <label for="email">Email Address</label>
+              <div class="inp">
+              <input type="text" id="email" placeholder="Enter email">
+              </div>
+            </div>
+            <div class="form_inp">
+              <label for="password">Password</label>
+              <div class="inp">
+              <input type="text" id="password" placeholder="Password">
+              <i id="eye" onclick="handleToggle('eye', 'password')" class="bi bi-eye"></i>
+              </div>
+            </div>
+          <div class="check_point">
+            <input type="checkbox" name="check" id="Agree">
+            <label for="Agree">I Agree with <b>Terms of Service </b> and <b>Privacy Policy</b> </label>
+          </div>
+            <div class="input_btn reuse_btn">
+              <button id="btnRegister" type="submit">Register</button>
+            </div>
+            <div class="inp_render">
+              <h5>have an account ? <a href="login.html">Login </a></h5>
+            </div>
+          </form>
+        </div>
+    </div>
+       <script src="../../cordova.js"></script>
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/script.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finding Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<div class="find_store_screen">
+
+    <div class="search_wrap">
+        <div class="search_icon"><img src="../assets/img/icon/search.svg" alt=""></div>
+    </div>
+
+    <div class="find_text" id="addrress">
+       <span > Finding your nearest store</span>
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+        <span class="dot">.</span>
+    </div>
+
+    <div class="image_shop_loc">
+    <img src="../assets/img/bg/shop.svg" alt="">
+    </div>
+
+</div>
+
+ <script src="../cordova.js"></script>
+ <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+<script src="../assets/js/script.js"></script>
+<script>
+        localStorage.setItem("currentCategoryName","Grocery");
+
+    setTimeout(() => {
+        $("#addrress").html("ITS Cart Mahaveer Nagar, Argora, Ranchi, 834002");
+        location.href="home.html";
+
+    }, 1500);
+</script>
+
+</body>
+</html>

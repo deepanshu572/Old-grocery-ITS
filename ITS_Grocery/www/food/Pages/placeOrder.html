@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order</title>
+
+ <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+      <link rel="stylesheet" href="../assets/css/style.css" />
+
+</head>
+<body>
+
+
+    <div class="place_order_data">
+        <div class="place_order_head">
+            <div class="back" onclick="location.href='orders.html'">
+                <i class="bi bi-arrow-left-short"></i>
+            </div>
+            <h4>Deliver Your order</h4>
+            <h4></h4>
+        </div>
+        <iframe
+            src="https://maps.google.com/maps?q=ranchi&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+        <div class="place_order_bottom_data">
+            <div class="wrap_phone_delivery">
+            <div class="place_order_phone">
+                <div class="place_order_left">
+                <div class="place_order_img">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="">
+                </div>
+                <div class="place_order_txt">
+                    <h4>Rahul Kumar</h4>
+                    <p>ID 23345</p>
+                </div>
+                </div>
+                <div class="place_order_right">
+                     <a href="tel:+919999999999" class="call_btn">
+              <img src="../assets/image/icons/phone.svg" alt="">
+            </a>
+                </div>
+
+            </div>
+            </div>
+            <div class="place_order_status">
+                <h4>Your Delivery Time</h4>
+                <b>Estimated 30 min</b>
+                <div class="place_order_status_sec">
+                    <div class="place_order_icon"> <img src="../assets/image/icons/order.svg" alt=""></div>
+                    <div class="border_order border_order_active"></div>
+                    <div class="place_order_icon"> <img src="../assets/image/icons/cook.svg" alt=""></div>
+                   <div class="border_order border_order_active"></div>
+                    <div class="place_order_icon"> <img src="../assets/image/icons/delivery.svg" alt=""></div>
+                   <div class="border_order"></div>
+                    <div class="place_order_icon"> <img src="../assets/image/icons/tick.svg" alt=""></div>
+                   
+                </div>
+                <p>Order</p>
+                <div id="orderData" class="order_data"></div>
+              
+            </div>
+            <div class="btn_reuse reuse_order">
+                <button onclick="location.href='orders.html'">Go To order</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../cordova.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+       getCurrentOrderData();
+    </script>
+
+</body>
+</html>

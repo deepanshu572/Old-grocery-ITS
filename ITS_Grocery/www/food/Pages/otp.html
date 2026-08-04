@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITS-Food</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <div class="main animate-fade-in">
+      <div class="otp_form">
+        <div class="otp_header reuse_header">
+          <a href="register.html" class="icon">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+          <h4>OTP</h4>
+          <div></div>
+        </div>
+        <form
+          onsubmit="
+            handleOtpRegister(event);
+          "
+          class="form_otp_data wrapper"
+        >
+          <div class="form_otp_head reuse_head">
+            <h4>Enter OTP to verify</h4>
+            <p>
+              A 6 digit OTP has been sent to your phone number <b id="num"></b>
+              <a href="#">Change</a>
+            </p>
+          </div>
+
+          <div class="form_otp_inputs">
+            <h5>Enter OTP Text</h5>
+            <div class="form_otp_input">
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp1" type="number" required />
+              </div>
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp2" type="number" required />
+              </div>
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp3" type="number" required />
+              </div>
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp4" type="number" required />
+              </div>
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp5" type="number" required />
+              </div>
+              <div class="form_inp_otp_holder">
+                <input class="otp_input" id="otp6" type="number" required />
+              </div>
+            </div>
+            <div class="form_otp_btn reuse_btn">
+              <button id="otpBtn">Verify Otp</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+   <script src="../../cordova.js"></script>
+    <script src="../mart/assets/js/signup.js"></script>
+    <script src="../mart/assets/js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
+     <script>
+      // $(".otp_input").on("input", function () {
+      //   if ($(this).val().length === 1) {
+      //     $(this).next(".otp_input").focus();
+      //   }
+      // });
+      // $(".otp_input").on("keydown", function (e) {
+      //   if (e.key === "Backspace" && $(this).val() === "") {
+      //     $(this).prev(".otp_input").focus();
+      //   }
+      // });
+
+
+      
+             sendOtpRegister();
+
+    </script>
+  </body>
+</html>

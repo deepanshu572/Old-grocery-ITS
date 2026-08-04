@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS-Food</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="main"> -->
+        <img src="assets/image/screens/splash.svg" alt="">
+
+    <!-- </div> -->
+     <script src="cordova.js"></script>
+    <script>
+        // document.addEventListener("deviceready", async function () { 
+
+      setTimeout(async () => {
+          await StatusBar.overlaysWebView(true);
+          await StatusBar.backgroundColorByHexString("#000000");
+          await StatusBar.styleLightContent();
+    }, 500);
+
+        setTimeout(() => {
+            let login_status = localStorage.getItem('login_status');
+        if (login_status == 'true') {
+            location.href = 'Pages/welcome.html';
+        } else {
+               location.href="Pages/splash1.html";
+        }
+        }, 3500);
+        // }, false);
+    </script>
+</body>
+</html>

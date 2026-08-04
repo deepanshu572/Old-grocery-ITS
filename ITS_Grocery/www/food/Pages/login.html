@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ITS-Food</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+    <div class="main">
+        <div class="login_form animate-fade-in">
+          <h4>Login to your <br> account.</h4>
+          <p>Please sign in your account</p>
+          <form onsubmit="handleLogin(event); return false;" class="form_input">
+            <div class="form_inp">
+              <label for="mobLogin">Mobile no</label>
+              <div class="inp">
+              <input type="tel" id="mob" maxlength="10" placeholder="Enter number">
+              </div>
+            </div>
+            <div class="form_inp">
+              <label for="password">Password</label>
+              <div class="inp">
+              <input type="text" id="password" placeholder="Password">
+              <i id="eye" onclick="handleToggle('eye','password')" class="bi bi-eye"></i>
+              </div>
+            </div>
+            <div class="inp_txt">
+              <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasForgot" aria-controls="offcanvasForgot" href="#">Forgot Password ?</a>
+            </div>
+            <div class="input_btn reuse_btn">
+              <button id="btnLogin">Login</button>
+            </div>
+            <div class="inp_render">
+              <h5>Don’t have an account? <a href="register.html">Register </a></h5>
+            </div>
+          </form>
+        </div>
+    </div>
+
+
+<div class="offcanvas offcanvas-bottom forgotCanvas" tabindex="-1" id="offcanvasForgot" aria-labelledby="offcanvasForgotLabel">
+ 
+  <div  class="offcanvas-body small">
+       <h4>Forgot Password?</h4>
+       <p>Select which contact details should we use to reset your password</p>
+       <div class="forgot_canvas_btn">
+        <input id="selectedForgotType" class="hidden" type="text">
+        <div class="forgot_btn active_forgot ">
+         <div class="forgot_left">
+          <div class="forgot_left_icon green">
+           <i class="bi bi-phone"></i>
+          </div>
+          <div class="forgot_left_txt">
+            <h4>Using Phone no</h4>
+            <p class="hidden">number</p>
+          </div>
+         </div>
+         <div class="forgot_right_icon">
+         <i class="bi bi-check"></i>
+         </div>
+        </div>
+        <div class="forgot_btn">
+         <div class="forgot_left">
+          <div class="forgot_left_icon orange">
+           <i class="bi bi-envelope-fill"></i>
+          </div>
+          <div class="forgot_left_txt">
+            
+            <h4>Using Email</h4>
+            <p class="hidden">email</p>
+          </div>
+         </div>
+         <div class="forgot_right_icon">
+         <i class="bi bi-check"></i>
+         </div>
+        </div>
+        <div class="forgot_continue_btn reuse_btn">
+          <button id="forgotOtpBtn" onclick="handleForgotOtp();">Continue</button>
+        </div>
+       </div>
+  </div>
+</div>
+       <script src="../../cordova.js"></script>
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+      <script src="../mart/assets/js/login.js"></script>
+    <script src="../mart/assets/js/script.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script>
+      localStorage.setItem("selectedService", "number");
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<svg width="440" height="355" viewBox="0 0 440 355" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 25C0 16.7157 6.71573 10 15 10H425C433.284 10 440 16.7157 440 25V355H0V25Z" fill="url(#paint0_linear_60_2052)"/>
+<circle cx="47.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="70.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="93.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="116.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="139.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="162.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="185.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="208.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="231.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="254.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="277.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="300.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="323.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="346.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="369.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<circle cx="392.5" cy="8.5" r="8.5" fill="#FCAB2B"/>
+<defs>
+<linearGradient id="paint0_linear_60_2052" x1="220" y1="355" x2="220" y2="10" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFC93D"/>
+<stop offset="0.847527" stop-color="white"/>
+</linearGradient>
+</defs>
+</svg>

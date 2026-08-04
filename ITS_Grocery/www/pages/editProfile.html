@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITS-grocery</title>
+        <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+
+    <div class="main animate-fade-in margin_box">
+          <div class="back_btn" onclick="history.back()">
+        <div class="back_btn_arrow">
+          <i class="ti ti-arrow-narrow-left"></i>
+        </div>
+        <h5>Edit Profile</h5>
+      </div>
+      <form onsubmit="handleUpdateProfile(event); return false;" class="profile_edit_data">
+        <div class="profile_edit_icon">
+            <div class="profile_img">
+            <img src="../assets/img/icon/profile.png">
+            <!-- <div class="camera">
+              <i class="ti ti-camera-filled"></i>
+            </div> -->
+          </div>
+        </div>
+        <div class="profile_edit_inputs">
+            <div class="inp_profile">
+                <i class="ti ti-user-circle"></i>
+                <input type="text" placeholder="Enter name" id="name">
+            </div>
+            <div class="inp_profile">
+                <i class="ti ti-mail"></i>
+                <input type="email" placeholder="Enter email" id="email">
+            </div>
+            <div class="inp_profile">
+               <i class="ti ti-phone-call"></i>
+                <input type="number" placeholder="Enter phone" id="phone">
+            </div>
+            <div class="btn_update_profile">
+                <button>Update profile</button>
+            </div>
+        </div>
+        
+
+      </form>
+      
+    </div>
+    
+     <script src="../cordova.js"></script>
+     <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

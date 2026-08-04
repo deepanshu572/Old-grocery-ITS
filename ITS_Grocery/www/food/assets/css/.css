@@ -1,0 +1,61 @@
+
+.intro_setup {
+  height: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.intro_steps {
+  /* background-color: var(--theme-color); */
+  color: #000;
+  height: 33vh;
+  padding: 10px;
+  /* width: 85%; */
+  background-color: #fff;
+  border-radius: 20px;
+  /* margin-bottom: 2rem; */
+  font-family: var(--font3);
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+       justify-content: space-around;
+}
+ .top_intro h5 {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px !important;
+      }
+      .top_intro p {
+        font-size: 12px;
+        text-align: center;
+      }
+
+.bottom_intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn_active{
+       background: #ffffff !important;
+}
+.btn_box
+ {
+    width: 30px;
+    background: #C2C2C2;
+
+    height: 8px;
+    margin-right: 5px;
+    margin-top: 1rem;
+    border-radius: 50px;
+}
+.btn_crousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bottom_intro a{
+      font-weight: 700;
+}

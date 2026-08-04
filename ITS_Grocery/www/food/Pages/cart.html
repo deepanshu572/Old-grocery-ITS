@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APP</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <style>
+      .main {
+        background: #f7f7f7;
+        height: 100vh;
+      }
+      .tax img{
+        width: 13px;
+      }
+      .not_found{
+                 height: 90vh;
+           margin: 0rem 0 !important;
+      }
+      .not_found button{
+            margin-top: 6px;
+    background: var(--theme-color);
+    color: #fff;
+    border: none;
+    padding: 6px 13px;
+    border-radius: 4px;
+    font-size: 11px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <input type="number" id="addressId"  style="display: none;"/>
+    <div class="main margin_box">
+      <div class="header_nav">
+        <a href="restaurantDetail.html" class="category_left_head">
+         <img src="../assets/image/icons/leftArrow.svg" alt="">
+          <h4>Checkout</h4>
+        </a>
+      </div>
+      <div id="cartWrap" class="animate-fade-in" style="display: none;">
+      <div class="cart_data" >
+        <div
+          class="cart_data_sec discount_data alert alert-dismissible fade show"
+          role="alert"
+        >
+          <h4>🥳 You save ₹ <b id="saved2"></b> on this order</h4>
+
+          <button
+            type="button"
+            class="btn_close_custom"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          >
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        <div class="cart_data_sec cart_data_sec1 ">
+     
+          <div class="cart_data_box" id="cartData">
+       
+           
+          </div>
+        </div>
+         <div class="similar_product_addd_cart cart_data_sec" hidden>
+          <div class="similar_product_cart_header">
+            <div class="similar_product_icon"><i class="bi bi-ui-checks-grid"></i></div>
+            <h4>Complete your meal with</h4>
+          </div>
+          <div class="similar_product_wrapper_items" id="recomendationPrd">
+            <div class="similar_product_box">
+              <div class="similar_prd_img">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500" alt="">
+                <button>+</button>
+              </div>
+              <div class="similar_prd_txt">
+                <h5>Cheese Pizza</h5>
+                 <span>
+                <del>₹800</del>
+              <p>₹299</p>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        <div class="cart_data_sec cart_data_sec2">
+          <div class="top_cart_gift">
+            <div class="top_cart_gift_left">
+              <h4>Claim Your Free Gift</h4>
+            </div>
+
+            <div class="top_cart_gift_right">
+              <img src="../assets/image/icons/gif2.svg" alt="" />
+            </div>
+          </div>
+          <div class="bottom_coupons">
+            <div class="img_coupons">
+              <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <div class="txt_coupons">
+              <h4 >You saved ₹<b id="saved"></b> on delivery</h4>
+              <p>applied as your order is above ₹<b id="amountApplied"></b></p>
+            </div>
+          </div>
+          <div
+            class="last_cart_gift"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottomCoupons"
+            aria-controls="offcanvasBottomCoupons"
+          >
+            <div class="gift_head_wrap">
+              <img src="../assets/image/icons/coupons.svg" alt="" />
+              <h4>View All Coupons</h4>
+            </div>
+            <div class="check">
+              <i class="bi bi-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+         <div class="cart_data_sec cart_data_sec3">
+          <!-- <div class="cart_sec_box cart_sec1_box">
+            <div class="left_cart_box_sec">
+              <i class="bi bi-stopwatch-fill"></i>
+
+              <h4>Delivery in 30-35 mins</h4>
+            </div>
+          </div> -->
+          <div
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottomAddress"
+            aria-controls="offcanvasBottomAddress"
+            class="cart_sec_box cart_sec2_box"
+            style="border: 0 !important;"
+          >
+            <div class="left_cart_box_sec" >
+              <i class="bi bi-geo-alt-fill" style="color: green;"></i>
+              <div class="" id="addressvalue">
+                <h4>Select Address</h4>
+                <!-- <h4>Delivering to <b></b></h4>
+                <p>____________</p> -->
+              </div>
+            </div>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+          <div class="cart_sec_box cart_sec3_box">
+            <div class="left_cart_box_sec" id="telephoneValue">
+              <!-- <i class="bi bi-telephone-fill" style="color: rgb(200, 0, 0);"></i>
+              <h4>_______________</h4> -->
+            </div>
+          </div>
+          <div
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottomBillSec"
+            aria-controls="offcanvasBottomBillSec"
+            class="cart_sec_box cart_sec4_box"
+          >
+            <div class="left_cart_box_sec">
+              <i class="bi bi-file-earmark-text-fill" style="color: rgba(231, 150, 0, 0.751);"></i>
+              <div class="">
+                <h4>Total Bill ₹<span id="payAmtTotal"></span></h4>
+                <p>Incl. taxes and charges</p>
+              </div>
+            </div>
+            <i class="bi bi-chevron-right"></i>
+          </div>
+        </div>
+       
+       
+         <!-- <div class="cart_data_sec cart_similar_prd">
+            <div class="similar_head">
+                <h4>Complete your meal with</h4>
+                <a href="">See all <i class="bi bi-arrow-right-circle-fill"></i></a>
+            </div>
+            <div class="resturant_product_wrapper" id="resturantProduct">
+                
+            </div>
+        </div> -->
+      </div>
+      <div class="footer footer_cart" >
+        <div class="footer_cart_wrap">
+          <div
+            class="footer_cart_left"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottomPay"
+            aria-controls="offcanvasBottomPay"
+          >
+            <div class="">
+              <img src="../assets/image/icons/pay.svg" alt="" />
+              <h4>PAY USING</h4>
+              <i class="bi bi-caret-up-fill"></i>
+            </div>
+            <p id="payMethod">Cash on Delivery</p>
+          </div>
+          <div class="footer_cart_right btn_reuse">
+            <button onclick="handleCheckout()">
+              ₹
+              <b id="checkPlaceOrder"> </b> MRP (Tax incuded)
+              <i class="bi bi-caret-right-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Payment Select Canvas -->
+    <div
+      class="offcanvas offcanvas-bottom reuse_modal_box"
+      tabindex="-1"
+      id="offcanvasBottomPay"
+      aria-labelledby="offcanvasBottomPayLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+          Select Payment Option
+        </h5>
+
+        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="payment_options reuse_options">
+          <!-- <input type="text" id="payMethod" hidden> -->
+             <label class="payment_option reuse_option selected_option">
+            <div class="left_pay_box reuse_left_box">
+              <input type="radio" name="payment" value="cod" hidden />
+              <i class="bi bi-cash-stack"></i>
+              <h5>Cash on Delivery</h5>
+            </div>
+            <i class="bi bi-check-circle-fill"></i>
+          </label>
+          <label class="payment_option reuse_option ">
+            <div class="left_pay_box reuse_left_box">
+              <input type="radio" name="payment" value="online" hidden />
+              <i class="bi bi-bank"></i>
+
+              <h5>Online Payment</h5>
+            </div>
+            <i class="bi bi-check-circle-fill"></i>
+          </label>
+
+        
+        </div>
+      </div>
+    </div>
+
+    <!-- Address Select Canvas -->
+
+    <div
+      class="offcanvas offcanvas-bottom address_canvas reuse_modal_box"
+      tabindex="-1"
+      id="offcanvasBottomAddress"
+      aria-labelledby="offcanvasBottomAddressLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+          Select Delivery Address
+        </h5>
+
+        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div class="btn_add_address btn_reuse">
+          <button
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottomAddAddress"
+            aria-controls="offcanvasBottomAddAddress"
+            onclick="toggleAddressBtn()"
+          >
+            + Add New <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+        <div class="saved_address">
+          <b>Saved addresses</b>
+          <div id="savedAddress">
+            
+         
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Address Canvas -->
+
+    <div
+      class="offcanvas offcanvas-bottom add_address_canvas reuse_modal_box"
+      tabindex="-1"
+      id="offcanvasBottomAddAddress"
+      aria-labelledby="offcanvasBottomAddAddressLabel"
+      >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+          Add Address
+        </h5>
+
+        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body small">
+        <div id="addressForm" class="add_address_wrap">
+        <input type="text" id="selectedRole" hidden>
+          <div class="add_address_highlight">
+            A detailed address will help our delivery partner reach your
+            doorstep easily.
+          </div>
+          <div class="add_address_form_sec">
+            <h4>Save address as*</h4>
+            <div class="form_address_wrap">
+              <div class="form_icons">
+                <div class="form_icon role_active">
+                  <i class="bi bi-house-add"></i>
+                  <p>Home</p>
+                </div>
+                <div class="form_icon">
+                  <i class="bi bi-buildings"></i>
+                  <p>Work</p>
+                </div>
+                <div class="form_icon">
+                  <i class="bi bi-people"></i>
+                  <p>Friends & Family</p>
+                </div>
+                <div class="form_icon">
+                  <i class="bi bi-geo-alt"></i>
+                  <p>Other</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="address_form">
+              <!-- Address Fields -->
+              <input
+                type="text"
+                placeholder="Flat / House no / Building name *"
+                class="form_input"
+                id="houseNo"
+              />
+
+              <input
+                type="text"
+                placeholder="Apartment / Road / Area (Recommended) *"
+                class="form_input"
+                id="area"
+              />
+              <input
+                type="text"
+              placeholder="e.g. Near City Mall, Opposite SBI Bank (Optional)"
+                class="form_input"
+                id="landmark"
+              />
+              
+
+              <textarea
+                placeholder="e.g. Ring the bell on the red gate (Optional)"
+                maxlength="200"
+                class="form_textarea"
+                id="instruction"
+              ></textarea>
+
+              <input
+                type="text"
+                placeholder="e.g. Ranchi, Jamshedpur (Required) *"
+                class="form_input"
+                id="city"
+              />
+
+              <input
+                type="text"
+                placeholder="e.g. Jharkhand, Bihar (Required) *"
+                class="form_input"
+                id="state"
+              />
+               <input
+                type="text"
+                placeholder="e.g. 834001 (Required) *"
+                class="form_input"
+                id="pincode"
+              />
+
+              <!-- Section Title -->
+              <p class="section_title">
+                Enter your details for seamless delivery experience
+              </p>
+
+              <!-- User Details -->
+              <input type="text" placeholder="Your Name *" id="name" class="form_input" />
+
+              <input
+                type="tel"
+                id="number"
+                placeholder="Your phone number *"
+                class="form_input"
+              />
+
+             
+            </div>
+            <div class="button_save_add btn_reuse" id="btnToggleAddress">
+              <button onclick="handleAddress(event)">Save Address</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- price section  Canvas -->
+
+    <div
+      class="offcanvas offcanvas-bottom reuse_modal_box bill_sec"
+      tabindex="-1"
+      id="offcanvasBottomBillSec"
+      aria-labelledby="offcanvasBottomBillSecLabel"
+    >
+      <div class="offcanvas-body small">
+        <div class="cart_data_sec4">
+          <div class="bill_wrapper">
+            <div class="flex_header">
+              <h4>Bill details</h4>
+              <button
+                type="button"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              >
+                <i class="bi bi-x"></i>
+              </button>
+            </div>
+
+            <div class="bill_format_data">
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <i class="bi bi-card-text"></i>
+                  <p>Sub Total</p>
+                </div>
+                <div class="right_bill_field">
+                  ₹
+                  <small id="subTotal"></small>
+                </div>
+              </div>
+            
+            
+              <div class="bill_field green">
+                <div class="left_bill_field">
+                  <img src="../assets/image/icons/coupons2.svg" alt="" />
+                  <p>Promo Discount</p>
+                </div>
+                <div class="right_bill_field">
+                  -₹
+                  <small id="couponDisc">0</small>
+                </div>
+              </div>
+                <div class="bill_field">
+                <div class="left_bill_field tax">
+                  <img src="../assets/image/icons/failed.svg" alt="" />
+                  <p>Tax amount</p>
+                </div>
+                <div class="right_bill_field">
+                  ₹
+                  <small id="taxAmount">20</small>
+                </div>
+              </div>
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <img
+                    style="width: 15px"
+                    src="../assets/image/icons/delivery.png"
+                    alt=""
+                  />
+                  <p>Delivery Charge</p>
+                </div>
+                <div class="right_bill_field">
+                  ₹
+                  <small id="deleveryCharge">20</small>
+                </div>
+              </div>
+            
+              <div class="img-design"></div>
+              <div class="bill_field bill_total">
+                <div class="left_bill_field">
+                  <p>Grand Total</p>
+                </div>
+                <div class="right_bill_field">
+                  ₹
+                  <small id="grandTotal"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- coupons Canvas -->
+
+    <div
+      class="offcanvas offcanvas-bottom address_canvas reuse_modal_box"
+      tabindex="-1"
+      id="offcanvasBottomCoupons"
+      aria-labelledby="offcanvasBottomCouponsLabel"
+    >
+      <div class="offcanvas-header">
+      
+         <h5 class="offcanvas-title" id="offcanvasBottomCouponsLabel">
+          Apply Coupons
+        </h5>
+
+        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+       
+      </div>
+      <div class="offcanvas-body small">
+        
+        <div id="couponsData" class="coupons_fnt"></div>
+
+      </div>
+    </div>
+    <script src="../../cordova.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        getCart();
+        getCoupons();
+        getSubtotal();
+        getAddress();
+
+    </script>
+  </body>
+</html>

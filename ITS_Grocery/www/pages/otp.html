@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <div class="otp_page">
+      <div class="back_btn" onclick="location.href = 'login.html'">
+        <div class="back_btn_arrow">
+          <i class="ti ti-arrow-narrow-left"></i>
+        </div>
+        <h5>OTP Verification</h5>
+      </div>
+      <form onsubmit="handleOtpLogin(event);" class="wrap_login">
+        <h1>Enter OTP to verify</h1>
+
+        <div class="otp_info">
+          <p>
+            A 6 digit OTP has been sent to your phone number <br />
+            +91 <span id="phone"></span>
+            <a href="#" class="change_btn">Change</a>
+          </p>
+        </div>
+
+        <div class="label_inp">Enter OTP Text</div>
+
+        <div class="otp_inputs">
+          <input type="number" maxlength="1" />
+          <input type="number" maxlength="1" />
+          <input type="number" maxlength="1" />
+          <input type="number" maxlength="1" />
+          <input type="number" maxlength="1" />
+          <input type="number" maxlength="1" />
+        </div>
+
+        <button class="verify_btn" >
+          Verify <span>OTP</span>
+        </button>
+      </form>
+    </div>
+
+    <script src="../cordova.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/login.js"></script>
+    <script>
+      getLoginData();
+
+      const otpInputs = document.querySelectorAll(".otp_inputs input");
+
+      otpInputs.forEach((input, index) => {
+        // Auto next
+        input.addEventListener("input", (e) => {
+          const value = e.target.value;
+
+          // Allow only numbers
+          e.target.value = value.replace(/[^0-9]/g, "");
+
+          if (e.target.value && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+        });
+
+        // Auto back
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && !input.value && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+
+        // Paste full OTP
+        input.addEventListener("paste", (e) => {
+          e.preventDefault();
+
+          const pasteData = e.clipboardData
+            .getData("text")
+            .replace(/\D/g, "")
+            .slice(0, otpInputs.length);
+
+          pasteData.split("").forEach((char, i) => {
+            if (otpInputs[i]) {
+              otpInputs[i].value = char;
+            }
+          });
+
+          const lastFilledIndex = pasteData.length - 1;
+          if (otpInputs[lastFilledIndex]) {
+            otpInputs[lastFilledIndex].focus();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

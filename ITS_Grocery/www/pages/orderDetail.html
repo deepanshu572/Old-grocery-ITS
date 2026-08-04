@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITS-grocery</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="main margin_box animate-fade-in">
+      <div class="back_btn" onclick="history.back()">
+        <div class="back_btn_arrow">
+          <i class="ti ti-arrow-narrow-left"></i>
+        </div>
+        <h5>OrderDetail</h5>
+      </div>
+      <div class="order_detail_data">
+        <div class="order_deliver_status">
+          <div class="icon_status">
+            <img src="../assets/img/icon/box.svg" alt="" />
+          </div>
+          <h5>Your order is : <b id="status">placed</b></h5>
+        </div>
+        <div class="order_data_item_name" id="singleOrder">
+        
+        </div>
+        <div class="order_rating">
+            <div class="order_wrap_data">
+            <h6>Rate this product</h6>
+            <div class="order_rate_wrap">
+                <i class="ti ti-star-filled gold"></i>
+                <i class="ti ti-star-filled gold"></i>
+                <i class="ti ti-star-filled"></i>
+                <i class="ti ti-star-filled"></i>
+                <i class="ti ti-star-filled"></i>
+            </div></div>
+        </div>
+        <div class="order_price_detail">
+          <div class="cart_data_sec cart_data_sec4">
+            <div class="bill_wrapper">
+              <h4>Bill details</h4>
+              <div class="bill_format_data" id="billCalc">
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="invoice">
+            <button><i class="ti ti-download"></i> Download invoice</button>
+        </div>
+      </div>
+    </div>
+
+
+     <script src="../cordova.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+      getSingleOrder();
+    </script>
+  </body>
+</html>
