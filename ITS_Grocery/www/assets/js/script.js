@@ -160,6 +160,7 @@ function getTopHeroBanner(id) {
 
 function getTopLeftBanner() {
     categoryId = localStorage.getItem("currentCategoryId");
+    const branchId = localStorage.getItem("branchId");
 
   return $.ajax({
     url: apiUrl,
@@ -167,7 +168,8 @@ function getTopLeftBanner() {
     dataType: "JSON",
     data: {
       type: "getFlashSalePrd",
-      categoryId
+      categoryId,
+      branchId
     },
     success: function (response) {
       if (response.status === "success") {
@@ -181,8 +183,8 @@ function getTopLeftBanner() {
         <div class="carousel-item  ${index === 0 ? "active" : ""}">
         <div class="top_left_banner" onclick="location.href='productDetail.html?id=${item.p_id}'">
         <h4>Flash Sale</h4>
-        <div class="sell_price">₹${item.selling_price}</div>
-        <div class="mrp_price"><del>₹${item.mrp}</del></div>
+        <div class="sell_price">₹${item.v_seliing_price}</div>
+        <div class="mrp_price"><del>₹${item.v_mrp}</del></div>
         <h6>${item.name}</h6>
           
         <img src="${imgUrl + item.image_path}" class="d-block w-100" alt="Banner"> 
@@ -615,11 +617,11 @@ function getAllProductData() {
 
           <div class="qty_price_sec">
 
-            <h4>${item.quantity}${item.unit}</h4>
+            <h4>${item.v_quantity}${item.v_unit}</h4>
 
             <div class="price_sec">
-              <h6>₹${item.selling_price}</h6>
-              <del>₹${item.mrp}</del>
+              <h6>₹${item.v_seliing_price}</h6>
+              <del>₹${item.v_mrp}</del>
             </div>
 
           </div>
@@ -811,9 +813,10 @@ function createSubCategoryHTML1(categories = []) {
     )
     .join("");
 }
-function renderInSubCategory(cid, sid) {
+function renderInSubCategory(cid, mid) {
   location.href = `subCategory.html?cid=${cid}`;
-  localStorage.setItem("subCatId", sid);
+  localStorage.setItem("middleCatId", mid);
+  localStorage.setItem("subCatId", 0);
 }
 
 const products = {};
@@ -840,6 +843,7 @@ function getAllProduct() {
         data?.allData?.map((item) => {
           AllProduct[item.p_id] = item;
         });
+        // console.log("AllProduct",AllProduct,data?.allData)
       }
     }
   })
@@ -865,6 +869,7 @@ function getGroceryProducts() {
         data?.allData?.map((item) => {
           AllProduct[item.p_id] = item;
         });
+        console.log("AllProduct,data?.allData")
         console.log(AllProduct,data?.allData)
         $("#productWrap1").html(renderProducts(data.title1));
         $("#productWrap2").html(renderProducts(data.title2));
@@ -1635,6 +1640,7 @@ function renderseeAllPrd(productList, type, name) {
   `;
 }
 function getSingleVarientId(id, type, image, name) {
+  const branch_id = localStorage.getItem("branchId");
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -1642,6 +1648,7 @@ function getSingleVarientId(id, type, image, name) {
     data: {
       type: "getSingleVarientId",
       id,
+      branchId:branch_id
     },
     success: function (response) {
       if (response.status == "success") {
@@ -1805,7 +1812,7 @@ function toggleAdd(id, varId, type, stock, isRestore = false) {
 
           <button
             id="plusVar${varId}"
-            onclick="handleIncrement('${id}','${varId}','singleVarIdUpdate','${idfr}','${stock}')">
+            onclick="handleIncrement('${id}','${varId}','singleVarIdUpdate','${idfr}')">
             +
           </button>
 
@@ -1813,7 +1820,7 @@ function toggleAdd(id, varId, type, stock, isRestore = false) {
       `);
 
       if (!isRestore) {
-        handleIncrement(id, varId, "singleVarIdUpdate", idfr, stock);
+        handleIncrement(id, varId, "singleVarIdUpdate", idfr);
       }
 
       break;
@@ -1824,15 +1831,19 @@ function toggleAdd(id, varId, type, stock, isRestore = false) {
 }
 
 function getAllVarient() {
+    const branchId = localStorage.getItem("branchId");
+
   $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
     data: {
       type: "getAllVarient",
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
+        
         varientAllData.push(response.data);
       } else {
         console.log(response.message);
@@ -1906,12 +1917,12 @@ function updateCartUI(type, singleVarId) {
 getGroceryProducts();
 
 function handleIncrement(id, varId, type, idfr) {
+  const branchId = localStorage.getItem("branchId");
 
   const prdData = products[id];
   const allPrdData = AllProduct[id];
 
-  console.log("id, varId, type, idfr");
-  console.log(id, varId, type, idfr);
+  // console.log(prdData, allPrdData, "prdData, allPrdData");
 
   // ================= Variant Data =================
   let varData;
@@ -1927,6 +1938,8 @@ function handleIncrement(id, varId, type, idfr) {
   } else {
     varData = varientData[varId];
   }
+    console.log(varData, varientAllData, "varData, allVariants");
+
 
   // ================= Quantity Input =================
   const qtyInput =
@@ -1937,26 +1950,29 @@ function handleIncrement(id, varId, type, idfr) {
   let qty = parseInt(qtyInput.first().val()) || 0;
 
   // ================= Stock =================
-  const stock =
-    type === "prdDataVar"
-      ? prdData?.stock
-      : varData?.v_stock;
 
-  if (qty >= stock) {
+  
+const stock = Number(varData?.stock ?? 0);
+qty = Number(qty);
+
+console.log("qty:", qty);
+console.log("stock:", stock);
+
+if (qty >= stock) {
     alert("Out of Stock");
 
     qtyInput.val(stock);
-
+    
     if (type === "prdDataVar") {
-      $(`.plusBtn[data-pid="${id}"]`).addClass("disabled");
+        $(`.plusBtn[data-pid="${id}"]`).addClass("disabled");
     } else {
-      $(`#plusVar${varId}`).addClass("disabled");
+        $(`#plusVar${varId}`).addClass("disabled");
     }
 
     return false;
-  }
+}
 
-  qty++;
+qty++;
 
   // ================= Local Cart =================
   if (type === "prdDataVar") {
@@ -1982,6 +1998,7 @@ function handleIncrement(id, varId, type, idfr) {
     idfr: idfr,
     p_id: productData?.p_id,
     vid: varId || "",
+    branch_id:branchId,
     name: productData?.name,
     image_path: productData?.image_path,
     quantity: varData.v_quantity,
@@ -2016,6 +2033,8 @@ function handleIncrement(id, varId, type, idfr) {
 
 }
 function handleDecrement(id, varId, type) {
+    const branchId = localStorage.getItem("branchId");
+
   const prdData = products[id];
   const allPrdData = AllProduct[id];
 
@@ -2109,6 +2128,7 @@ function handleDecrement(id, varId, type) {
       user_id: userId,
       p_id: type === "prdDataVar" ? prdData?.p_id : allPrdData?.p_id,
       varId: varId,
+      branch_id:branchId,
       nop: qty,
     },
     success: function (res) {
@@ -2406,11 +2426,11 @@ function getRelatedProduct(pid, cid, sid) {
 
               <div class="qty_price_sec">
 
-                <h4>${item.quantity}${item.unit}</h4>
+                <h4>${item.v_quantity}${item.v_unit}</h4>
 
                 <div class="price_sec">
-                  <h6>₹${item.selling_price}</h6>
-                  <del>₹${item.mrp}</del>
+                  <h6>₹${item.v_seliing_price}</h6>
+                  <del>₹${item.v_mrp}</del>
                 </div>
 
               </div>
@@ -2506,7 +2526,8 @@ function renderFilterProduct(prd, category) {
   const params = new URLSearchParams(window.location.search);
 
   const cid = params.get("cid");
-  let sid = localStorage.getItem("subCatId");
+  const sid = localStorage.getItem("subCatId");
+  let mid = localStorage.getItem("middleCatId");
   let productHtml = "";
   if (prd.length > 0) {
     prd?.map((item, index) => {
@@ -2580,11 +2601,11 @@ function renderFilterProduct(prd, category) {
 
           <div class="qty_price_sec">
 
-            <h4>${item.quantity}${item.unit}</h4>
+            <h4>${item.v_quantity}${item.v_unit}</h4>
 
             <div class="price_sec">
-              <h6>₹${item.selling_price}</h6>
-              <del>₹${item.mrp}</del>
+              <h6>₹${item.v_seliing_price}</h6>
+              <del>₹${item.v_mrp}</del>
             </div>
 
           </div>
@@ -2602,7 +2623,7 @@ function renderFilterProduct(prd, category) {
   updateCartUI("prd");
 
   let subCatHtml = `<div 
-        onclick="handleData('0','all')" class="wrap_sub_cat allCat ${sid === "0" ? "active_category" : ""}" id="allPrdData"> 
+        onclick="handleData('0','all')" class="wrap_sub_cat allCat ${ sid === "0" ? "active_category" : ""}" id="allPrdData"> 
             <div class="sub_category_box">
               <i class="ti ti-box"></i>
               <h6>All</h6>
@@ -2610,7 +2631,7 @@ function renderFilterProduct(prd, category) {
             <div class="brd"></div>
           </div>`;
   category?.map((item, index) => {
-    subCatHtml += `   <div onclick="handleData('${item.id}','filter')" class="wrap_sub_cat ${sid == item.id ? "active_category" : ""}">
+    subCatHtml += `   <div onclick="handleData('${item.id}','filter')" class="wrap_sub_cat ${ sid == item.id ? "active_category" : ""}">
             <div class="sub_category_box">
               <img
                 src="${imgUrl + item.image_path}"
@@ -2630,6 +2651,7 @@ function handleData(id, type) {
 
   if (type == "filter") {
     filterdProduct = allProducts.filter((item) => {
+      console.log(item.under_subcategory, id, "item.under_subcategory, id");
       return item.under_subcategory === id;
     });
   } else {
@@ -2642,7 +2664,9 @@ function getSingleCategory() {
   const params = new URLSearchParams(window.location.search);
 
   const cid = params.get("cid");
+  let mid = localStorage.getItem("middleCatId");
   let sid = localStorage.getItem("subCatId");
+  let branchId = localStorage.getItem("branchId");
 
   $.ajax({
     url: apiUrl,
@@ -2651,6 +2675,8 @@ function getSingleCategory() {
     data: {
       type: "getSingleCategory",
       cid,
+      mid,
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
@@ -2660,14 +2686,16 @@ function getSingleCategory() {
         allSubCategories = response.subCategory;
         localStorage.setItem("subCatId", sid);
         // renderFilterProduct(allProducts,allSubCategories)
-        if (sid === "0") {
-          handleData(sid, "");
+         if (sid=="0") {
+            handleData(sid, "");
+          } else {
+            handleData(sid, "filter");
+          }
+          
         } else {
-          handleData(sid, "filter");
+          console.log(response.message);
         }
-      } else {
-        console.log(response.message);
-      }
+
     },
   });
 }
@@ -3420,6 +3448,7 @@ function openOffcanvas(id) {
 
 function handleOrder() {
   let idfr = localStorage.getItem("currentIdfr");
+  const branchId = localStorage.getItem("branchId");
   //userId
   let selectedPayment = $("#payMethod1").val();
   let selectedSlot = $("#slot").val();
@@ -3461,6 +3490,7 @@ function handleOrder() {
 
   formData.append("type", "handleOrder");
   formData.append("idfr", idfr);
+  formData.append("branchId", branchId);
   formData.append("user_id", userId);
   formData.append("payMethod", selectedPayment);
   formData.append("selectAddress", selectedAddress);
@@ -3898,13 +3928,15 @@ function getBrandOfTheDay() {
 }
 function getSingleBrandOfTheDay(){
   let brandId = localStorage.getItem("brandId");
+  let branchId = localStorage.getItem("branchId");
   $.ajax({
     url:apiUrl,
     method:"POST",
     dataType:"JSON",
     data:{
       type:"getSingleBrandOfTheDay",
-      brandId
+      brandId,
+      branchId
     },
     success:function (response) {
        if(response.status == "success"){
@@ -3984,11 +4016,11 @@ function getSingleBrandOfTheDay(){
 
           <div class="qty_price_sec">
 
-            <h4>${item.quantity}${item.unit}</h4>
+            <h4>${item.v_quantity}${item.v_unit}</h4>
 
             <div class="price_sec">
-              <h6>₹${item.selling_price}</h6>
-              <del>₹${item.mrp}</del>
+              <h6>₹${item.v_seliing_price}</h6>
+              <del>₹${item.v_mrp}</del>
             </div>
 
           </div>
@@ -6857,11 +6889,11 @@ async function handleInput(e) {
 
           <div class="qty_price_sec">
 
-            <h4>${item.quantity}${item.unit}</h4>
+            <h4>${item.v_quantity}${item.v_unit}</h4>
 
             <div class="price_sec">
-              <h6>₹${item.selling_price}</h6>
-              <del>₹${item.mrp}</del>
+              <h6>₹${item.v_seliing_price}</h6>
+              <del>₹${item.v_mrp}</del>
             </div>
 
           </div>
