@@ -218,7 +218,7 @@ function renderCategory(name) {
           
           <div class="category_store_beauty">
             <div class="category_store_head">
-              <h4>Only At Itscart</h4>
+              <h4 id="categoryTheadBeauty1" >Only At Itscart</h4>
               <p>Beauty you wont find anywhere else</p>
             </div>
             <div class="category_store_wrap_beauty" id="categoryBeauty1"></div>
@@ -236,14 +236,14 @@ function renderCategory(name) {
             </div>
           </div>
           <div class="category_beauty_arrow_design_Sec reuse_wrap_head">
-            <h4>Your Beauty Must- Have Await</h4>
+            <h4 id="categoryTheadBeauty2" >Your Beauty Must- Have Await</h4>
             <div class="category_beauty_arrow_wrap" id="categoryBeauty2">
            
             </div>
           </div>
              <div class="reuse_category wrap_category2">
             <div class="category_wrap reuse_wrap_head">
-            <h4>Easy to buy</h4>
+            <h4 id="categoryTheadBeauty3">Easy to buy</h4>
             <div class="category_box_design" id="categoryBeauty3">
               
             </div>
@@ -273,13 +273,13 @@ function renderCategory(name) {
           </div>
            <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Daily Needs</h4>
+              <h4 id="categoryTheadBeauty4">Daily Needs</h4>
               <div class="category_box_design" id="categoryBeauty4"></div>
             </div> 
           </div>
           <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Daily Needs</h4>
+              <h4 id="categoryTheadBeauty5" >Daily Needs</h4>
               <div class="category_box_design" id="categoryBeauty5"></div>
             </div>
           </div>
@@ -361,7 +361,7 @@ function renderCategory(name) {
         </div>
         <div class="fashion_flash">
           <div class="fashion_header">
-            <h4>Flash Sale</h4>
+            <h4 id="categoryTheadFashion2">Flash Sale</h4>
           </div>
           <div class="fashion_sale_wrap" id="fashionCategory2">
            
@@ -371,7 +371,7 @@ function renderCategory(name) {
         </div>
         <div class="fashion_brands">
           <div class="fashion_brand_head fashion_header">
-            <h4>Hype-Worthly Brands</h4>
+            <h4 id="categoryTheadFashion3">Hype-Worthly Brands</h4>
           </div>
           <div class="fashion_brand_content" id="fashionCategory3"></div>
         </div>
@@ -460,7 +460,7 @@ function renderCategory(name) {
           </div>
           <div class="last_sec_fashion">
             <div class="fashion_header">
-              <h4>What’s Trending Near By</h4>
+              <h4 id="categoryTheadFashion5">What’s Trending Near By</h4>
               <a href="#"> <i class="ti ti-arrow-narrow-right-dashed"></i></a>
             </div>
             <div class="last_fashion_data">
@@ -528,7 +528,7 @@ function renderCategory(name) {
         </div>
         <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Snacks & Drinks</h4>
+              <h4 id="categoryTheadElectronic2">Snacks & Drinks</h4>
               <div class="category_box_design" id="categoryElectricity2"></div>
             </div>
         </div>
@@ -551,7 +551,7 @@ function renderCategory(name) {
         </div>
          <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Snacks & Drinks</h4>
+              <h4 id="categoryTheadElectronic3"></h4>
               <div class="category_box_design" id="categoryElectricity3"></div>
             </div>
         </div>
@@ -570,13 +570,13 @@ function renderCategory(name) {
         </div> 
         <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Needs for you</h4>
+              <h4 id="categoryTheadElectronic4">Needs for you</h4>
               <div class="category_box_design" id="categoryElectricity4"></div>
             </div>
         </div>
          <div class="reuse_category wrap_category3">
             <div class="category_wrap reuse_wrap_head">
-              <h4>Shop by category</h4>
+              <h4 id="categoryTheadElectronic5"></h4>
               <div class="category_box_design" id="categoryElectricity5"></div>
             </div>
         </div>

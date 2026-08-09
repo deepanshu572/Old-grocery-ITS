@@ -766,16 +766,18 @@ function getSubCategories() {
 }
 
 function renderSubCategories1(data) {
-  $("#categoryBox1").html(createSubCategoryHTML1(data.title2));
-  $("#categoryBox2").html(createSubCategoryHTML1(data.title3));
-  $("#categoryBox3").html(createSubCategoryHTML1(data.title4));
-  $("#categoryBox4").html(createSubCategoryHTML2(data.title5));
+  $("#categoryBox1").html(createSubCategoryHTML1(data.title1));
+  $("#categoryBox2").html(createSubCategoryHTML1(data.title2));
+  $("#categoryBox3").html(createSubCategoryHTML1(data.title3));
+  $("#categoryBox4").html(createSubCategoryHTML1(data.title4));
+  $("#categoryBox5").html(createSubCategoryHTML2(data.title5));
 }
 function renderSubCategories2(data) {
-  $("#category1").html(createSubCategoryHTML1(data.title2));
-  $("#category2").html(createSubCategoryHTML1(data.title3));
-  $("#category3").html(createSubCategoryHTML1(data.title4));
-  $("#category4").html(createSubCategoryHTML1(data.title5));
+  $("#category1").html(createSubCategoryHTML1(data.title1));
+  $("#category2").html(createSubCategoryHTML1(data.title2));
+  $("#category3").html(createSubCategoryHTML1(data.title3));
+  $("#category4").html(createSubCategoryHTML1(data.title4));
+  $("#category5").html(createSubCategoryHTML1(data.title5));
 }
 
 
@@ -2148,6 +2150,7 @@ function handleDecrement(id, varId, type) {
 
 }
 function getAllHeading(type) {
+  let categoryId = localStorage.getItem("currentCategoryId");
   return $.ajax({
     url: apiUrl,
     method: "POST",
@@ -2162,10 +2165,12 @@ function getAllHeading(type) {
         let categoryHead = response.data.categoryHeading[0];
         let productHead = response.data.productHeading[0];
 
+      
         $("#categoryhead1").html(categoryHead.title1);
-        $("#categoryhead2").html(categoryHead.title2);
-        $("#categoryhead3").html(categoryHead.title3);
-        $("#categoryhead4").html(categoryHead.title4);
+    $("#categoryhead2").html(categoryHead.title2);
+    $("#categoryhead3").html(categoryHead.title3);
+    $("#categoryhead4").html(categoryHead.title4);
+    $("#categoryhead5").html(categoryHead.title5);
         if (type === "home") {
           $("#producthead1").html(productHead.title1);
           $("#producthead2").html(productHead.title2);
@@ -2175,6 +2180,11 @@ function getAllHeading(type) {
           $("#producthead6").html(productHead.title6);
 
         } else if (type == "beauty") {
+          $("#categoryTheadBeauty1").text(categoryHead.title1);
+          $("#categoryTheadBeauty2").text(categoryHead.title2);
+          $("#categoryTheadBeauty3").text(categoryHead.title3);
+          $("#categoryTheadBeauty4").text(categoryHead.title4);
+          $("#categoryTheadBeauty5").text(categoryHead.title5);
           $("#productheadBeauty1").html(productHead.title1);
           $("#productheadBeauty2").html(productHead.title2);
           $("#productheadBeauty3").html(productHead.title3);
@@ -2182,12 +2192,57 @@ function getAllHeading(type) {
           $("#productheadBeauty5").html(productHead.title5);
           $("#productheadBeauty6").html(productHead.title6);
         } else if (type == "fashion") {
+           $("#categoryTheadFashion1").text(categoryHead.title1);
+          $("#categoryTheadFashion2").text(categoryHead.title2);
+          $("#categoryTheadFashion3").text(categoryHead.title3);
+          $("#categoryTheadFashion4").text(categoryHead.title4);
+          $("#categoryTheadFashion5").text(categoryHead.title5);
           $("#productheadFashion1").html(productHead.title1);
           $("#productheadFashion2").html(productHead.title2);
           $("#productheadFashion3").html(productHead.title3);
           $("#productheadFashion4").html(productHead.title4);
           $("#productheadFashion5").html(productHead.title5);
           $("#productheadFashion6").html(productHead.title6);
+        }
+         else if (type == "pharmacy") {
+            $("#categoryTheadPharmacy1").text(categoryHead.title1);
+          $("#categoryTheadPharmacy2").text(categoryHead.title2);
+          $("#categoryTheadPharmacy3").text(categoryHead.title3);
+          $("#categoryTheadPharmacy4").text(categoryHead.title4);
+          $("#categoryTheadPharmacy5").text(categoryHead.title5);
+          $("#productheadPharmacy1").html(productHead.title1);
+          $("#productheadPharmacy2").html(productHead.title2);
+          $("#productheadPharmacy3").html(productHead.title3);
+          $("#productheadPharmacy4").html(productHead.title4);
+          $("#productheadPharmacy5").html(productHead.title5);
+          $("#productheadPharmacy6").html(productHead.title6);
+        }
+         else if (type == "kids") {
+          $("#productheadKids1").html(productHead.title1);
+          $("#productheadKids2").html(productHead.title2);
+          $("#productheadKids3").html(productHead.title3);
+          $("#productheadKids4").html(productHead.title4);
+          $("#productheadKids5").html(productHead.title5);
+          $("#productheadKids6").html(productHead.title6);
+        } else if (type == "99store") {
+          $("#producthead99store1").html(productHead.title1);
+          $("#producthead99store2").html(productHead.title2);
+          $("#producthead99store3").html(productHead.title3);
+          $("#producthead99store4").html(productHead.title4);
+          $("#producthead99store5").html(productHead.title5);
+          $("#producthead99store6").html(productHead.title6);
+        } else if (type == "electronic") {
+           $("#categoryTheadElectronic1").text(categoryHead.title1);
+          $("#categoryTheadElectronic2").text(categoryHead.title2);
+          $("#categoryTheadElectronic3").text(categoryHead.title3);
+          $("#categoryTheadElectronic4").text(categoryHead.title4);
+          $("#categoryTheadElectronic5").text(categoryHead.title5);
+          $("#productheadElectricity1").html(productHead.title1);
+          $("#productheadElectricity2").html(productHead.title2);
+          $("#productheadElectricity3").html(productHead.title3);
+          $("#productheadElectricity4").html(productHead.title4);
+          $("#productheadElectricity5").html(productHead.title5);
+          $("#productheadElectricity6").html(productHead.title6);
         }
       } else {
         console.log("something wents wrong on getAllHeading ");
@@ -3837,7 +3892,8 @@ function initFashion() {
 function initElectric() {
         getTopHeroBanner();
 
-  
+    getAllHeading("electronic");
+
   getCategoryElectricity1();
   getCategoryElectricity2();
   getCategoryElectricity3();
@@ -3872,6 +3928,8 @@ function initPharmacy() {
 
 }
 function init99Store() {
+    getAllHeading("99store");
+
   getTopHeroBanner(4);
   getCategory99store1();
   getCategory99store2();
@@ -3889,6 +3947,8 @@ function init99Store() {
 
 }
 function initKids() {
+    getAllHeading("kids");
+
   getTopHeroBanner(5);
   getKidsProducts();
   getTopChildBanner();
