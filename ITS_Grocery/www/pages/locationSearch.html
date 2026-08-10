@@ -13,9 +13,15 @@
 
 <div class="find_store_screen">
 
+    <input type="text" id="latitude" placeholder="Latitude" hidden>
+    <input type="text" id="longitude" placeholder="Longitude" hidden>
+
     <div class="search_wrap">
         <div class="search_icon"><img src="../assets/img/icon/search.svg" alt=""></div>
     </div>
+
+    <p class="txt_address_find" id="address"></p>
+    <!-- <input type="text" id="address" placeholder="Address"> -->
 
     <div class="find_text" id="addrress">
        <span > Finding your nearest store</span>
@@ -38,13 +44,17 @@
     ></script>
 <script src="../assets/js/script.js"></script>
 <script>
-        localStorage.setItem("currentCategoryName","Grocery");
+      localStorage.setItem("currentCategoryName","Grocery");
+      document.addEventListener("DOMContentLoaded", function () {
+         getCurrentLocation();  
 
-    setTimeout(() => {
-        $("#addrress").html("ITS Cart Mahaveer Nagar, Argora, Ranchi, 834002");
-        location.href="home.html";
+      });
 
-    }, 1500);
+    // setTimeout(() => {
+    //     // $("#addrress").html("ITS Cart Mahaveer Nagar, Argora, Ranchi, 834002");
+    //     // location.href="home.html";
+
+    // }, 1500);
 </script>
 
 </body>

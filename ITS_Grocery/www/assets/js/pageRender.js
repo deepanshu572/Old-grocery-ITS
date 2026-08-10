@@ -137,6 +137,7 @@ function renderCategory(name) {
             
           </div>
         </div>
+        
         <div class="reuse_product bg bg2 product_design_sec_wrap">
           <div class="prd_img" id="promotionImg2">
           </div>
@@ -153,12 +154,19 @@ function renderCategory(name) {
             
           </div>
         </div>
+
         <div class="carousel_wrap crousel2">
          <h4>Brand On You</h4> 
           <div
             class="owl-carousel owl-carousel2 banner_crousel"
             id="carousel2"
           ></div>
+        </div>
+        <div class="reuse_category wrap_category4">
+          <div class="category_wrap reuse_wrap_head">
+            <h4 id="categoryhead5"></h4>
+            <div class="category_box_design" id="categoryBox5"></div>
+          </div>
         </div>
         <div class="reuse_wrap_head">
           <h4>Discover New Finds</h4>
@@ -196,12 +204,12 @@ function renderCategory(name) {
         <div class="footer_grocery">
          <img src='../assets/img/bg/footer_bg.svg' alt=""/>
         </div>`);
-    if (!loadedPages.Grocery) {
-      loadedPages.Grocery = true;
+    // if (!loadedPages.Grocery) {
+    //   loadedPages.Grocery = true;
 
       // Sirf pehli baar chalega
       initGrocery();
-    }
+    // }
    
   } else if (name == "Beauty") {
     $(".main").removeClass("lightThemePharmacy");
@@ -666,7 +674,7 @@ function renderCategory(name) {
         </div>
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadPharmacy1">Featured brands</h4>
             <div class="category_box_design" id="catgoryPharmacy1"></div>
           </div>
         </div>
@@ -689,13 +697,13 @@ function renderCategory(name) {
 
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4  id="categoryTheadPharmacy2">Featured brands</h4>
             <div class="category_box_design" id="catgoryPharmacy2"></div>
           </div>
         </div>
          <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadPharmacy3">Featured brands</h4>
             <div class="category_box_design" id="catgoryPharmacy3"></div>
           </div>
         </div>
@@ -728,13 +736,13 @@ function renderCategory(name) {
         </div>
           <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadPharmacy4">Featured brands</h4>
             <div class="category_box_design" id="catgoryPharmacy4"></div>
           </div>
         </div>
          <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4  id="categoryTheadPharmacy5">Featured brands</h4>
             <div class="category_box_design" id="catgoryPharmacy5"></div>
           </div>
         </div>
@@ -797,7 +805,7 @@ function renderCategory(name) {
           `);
     $("#Store99Page").html(` <div class="store99_category">
          <div class="reuse_header_for_all">
-            <h5>Categories</h5>
+            <h5 id="categoryThead99Store1">Categories</h5>
           </div>
           <div class="store99_category_wrap" id="storeCategory991">
             
@@ -826,14 +834,14 @@ function renderCategory(name) {
         </div>
          <div class="reuse_category wrap_category2">
     <div class="category_wrap reuse_wrap_head">
-      <h4>Top Rated</h4>
+      <h4  id="categoryThead99Store2">Top Rated</h4>
       <div class="category_box_design" id="catgory99Store2">
       </div>
     </div>
   </div>
    <div class="reuse_category wrap_category2">
     <div class="category_wrap reuse_wrap_head">
-      <h4>Top Rated</h4>
+      <h4  id="categoryThead99Store3">Top Rated</h4>
       <div class="category_box_design" id="catgory99Store3">
       </div>
     </div>
@@ -873,14 +881,14 @@ function renderCategory(name) {
         </div>
           <div class="reuse_category wrap_category2">
     <div class="category_wrap reuse_wrap_head">
-      <h4>Top Rated</h4>
+      <h4  id="categoryThead99Store4">Top Rated</h4>
       <div class="category_box_design" id="catgory99Store4">
       </div>
     </div>
   </div>
    <div class="reuse_category wrap_category2">
     <div class="category_wrap reuse_wrap_head">
-      <h4>Top Rated</h4>
+      <h4  id="categoryThead99Store5">Top Rated</h4>
       <div class="category_box_design" id="catgory99Store5">
       </div>
     </div>
@@ -954,19 +962,19 @@ function renderCategory(name) {
         </div>
          <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadKids1">Featured brands</h4>
             <div class="category_box_design" id="catgoryKids1"></div>
           </div>
         </div>
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadKids2">Featured brands</h4>
             <div class="category_box_design" id="catgoryKids2"></div>
           </div>
         </div>
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadKids3">Featured brands</h4>
             <div class="category_box_design" id="catgoryKids3"></div>
           </div>
         </div>
@@ -993,13 +1001,13 @@ function renderCategory(name) {
         </div>
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadKids4">Featured brands</h4>
             <div class="category_box_design" id="catgoryKids4"></div>
           </div>
         </div>
         <div class="reuse_category wrap_category2">
           <div class="category_wrap reuse_wrap_head">
-            <h4>Featured brands</h4>
+            <h4 id="categoryTheadKids5">Featured brands</h4>
             <div class="category_box_design" id="catgoryKids5"></div>
           </div>
         </div>

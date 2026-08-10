@@ -591,7 +591,7 @@ body {
     position: relative;
     width: 70px;
     height: 70px;
-    
+
 }
 
 .search_icon {
@@ -789,7 +789,7 @@ body {
 
 .top_wrap {
     padding: 0 16px;
-    margin-top:env(safe-area-inset-top);
+    margin-top: env(safe-area-inset-top);
 }
 
 .header_nav>h6 {
@@ -823,7 +823,8 @@ body {
     font-size: 13px;
     font-weight: 700;
 }
-.header_loc img{
+
+.header_loc img {
     width: 12px;
     position: relative;
     top: -1px;
@@ -2001,8 +2002,8 @@ body {
 }
 
 .fashion_box {
-    width: 73px;
-    height: 73px;
+    /* width: 73px; */
+    height: 75px;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -4386,7 +4387,7 @@ justify-content: space-between; */
 
 .address_canvas {
     height: 500px !important;
-        border-bottom-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
 
@@ -5936,55 +5937,100 @@ button.coupon_btn.apply-btn {
 
 
 
-.sticky-wrapper{
+.sticky-wrapper {
     /* height:110px;      search + category height */
 }
 
-.fixed_position{
-    width:100%;
+.fixed_position {
+    width: 100%;
     /* background:#fff; */
-    transition:box-shadow .25s ease;
+    transition: box-shadow .25s ease;
 }
 
-.fixed_position.sticky{
+.fixed_position.sticky {
 
-    position:fixed;
+    position: fixed;
 
-    top:0;
-    left:0;
-    right:0;
+    top: 0;
+    left: 0;
+    right: 0;
 
-    z-index:9999;
+    z-index: 9999;
 
-    background:#f8f8f8;
+    background: #f8f8f8;
 
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
 
-    animation:slideDown .25s ease;
-    padding-top:env(safe-area-inset-top);
+    animation: slideDown .25s ease;
+    padding-top: env(safe-area-inset-top);
 
 }
 
-@keyframes slideDown{
+@keyframes slideDown {
 
-    from{
-        transform:translateY(-100%);
+    from {
+        transform: translateY(-100%);
     }
 
-    to{
-        transform:translateY(0);
+    to {
+        transform: translateY(0);
     }
 
 }
-.sticky_not{
+
+.sticky_not {
     background: transparent !important;
 }
-.sticky .category_btn .category_img img{
+
+.sticky .category_btn .category_img img {
     filter: unset !important;
 }
+
 .sticky .category_btn {
     color: black !important;
 }
-.sticky .search_bar{
-  border:1px solid #ededed !important;
+
+.sticky .search_bar {
+    border: 1px solid #ededed !important;
 }
+
+.sticky .category_indicator {
+    background: #000 !important;
+}
+
+.flex_top_bar>h5 {
+    font-size: 14px;
+    text-transform: capitalize
+}
+.flex_top_bar{
+    display: flex;
+    flex-direction: column;
+}
+.flex_top_bar span{
+    font-size: 10px;
+    color: rgb(51, 51, 51);
+}
+.txt_address_find{
+      text-align: center;
+    font-size: 13px;
+    width: 83%;
+    font-weight: 500;
+}
+
+
+/* HTML: <div class="loader"></div> */
+/* .loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 6px;
+  background:
+    conic-gradient(from 135deg at top,currentColor 90deg, #0000 0) 0 calc(50% - 4px)/17px 8.5px,
+    radial-gradient(farthest-side at bottom left,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) top right/50%  50% content-box content-box,
+    radial-gradient(farthest-side at top        ,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) bottom   /100% 50% content-box content-box;
+  background-repeat: no-repeat;
+  animation: l11 1s infinite linear;
+}
+@keyframes l11{ 
+  100%{transform: rotate(1turn)}
+} */

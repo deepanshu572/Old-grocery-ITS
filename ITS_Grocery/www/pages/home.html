@@ -17,16 +17,17 @@
   <!-- <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" /> -->
 
   <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 
-<!-- Owl Carousel CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
-<!-- Your CSS -->
-<link rel="stylesheet" href="../assets/css/style.css">
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    
+
   </style>
 </head>
 
@@ -42,80 +43,81 @@
     </div>
   </div>
   <div class="main">
-          <input type="text" id="addressId" hidden>
+    <input type="text" id="addressId" hidden>
 
     <div class="header_nav" id="headerBg">
-    <div class="wrapper_top">
+      <div class="wrapper_top">
 
-    <!-- Top Header -->
-    <div class="top_wrap">
-        <div class="header_top_wrap">
+        <!-- Top Header -->
+        <div class="top_wrap">
+          <div class="header_top_wrap">
 
             <div class="header_left_wrap">
-                <h5>Itscart.in</h5>
-                <h5>15 minutes</h5>
+              <h5>Itscart.in</h5>
+              <h5>15 minutes</h5>
 
-                <div class="header_loc"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasBottomAddress"
-                    aria-controls="offcanvasBottomAddress">
+              <div class="header_loc" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomAddress"
+                aria-controls="offcanvasBottomAddress">
 
-                    <i class="ti ti-home"></i>
-                    <h5 id="addressTypeHome">Select Your location</h5>
-                    <i class="ti ti-chevron-down"></i>
+                <i class="ti ti-home"></i>
+                <h5 id="addressTypeHome">Select Your location</h5>
+                <i class="ti ti-chevron-down"></i>
 
-                </div>
+              </div>
 
-                <p id="addressTxtHome">Ranchi Jharkhand</p>
+              <p id="addressTxtHome">Ranchi Jharkhand</p>
             </div>
 
             <div class="header_right_wrap">
 
-                <div class="header_right_icon" onclick="location.href='wallet.html'">
-                    <img src="../assets/img/icon/wallet.svg" alt="">
-                    <div class="box_wallet">100</div>
-                </div>
+              <div class="header_right_icon" onclick="location.href='wallet.html'">
+                <img src="../assets/img/icon/wallet.svg" alt="">
+                <div class="box_wallet">100</div>
+              </div>
 
-                <div class="header_right_icon" onclick="location.href='profile.html'">
-                    <img src="../assets/img/icon/profile.svg" alt="">
-                </div>
+              <div class="header_right_icon" onclick="location.href='profile.html'">
+                <img src="../assets/img/icon/profile.svg" alt="">
+              </div>
 
             </div>
 
+          </div>
         </div>
-    </div>
 
-    <!-- Sticky Wrapper -->
-    <div class="sticky-wrapper">
+        <!-- Sticky Wrapper -->
+        <div class="sticky-wrapper">
 
-        <div class="fixed_position" id="stickyHeader">
+          <div class="fixed_position" id="stickyHeader">
 
             <div class="search_bar" onclick="location.href='search.html'">
-                <i class="ti ti-search"></i>
+              <i class="ti ti-search"></i>
 
-                <input
-                    type="text"
-                    placeholder="Search 'Vegetables & Fruits'"
-                    readonly>
+              <input type="text" placeholder="Search 'Vegetables & Fruits'" readonly>
 
-                <i class="ti ti-microphone"></i>
+              <i class="ti ti-microphone"></i>
             </div>
 
             <div class="category_wrapper">
-                <div class="category_icons" id="category">
-                    <!-- tabs -->
-                </div>
+              <div class="category_icons" id="category">
+                <!-- tabs -->
+              </div>
             </div>
+
+          </div>
 
         </div>
 
-    </div>
-
-</div>
+      </div>
 
       <div class="banner_wrap" id="banners"></div>
     </div>
+    <!-- <div class="loader"></div> -->
+
+    <input type="text" id="latitude" placeholder="Latitude">
+    <input type="text" id="longitude" placeholder="Longitude">
+
+    <!-- <input type="text" id="address" placeholder="Address"> -->
+     <p id="address"></p>
 
     <!--      
       <div class="main_content_sec" id="contentToggle">
@@ -146,6 +148,7 @@
       ...
     </div>
 
+
     <div class="offcanvas offcanvas-bottom varient_data_canvas" tabindex="-1" id="offcanvasVarient"
       aria-labelledby="offcanvasVarientLabel">
       <div class="offcanvas-body small">
@@ -170,6 +173,8 @@
 
       </div>
     </div>
+
+
     <div class="footer_tab">
       <div class="foot_tab" onclick="location.href = 'home.html'">
         <div class="line"></div>
@@ -198,298 +203,290 @@
 
 
 
-    <!-- Address Select Canvas -->
+  <!-- Address Select Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom address_canvas reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomAddress"
-      aria-labelledby="offcanvasBottomAddressLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
-          Select Delivery Address
-        </h5>
+  <div class="offcanvas offcanvas-bottom address_canvas reuse_modal_box" tabindex="-1" id="offcanvasBottomAddress"
+    aria-labelledby="offcanvasBottomAddressLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+        Select Delivery Address
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+
+    </div>
+    <div class="offcanvas-body small">
+      <div class="btn_add_address1">
+        <button class="current-location-btn" onclick="getCurrentLocation()">
+          <i class="ti ti-current-location"></i>
+          <span>Use Current Location</span>
         </button>
 
+        <button class="add-address-btn" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasBottomAddAddress">
+          <i class="ti ti-plus"></i>
+          <span>Add Address</span>
+        </button>
       </div>
-      <div class="offcanvas-body small">
-        <div class="btn_add_address1">
-    <button class="current-location-btn">
-        <i class="ti ti-current-location"></i>
-        <span>Use Current Location</span>
-    </button>
-
-    <button
-        class="add-address-btn"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasBottomAddAddress">
-        <i class="ti ti-plus"></i>
-        <span>Add Address</span>
-    </button>
-</div>
-        <div class="saved_address">
-          <b>Saved addresses</b>
-          <div id="savedAddress"></div>
-        </div>
+      <div class="saved_address">
+        <b>Saved addresses</b>
+        <div id="savedAddress"></div>
       </div>
     </div>
+  </div>
 
-    <!-- Add Address Canvas -->
+  <!-- Add Address Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom add_address_canvas reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomAddAddress"
-      aria-labelledby="offcanvasBottomAddAddressLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
-          Add Address
-        </h5>
+  <div class="offcanvas offcanvas-bottom add_address_canvas reuse_modal_box" tabindex="-1"
+    id="offcanvasBottomAddAddress" aria-labelledby="offcanvasBottomAddAddressLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+        Add Address
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <div class="offcanvas-body small">
-        <div class="add_address_wrap">
-          <input type="text" id="selectedRole" hidden />
-          <div class="add_address_highlight">
-            A detailed address will help our delivery partner reach your
-            doorstep easily.
-          </div>
-          <div class="add_address_form_sec">
-            <h4>Save address as*</h4>
-            <div class="form_address_wrap">
-              <div class="form_icons">
-                <div class="form_icon role_active" data-role="Home">
-                  <i class="bi bi-house-add"></i>
-                  <p>Home</p>
-                </div>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body small">
+      <div class="add_address_wrap">
+        <input type="text" id="selectedRole" hidden />
+        <div class="add_address_highlight">
+          A detailed address will help our delivery partner reach your
+          doorstep easily.
+        </div>
+        <div class="add_address_form_sec">
+          <h4>Save address as*</h4>
+          <div class="form_address_wrap">
+            <div class="form_icons">
+              <div class="form_icon role_active" data-role="Home">
+                <i class="bi bi-house-add"></i>
+                <p>Home</p>
+              </div>
 
-                <div class="form_icon" data-role="Work">
-                  <i class="bi bi-buildings"></i>
-                  <p>Work</p>
-                </div>
+              <div class="form_icon" data-role="Work">
+                <i class="bi bi-buildings"></i>
+                <p>Work</p>
+              </div>
 
-                <div class="form_icon" data-role="Friends & Family">
-                  <i class="bi bi-people"></i>
-                  <p>Friends &amp; Family</p>
-                </div>
+              <div class="form_icon" data-role="Friends & Family">
+                <i class="bi bi-people"></i>
+                <p>Friends &amp; Family</p>
+              </div>
 
-                <div class="form_icon" data-role="Other">
-                  <i class="bi bi-geo-alt"></i>
-                  <p>Other</p>
-                </div>
+              <div class="form_icon" data-role="Other">
+                <i class="bi bi-geo-alt"></i>
+                <p>Other</p>
               </div>
             </div>
+          </div>
 
-            <div class="address_form">
-              <!-- Address Details -->
-              <input
-                type="text"
-                id="houseNo"
-                class="form_input"
-                placeholder="House No / Flat No / Building Name *"
-              />
+          <div class="address_form">
+            <!-- Address Details -->
+            <input type="text" id="houseNo" class="form_input" placeholder="House No / Flat No / Building Name *" />
 
-              <input
-                type="text"
-                id="floor"
-                class="form_input"
-                placeholder="Floor (Optional)"
-              />
+            <input type="text" id="floor" class="form_input" placeholder="Floor (Optional)" />
 
-              <input
-                type="text"
-                id="area"
-                class="form_input"
-                placeholder="Area / Locality *"
-              />
+            <input type="text" id="area" class="form_input" placeholder="Area / Locality *" />
 
-              <input
-                type="text"
-                id="city"
-                class="form_input"
-                placeholder="City *"
-              />
+            <input type="text" id="city" class="form_input" placeholder="City *" />
 
-              <input
-                type="text"
-                id="state"
-                class="form_input"
-                placeholder="State *"
-              />
+            <input type="text" id="state" class="form_input" placeholder="State *" />
 
-              <input
-                type="text"
-                id="pincode"
-                class="form_input"
-                maxlength="6"
-                placeholder="PIN Code *"
-              />
+            <input type="text" id="pincode" class="form_input" maxlength="6" placeholder="PIN Code *" />
 
-              <p class="section_title">Receiver Details</p>
+            <p class="section_title">Receiver Details</p>
 
-              <input
-                type="text"
-                id="name"
-                class="form_input"
-                placeholder="Receiver Name *"
-              />
+            <input type="text" id="name" class="form_input" placeholder="Receiver Name *" />
 
-              <input
-                type="tel"
-                id="number"
-                class="form_input"
-                maxlength="10"
-                placeholder="Mobile Number *"
-              />
-            </div>
-            <div class="button_save_add btn_reuse" id="btnToggleAddress">
-              <button onclick="handleAddress(event)">Save Address</button>
-            </div>
+            <input type="tel" id="number" class="form_input" maxlength="10" placeholder="Mobile Number *" />
+          </div>
+          <div class="button_save_add btn_reuse" id="btnToggleAddress">
+            <button onclick="handleAddress(event)">Save Address</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
 
- <script src="../cordova.js"></script>
-<!-- jQuery (must be first) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../cordova.js"></script>
+  <!-- jQuery (must be first) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Owl Carousel JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- Owl Carousel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
-<!-- GSAP -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 
-<!-- Your Scripts -->
-<script src="../assets/js/pageRender.js"></script>
-<script src="../assets/js/script.js"></script>
+  <!-- Your Scripts -->
+  <script src="../assets/js/pageRender.js"></script>
+  <script src="../assets/js/script.js"></script>
 
   <script>// Text instantly visible
     // Text
-    gsap.to(".data_loader h6", {
-      opacity: 1,
-      duration: 0.3
-    });
+    let loaderTl;
 
-    // Images
-    const images = gsap.utils.toArray(".loader-img");
+    function showLoader() {
 
-    gsap.set(images, {
-      opacity: 0,
-      y: 40
-    });
+      console.log("hello inner....");
 
-    // Timeline
-    const loaderTl = gsap.timeline({
-      repeat: -1
-    });
+      const loader = document.getElementById("loader");
 
-    images.forEach((img) => {
+      // IMPORTANT: show loader again
+      loader.style.display = "flex";
 
-      loaderTl
-        .fromTo(img,
-          {
-            opacity: 0,
-            y: 40
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.45,
-            ease: "power2.out"
-          })
-
-        .to({}, {
-          duration: 0.7
-        })
-
-        .to(img, {
-          opacity: 0,
-          y: -40,
-          duration: 0.35,
-          ease: "power2.in"
-        });
-
-    });
-    function hideLoader() {
-
-      loaderTl.kill();
-
-      gsap.to("#loader", {
-        opacity: 0,
-        duration: 0.4,
-        onComplete() {
-          document.getElementById("loader").style.display = "none";
-        }
+      // Reset loader opacity
+      gsap.set(loader, {
+        opacity: 1
       });
 
+      // Kill previous timeline if exists
+      if (loaderTl) {
+        loaderTl.kill();
+      }
+
+      // Heading
+      gsap.set(".data_loader h6", {
+        opacity: 0
+      });
+
+      gsap.to(".data_loader h6", {
+        opacity: 1,
+        duration: 0.3
+      });
+
+      // Images
+      const images = gsap.utils.toArray(".loader-img");
+
+      // Reset images
+      gsap.set(images, {
+        opacity: 0,
+        y: 40
+      });
+
+      // Create new timeline
+      loaderTl = gsap.timeline({
+        repeat: -1
+      });
+
+      images.forEach((img) => {
+
+        loaderTl
+          .fromTo(
+            img,
+            {
+              opacity: 0,
+              y: 40
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: "power2.out"
+            }
+          )
+
+          .to({}, {
+            duration: 0.7
+          })
+
+          .to(img, {
+            opacity: 0,
+            y: -40,
+            duration: 0.35,
+            ease: "power2.in"
+          });
+
+      });
     }
 
 
+    function hideLoader() {
 
-    
+      // Stop animation
+      if (loaderTl) {
+        loaderTl.kill();
+        loaderTl = null;
+      }
+
+      const loader = document.getElementById("loader");
+
+      gsap.to(loader, {
+        opacity: 0,
+        duration: 0.4,
+
+        onComplete() {
+          loader.style.display = "none";
+        }
+      });
+    }
+
+
   </script>
 
   <script>
-  let main2 = document.querySelector(".main");
-const stickyHeader = document.getElementById("stickyHeader");
+    let main2 = document.querySelector(".main");
+    const stickyHeader = document.getElementById("stickyHeader");
 
-let sticky = false;
+    let sticky = false;
 
-main2.addEventListener("scroll", () => {
+    main2.addEventListener("scroll", () => {
 
-    const scrollTop = main2.scrollTop;
+      const scrollTop = main2.scrollTop;
 
-    if (scrollTop > 120 && !sticky) {
+      if (scrollTop > 120 && !sticky) {
 
         stickyHeader.classList.add("sticky");
         // stickyHeader.classList.add("animate-fade-in");
-        
-                stickyHeader.classList.remove("sticky_not");
+
+        stickyHeader.classList.remove("sticky_not");
 
         sticky = true;
 
-    }
+      }
 
-    else if (scrollTop <= 120 && sticky) {
+      else if (scrollTop <= 120 && sticky) {
 
         stickyHeader.classList.remove("sticky");
         stickyHeader.classList.add("sticky_not");
-                // stickyHeader.classList.remove("animate-fade-in");
+        // stickyHeader.classList.remove("animate-fade-in");
 
         sticky = false;
 
+      }
+
+    });
+
+
+    function scrollToTop() {
+      document.querySelector(".main").scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+      // alert("hhh")
     }
-
-});
-
 
     // toggleBrandDay();
     getCategory();
     getCurrentAddress();
-           getAddress();
+    getAddress();
 
 
 
 
 
 
-  
-    
+
+
+
 
 
 

@@ -24,41 +24,41 @@ let apiUrl =
 let imgUrl =
   "http://localhost/indian%20tech%20solution/Dashboard_multiBranch/admin/";
 
-let categoryId = localStorage.getItem("currentCategoryId")||'';
+let categoryId = localStorage.getItem("currentCategoryId") || '';
 
 async function setStatusBar(color, style, isTrue) {
 
-    // if (!window.StatusBar) {
-    //     alert("StatusBar plugin not available");
-    //     return;
-    // }
+  // if (!window.StatusBar) {
+  //     alert("StatusBar plugin not available");
+  //     return;
+  // }
 
-    StatusBar.overlaysWebView(isTrue);
-    StatusBar.backgroundColorByHexString(color);
-    
-    if (style == "light") {
-         StatusBar.styleLightContent();
-    } else {
-         StatusBar.styleDefault();
-    }
+  StatusBar.overlaysWebView(isTrue);
+  StatusBar.backgroundColorByHexString(color);
+
+  if (style == "light") {
+    StatusBar.styleLightContent();
+  } else {
+    StatusBar.styleDefault();
+  }
 }
 
 async function applyPageStatusBar() {
 
-    let page = window.location.pathname;
+  let page = window.location.pathname;
 
-    if (page.includes("home.html") || page.includes("productDetail.html")) {
-        await setStatusBar("#00000000", "dark", true); // false is not working 
-        
-    }
-    else{
-        await setStatusBar("#fff", "dark", false); // false is not working
-    }
+  if (page.includes("home.html") || page.includes("productDetail.html")) {
+    await setStatusBar("#00000000", "dark", true); // false is not working 
+
+  }
+  else {
+    await setStatusBar("#fff", "dark", false); // false is not working
+  }
 
 }
 
-document.addEventListener("deviceready", async function () { 
-        await applyPageStatusBar();
+document.addEventListener("deviceready", async function () {
+  await applyPageStatusBar();
 }, false);
 
 
@@ -89,9 +89,9 @@ function getTopHeroBanner(id) {
         $(`#headerBg`).css("background", `url('${imgUrl + topBannerData.img_path}')`);
         $(`#headerBg`).css("color", `${topBannerData.color_code}`);
 
-        if(topBannerData.icon_color == "white"){
+        if (topBannerData.icon_color == "white") {
           $(".main").addClass("lightTheme");
-        }else{
+        } else {
           $(".main").removeClass("lightTheme");
         }
       } else {
@@ -105,7 +105,7 @@ function getTopHeroBanner(id) {
 
 
 
-  function getCategory() {
+function getCategory() {
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -116,22 +116,23 @@ function getTopHeroBanner(id) {
     success: function (response) {
       if (response.status == "success") {
         console.log(response.data);
-        let categories =  response.data;
+        let categories = response.data;
         let categoryHtml = `<div class="category_indicator"></div>`;
-        categoryId =  localStorage.getItem("currentCategoryId");
-       if(!categoryId || categoryId == ''){
-        categoryId = categories[0]?.id;
-        localStorage.setItem("currentCategoryId",categories[0]?.id);
-       }
-           let currentCategoryName = localStorage.getItem("currentCategoryName");
+        categoryId = localStorage.getItem("currentCategoryId");
+        if (!categoryId || categoryId == '') {
+          categoryId = categories[0]?.id;
+          localStorage.setItem("currentCategoryId", categories[0]?.id);
+        }
+        let currentCategoryName = localStorage.getItem("currentCategoryName");
 
-            renderCategory(currentCategoryName)
+        renderCategory(currentCategoryName)
 
 
         categories.forEach((item, index) => {
           categoryHtml += `
             <button 
                 class="category_btn  ${item.id === categoryId ? "active" : ""}"
+                onclick="scrollToTop()"
                 data-category="${item.name}"
                  data-category-id="${item.id}"
             >
@@ -145,10 +146,10 @@ function getTopHeroBanner(id) {
         $("#category").html(categoryHtml);
         setTimeout(() => {
           moveIndicator($(".category_btn.active"));
-         
+
         }, 100);
-       
-       
+
+
       } else {
         alert(response.message);
         console.log(response.data);
@@ -159,8 +160,8 @@ function getTopHeroBanner(id) {
 
 
 function getTopLeftBanner() {
-    categoryId = localStorage.getItem("currentCategoryId");
-    const branchId = localStorage.getItem("branchId");
+  categoryId = localStorage.getItem("currentCategoryId");
+  const branchId = localStorage.getItem("branchId");
 
   return $.ajax({
     url: apiUrl,
@@ -227,7 +228,7 @@ function getTopRightBanner() {
         console.log(bannerData);
         console.log("bannerData =====================");
         bannerData.map((item) => {
-          bannerRightHtml += `<img onclick="renderInSubCategory('${item.under_category}','${item.under_subcategory}')" src="${imgUrl + item.image_path}" />`;
+          bannerRightHtml += `<img onclick="renderInSubCategory('${item.under_category}','${item.under_middle_category}')" src="${imgUrl + item.image_path}" />`;
         });
 
         $("#bannerRight").html(bannerRightHtml);
@@ -333,7 +334,7 @@ function renderBestSellingHtml(products, title, type) {
 }
 
 function getNewFindPrd() {
- return $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -360,6 +361,9 @@ function getNewFindPrd() {
 
 }
 function renderNewFindHtml(products, title, type) {
+  console.log("newfinds : ===========");
+  console.log(products, title, type);
+  console.log("newfinds : ===========");
   if (!products?.length) return;
 
   const item = {
@@ -391,8 +395,8 @@ function renderNewFindHtml(products, title, type) {
 
   $("#categoryDesign").append(html);
 }
-function getNewFindKids(){
-   $.ajax({
+function getNewFindKids() {
+  $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -561,7 +565,7 @@ function getAllProductData() {
           </div>
 
           ${item.varient_count <= 1
-  ? `
+              ? `
       <div
         class="AddWrp productAddBtn"
         id="AddBtnToggle${item.p_id}"
@@ -574,7 +578,7 @@ function getAllProductData() {
         </button>
       </div>
     `
-  : `
+              : `
       <div
         type="button"
         data-bs-toggle="offcanvas"
@@ -591,7 +595,7 @@ function getAllProductData() {
 
       </div>
     `
-}
+            }
 
         </div>
 
@@ -714,10 +718,10 @@ function getBrandsProducts() {
         $("#promotionPrd1").html(renderProducts(data?.b1?.products));
         $("#promotionPrd2").html(renderProducts(data?.b2?.products));
         $("#promotionPrd3").html(renderProducts(data?.b3?.products));
-        
-        $("#promotionImg1").html(`<img src='${imgUrl+data?.b1?.img}' alt='${data?.b1?.name}'/>`);
-        $("#promotionImg2").html(`<img src='${ imgUrl+data?.b2?.img}' alt='${data?.b2?.name}'/>`)
-        $("#promotionImg3").html(`<img src='${ imgUrl+data?.b3?.img}' alt='${data?.b3?.name}'/>`)
+
+        $("#promotionImg1").html(`<img src='${imgUrl + data?.b1?.img}' alt='${data?.b1?.name}'/>`);
+        $("#promotionImg2").html(`<img src='${imgUrl + data?.b2?.img}' alt='${data?.b2?.name}'/>`)
+        $("#promotionImg3").html(`<img src='${imgUrl + data?.b3?.img}' alt='${data?.b3?.name}'/>`)
 
         // // See All Products
         $("#promotionWrapHeading1").html(
@@ -769,8 +773,8 @@ function renderSubCategories1(data) {
   $("#categoryBox1").html(createSubCategoryHTML1(data.title1));
   $("#categoryBox2").html(createSubCategoryHTML1(data.title2));
   $("#categoryBox3").html(createSubCategoryHTML1(data.title3));
-  $("#categoryBox4").html(createSubCategoryHTML1(data.title4));
-  $("#categoryBox5").html(createSubCategoryHTML2(data.title5));
+  $("#categoryBox4").html(createSubCategoryHTML2(data.title4));
+  $("#categoryBox5").html(createSubCategoryHTML1(data.title5));
 }
 function renderSubCategories2(data) {
   $("#category1").html(createSubCategoryHTML1(data.title1));
@@ -828,19 +832,19 @@ const varientData = {};
 
 function getAllProduct() {
   const branchId = localStorage.getItem("branchId");
- 
+
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
-      type:"getAllProduct",
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getAllProduct",
       branchId
     },
-    success:function (response) {
-      if(response.status=="success"){
+    success: function (response) {
+      if (response.status == "success") {
         let data = response.data;
-        
+
 
         data?.allData?.map((item) => {
           AllProduct[item.p_id] = item;
@@ -852,7 +856,7 @@ function getAllProduct() {
 }
 getAllProduct();
 function getGroceryProducts() {
-   categoryId = localStorage.getItem("currentCategoryId");
+  categoryId = localStorage.getItem("currentCategoryId");
   const branchId = localStorage.getItem("branchId");
   return $.ajax({
     url: apiUrl,
@@ -872,7 +876,7 @@ function getGroceryProducts() {
           AllProduct[item.p_id] = item;
         });
         console.log("AllProduct,data?.allData")
-        console.log(AllProduct,data?.allData)
+        console.log(AllProduct, data?.allData)
         $("#productWrap1").html(renderProducts(data.title1));
         $("#productWrap2").html(renderProducts(data.title2));
         $("#productWrap3").html(renderProducts(data.title3));
@@ -899,10 +903,10 @@ function getGroceryProducts() {
         $("#productWrapHeading4").html(
           renderseeAllPrd(data.title4, "title4", producthead4),
         );
-          $("#productWrapHeading5").html(
+        $("#productWrapHeading5").html(
           renderseeAllPrd(data.title5, "title5", producthead5),
         );
-          $("#productWrapHeading6").html(
+        $("#productWrapHeading6").html(
           renderseeAllPrd(data.title6, "title6", producthead6),
         );
         updateCartUI("prd");
@@ -913,10 +917,10 @@ function getGroceryProducts() {
   });
 }
 function getBeautyProducts() {
-  
-categoryId = localStorage.getItem("currentCategoryId");
+
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -960,9 +964,9 @@ categoryId = localStorage.getItem("currentCategoryId");
         $("#productBeautyHeading4").html(
           renderseeAllPrd(data.title4, "title4", producthead4),
         );
-          $("#productBeautyHeading5").html(
+        $("#productBeautyHeading5").html(
           renderseeAllPrd(data.title5, "title5", producthead5),
-        );  
+        );
         $("#productBeautyHeading6").html(
           renderseeAllPrd(data.title6, "title6", producthead6),
         );
@@ -975,10 +979,10 @@ categoryId = localStorage.getItem("currentCategoryId");
   });
 }
 function getFashionProducts() {
-  
-categoryId = localStorage.getItem("currentCategoryId");
+
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -1025,7 +1029,7 @@ categoryId = localStorage.getItem("currentCategoryId");
         $("#productFashionHeading5").html(
           renderseeAllPrd(data.title5, "title5", producthead5),
         );
-         $("#productFashionHeading6").html(
+        $("#productFashionHeading6").html(
           renderseeAllPrd(data.title6, "title6", producthead6),
         );
 
@@ -1037,9 +1041,9 @@ categoryId = localStorage.getItem("currentCategoryId");
   });
 }
 function getPharmacyProducts() {
-   categoryId = localStorage.getItem("currentCategoryId");
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -1100,10 +1104,10 @@ function getPharmacyProducts() {
   });
 }
 function getKidsProducts() {
-  
-categoryId = localStorage.getItem("currentCategoryId");
+
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -1164,10 +1168,10 @@ categoryId = localStorage.getItem("currentCategoryId");
   });
 }
 function get99storeProducts() {
-  
-categoryId = localStorage.getItem("currentCategoryId");
+
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -1228,10 +1232,10 @@ categoryId = localStorage.getItem("currentCategoryId");
   });
 }
 function getElictricityProducts() {
- 
-categoryId = localStorage.getItem("currentCategoryId");
+
+  categoryId = localStorage.getItem("currentCategoryId");
   branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -1296,29 +1300,29 @@ categoryId = localStorage.getItem("currentCategoryId");
 function getRecentOrder() {
   const branchId = localStorage.getItem("branchId");
   return $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
-      type:"getRecentOrder",
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getRecentOrder",
       userId,
       branchId
     },
     success: function (response) {
-      if(response.status=="success"){
+      if (response.status == "success") {
         let recentOrder = response.data;
-       
-        $(".wrap_prd1").css("display","block");
 
-          $("#productDesign1").html(renderProducts3(recentOrder));
+        $(".wrap_prd1").css("display", "block");
 
-      }else{
+        $("#productDesign1").html(renderProducts3(recentOrder));
+
+      } else {
         console.log(response.message);
-                $(".wrap_prd1").css("display","none");
+        $(".wrap_prd1").css("display", "none");
 
       }
     },
-   
+
   })
 }
 
@@ -1339,15 +1343,13 @@ function renderProducts(productList) {
             <img src="${imgUrl + item.image_path}" alt="">
           </div>
 
-          <div class="like ${
-            index == 0 || index == 3 || index == 4 ? "like_active" : ""
-          }">
+          <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
+      }">
             <i class="ti ti-heart-filled"></i>
           </div>
 
-          ${
-            item.varient_count <= 1
-              ? `
+          ${item.varient_count <= 1
+        ? `
                 <div
                   class="AddWrp productAddBtn"
                   id="AddBtnToggle${item.p_id}"
@@ -1360,7 +1362,7 @@ function renderProducts(productList) {
                   </button>
                 </div>
               `
-              : `
+        : `
                 <div
                   type="button"
                   data-bs-toggle="offcanvas"
@@ -1377,7 +1379,7 @@ function renderProducts(productList) {
 
                 </div>
               `
-          }
+      }
 
         </div>
 
@@ -1435,15 +1437,13 @@ function renderProducts2(productList) {
             <img src="${imgUrl + item.image_path}" alt="">
           </div>
 
-          <div class="like ${
-            index == 0 || index == 3 || index == 4 ? "like_active" : ""
-          }">
+          <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
+      }">
             <i class="ti ti-heart-filled"></i>
           </div>
 
-          ${
-            item.varient_count <= 1
-              ? `
+          ${item.varient_count <= 1
+        ? `
                 <div
                   class="AddWrp productAddBtn"
                   id="AddBtnToggle${item.p_id}"
@@ -1456,7 +1456,7 @@ function renderProducts2(productList) {
                   </button>
                 </div>
               `
-              : `
+        : `
                 <div
                   type="button"
                   data-bs-toggle="offcanvas"
@@ -1473,7 +1473,7 @@ function renderProducts2(productList) {
 
                 </div>
               `
-          }
+      }
 
         </div>
 
@@ -1531,9 +1531,8 @@ function renderProducts3(productList) {
             <img src="${imgUrl + item.image_path}" alt="">
           </div>
 
-          <div class="like ${
-            index == 0 || index == 3 || index == 4 ? "like_active" : ""
-          }">
+          <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
+      }">
             <i class="ti ti-heart-filled"></i>
           </div>
 
@@ -1570,9 +1569,8 @@ function renderProducts3(productList) {
 
           </div>
 
-          ${
-            item.varient_count <= 1
-              ? `
+          ${item.varient_count <= 1
+        ? `
                 <div
                   class="AddWrp productAddBtn"
                   id="AddBtnToggle${item.p_id}"
@@ -1586,7 +1584,7 @@ function renderProducts3(productList) {
                   </button>
                 </div>
               `
-              : `
+        : `
                 <div
                   type="button"
                   data-bs-toggle="offcanvas"
@@ -1599,7 +1597,7 @@ function renderProducts3(productList) {
 
                 </div>
               `
-          }
+      }
 
         </div>
 
@@ -1650,7 +1648,7 @@ function getSingleVarientId(id, type, image, name) {
     data: {
       type: "getSingleVarientId",
       id,
-      branchId:branch_id
+      branchId: branch_id
     },
     success: function (response) {
       if (response.status == "success") {
@@ -1833,7 +1831,7 @@ function toggleAdd(id, varId, type, stock, isRestore = false) {
 }
 
 function getAllVarient() {
-    const branchId = localStorage.getItem("branchId");
+  const branchId = localStorage.getItem("branchId");
 
   $.ajax({
     url: apiUrl,
@@ -1845,7 +1843,7 @@ function getAllVarient() {
     },
     success: function (response) {
       if (response.status == "success") {
-        
+
         varientAllData.push(response.data);
       } else {
         console.log(response.message);
@@ -1940,7 +1938,7 @@ function handleIncrement(id, varId, type, idfr) {
   } else {
     varData = varientData[varId];
   }
-    console.log(varData, varientAllData, "varData, allVariants");
+  console.log(varData, varientAllData, "varData, allVariants");
 
 
   // ================= Quantity Input =================
@@ -1953,28 +1951,28 @@ function handleIncrement(id, varId, type, idfr) {
 
   // ================= Stock =================
 
-  
-const stock = Number(varData?.stock ?? 0);
-qty = Number(qty);
 
-console.log("qty:", qty);
-console.log("stock:", stock);
+  const stock = Number(varData?.stock ?? 0);
+  qty = Number(qty);
 
-if (qty >= stock) {
+  console.log("qty:", qty);
+  console.log("stock:", stock);
+
+  if (qty >= stock) {
     alert("Out of Stock");
 
     qtyInput.val(stock);
-    
+
     if (type === "prdDataVar") {
-        $(`.plusBtn[data-pid="${id}"]`).addClass("disabled");
+      $(`.plusBtn[data-pid="${id}"]`).addClass("disabled");
     } else {
-        $(`#plusVar${varId}`).addClass("disabled");
+      $(`#plusVar${varId}`).addClass("disabled");
     }
 
     return false;
-}
+  }
 
-qty++;
+  qty++;
 
   // ================= Local Cart =================
   if (type === "prdDataVar") {
@@ -2000,7 +1998,7 @@ qty++;
     idfr: idfr,
     p_id: productData?.p_id,
     vid: varId || "",
-    branch_id:branchId,
+    branch_id: branchId,
     name: productData?.name,
     image_path: productData?.image_path,
     quantity: varData.v_quantity,
@@ -2035,7 +2033,7 @@ qty++;
 
 }
 function handleDecrement(id, varId, type) {
-    const branchId = localStorage.getItem("branchId");
+  const branchId = localStorage.getItem("branchId");
 
   const prdData = products[id];
   const allPrdData = AllProduct[id];
@@ -2130,7 +2128,7 @@ function handleDecrement(id, varId, type) {
       user_id: userId,
       p_id: type === "prdDataVar" ? prdData?.p_id : allPrdData?.p_id,
       varId: varId,
-      branch_id:branchId,
+      branch_id: branchId,
       nop: qty,
     },
     success: function (res) {
@@ -2165,12 +2163,12 @@ function getAllHeading(type) {
         let categoryHead = response.data.categoryHeading[0];
         let productHead = response.data.productHeading[0];
 
-      
+
         $("#categoryhead1").html(categoryHead.title1);
-    $("#categoryhead2").html(categoryHead.title2);
-    $("#categoryhead3").html(categoryHead.title3);
-    $("#categoryhead4").html(categoryHead.title4);
-    $("#categoryhead5").html(categoryHead.title5);
+        $("#categoryhead2").html(categoryHead.title2);
+        $("#categoryhead3").html(categoryHead.title3);
+        $("#categoryhead4").html(categoryHead.title4);
+        $("#categoryhead5").html(categoryHead.title5);
         if (type === "home") {
           $("#producthead1").html(productHead.title1);
           $("#producthead2").html(productHead.title2);
@@ -2192,7 +2190,7 @@ function getAllHeading(type) {
           $("#productheadBeauty5").html(productHead.title5);
           $("#productheadBeauty6").html(productHead.title6);
         } else if (type == "fashion") {
-           $("#categoryTheadFashion1").text(categoryHead.title1);
+          $("#categoryTheadFashion1").text(categoryHead.title1);
           $("#categoryTheadFashion2").text(categoryHead.title2);
           $("#categoryTheadFashion3").text(categoryHead.title3);
           $("#categoryTheadFashion4").text(categoryHead.title4);
@@ -2204,8 +2202,8 @@ function getAllHeading(type) {
           $("#productheadFashion5").html(productHead.title5);
           $("#productheadFashion6").html(productHead.title6);
         }
-         else if (type == "pharmacy") {
-            $("#categoryTheadPharmacy1").text(categoryHead.title1);
+        else if (type == "pharmacy") {
+          $("#categoryTheadPharmacy1").text(categoryHead.title1);
           $("#categoryTheadPharmacy2").text(categoryHead.title2);
           $("#categoryTheadPharmacy3").text(categoryHead.title3);
           $("#categoryTheadPharmacy4").text(categoryHead.title4);
@@ -2217,7 +2215,12 @@ function getAllHeading(type) {
           $("#productheadPharmacy5").html(productHead.title5);
           $("#productheadPharmacy6").html(productHead.title6);
         }
-         else if (type == "kids") {
+        else if (type == "kids") {
+          $("#categoryTheadKids1").text(categoryHead.title1);
+          $("#categoryTheadKids2").text(categoryHead.title2);
+          $("#categoryTheadKids3").text(categoryHead.title3);
+          $("#categoryTheadKids4").text(categoryHead.title4);
+          $("#categoryTheadKids5").text(categoryHead.title5);
           $("#productheadKids1").html(productHead.title1);
           $("#productheadKids2").html(productHead.title2);
           $("#productheadKids3").html(productHead.title3);
@@ -2225,6 +2228,11 @@ function getAllHeading(type) {
           $("#productheadKids5").html(productHead.title5);
           $("#productheadKids6").html(productHead.title6);
         } else if (type == "99store") {
+          $("#categoryThead99Store1").text(categoryHead.title1);
+          $("#categoryThead99Store2").text(categoryHead.title2);
+          $("#categoryThead99Store3").text(categoryHead.title3);
+          $("#categoryThead99Store4").text(categoryHead.title4);
+          $("#categoryThead99Store5").text(categoryHead.title5);
           $("#producthead99store1").html(productHead.title1);
           $("#producthead99store2").html(productHead.title2);
           $("#producthead99store3").html(productHead.title3);
@@ -2232,7 +2240,7 @@ function getAllHeading(type) {
           $("#producthead99store5").html(productHead.title5);
           $("#producthead99store6").html(productHead.title6);
         } else if (type == "electronic") {
-           $("#categoryTheadElectronic1").text(categoryHead.title1);
+          $("#categoryTheadElectronic1").text(categoryHead.title1);
           $("#categoryTheadElectronic2").text(categoryHead.title2);
           $("#categoryTheadElectronic3").text(categoryHead.title3);
           $("#categoryTheadElectronic4").text(categoryHead.title4);
@@ -2418,15 +2426,13 @@ function getRelatedProduct(pid, cid, sid) {
                 <img src="${imgUrl + item.image_path}" alt="">
               </div>
 
-              <div class="like ${
-                index == 0 || index == 3 || index == 4 ? "like_active" : ""
-              }">
+              <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
+            }">
                 <i class="ti ti-heart-filled"></i>
               </div>
 
-              ${
-                item.varient_count <= 1
-                  ? `
+              ${item.varient_count <= 1
+              ? `
                     <div
                       class="AddWrp productAddBtn"
                       id="AddBtnToggle${item.p_id}"
@@ -2438,7 +2444,7 @@ function getRelatedProduct(pid, cid, sid) {
                       </button>
                     </div>
                   `
-                  : `
+              : `
                     <div
                       type="button"
                       data-bs-toggle="offcanvas"
@@ -2455,7 +2461,7 @@ function getRelatedProduct(pid, cid, sid) {
 
                     </div>
                   `
-              }
+            }
 
             </div>
 
@@ -2600,7 +2606,7 @@ function renderFilterProduct(prd, category) {
           </div>
 
           ${item.varient_count <= 1
-  ? `
+          ? `
       <div
         class="AddWrp productAddBtn"
         id="AddBtnToggle${item.p_id}"
@@ -2613,7 +2619,7 @@ function renderFilterProduct(prd, category) {
         </button>
       </div>
     `
-  : `
+          : `
       <div
         type="button"
         data-bs-toggle="offcanvas"
@@ -2630,7 +2636,7 @@ function renderFilterProduct(prd, category) {
 
       </div>
     `
-}
+        }
 
         </div>
 
@@ -2678,7 +2684,7 @@ function renderFilterProduct(prd, category) {
   updateCartUI("prd");
 
   let subCatHtml = `<div 
-        onclick="handleData('0','all')" class="wrap_sub_cat allCat ${ sid === "0" ? "active_category" : ""}" id="allPrdData"> 
+        onclick="handleData('0','all')" class="wrap_sub_cat allCat ${sid === "0" ? "active_category" : ""}" id="allPrdData"> 
             <div class="sub_category_box">
               <i class="ti ti-box"></i>
               <h6>All</h6>
@@ -2686,7 +2692,7 @@ function renderFilterProduct(prd, category) {
             <div class="brd"></div>
           </div>`;
   category?.map((item, index) => {
-    subCatHtml += `   <div onclick="handleData('${item.id}','filter')" class="wrap_sub_cat ${ sid == item.id ? "active_category" : ""}">
+    subCatHtml += `   <div onclick="handleData('${item.id}','filter')" class="wrap_sub_cat ${sid == item.id ? "active_category" : ""}">
             <div class="sub_category_box">
               <img
                 src="${imgUrl + item.image_path}"
@@ -2740,16 +2746,23 @@ function getSingleCategory() {
         allProducts = response.data;
         allSubCategories = response.subCategory;
         localStorage.setItem("subCatId", sid);
+        $("#categoryName").html(response?.middleCategoryName[0]?.name);
+        $("#productCount").html(response.data?.length)
         // renderFilterProduct(allProducts,allSubCategories)
-         if (sid=="0") {
-            handleData(sid, "");
-          } else {
-            handleData(sid, "filter");
-          }
-          
+        if (sid == "0") {
+          handleData(sid, "");
         } else {
-          console.log(response.message);
+          handleData(sid, "filter");
         }
+
+      } else {
+        let productHtml = '';
+        productHtml += `<div class="not_found"> <img src="https://myntra-umber.vercel.app/assets/sad-Csmh6fkm.gif" /> <h6>No Data Found !</h6></div>`;
+
+        $("#subCategoryProductData").html(productHtml)
+        // alert("nhi.....")
+        console.log(response.message);
+      }
 
     },
   });
@@ -2768,7 +2781,7 @@ $(document).on("click", ".category_btn", function () {
   const category = $(this).data("category");
 
   const categoryId = $(this).data("categoryId");
-  
+
 
   localStorage.setItem("currentCategoryName", category);
   localStorage.setItem("currentCategoryId", categoryId);
@@ -3186,15 +3199,20 @@ function getAddress() {
     },
     success: function (response) {
       if (response.status == "success") {
-        // console.log(response);
+
+        console.log(response.data);
 
         let addressHtml = "";
         let addressId = localStorage.getItem("addressId");
-        if (addressId) {
+        if (response.data.length > 0 && addressId) {
+          // alert("hulluu...")
           getExistingData(response.data);
           $("#addressId").val(addressId);
+
+
         }
         response.data.forEach((item, index) => {
+          console.log(item.type)
           addressHtml += `
    <div class="saved_address_data">
 
@@ -3212,7 +3230,7 @@ function getAddress() {
                 '${item.street}',
                 '${item.area}',
                 '${item.pin_code}',
-                '${item.type}',
+                '${item?.type || "Home"}',
                 '${item.o_floor}'
             )"
         >
@@ -3298,9 +3316,9 @@ function selectAddress(
   $("#selectedRole").val(address_type);
   $(".saved_address_data").removeClass("selected_address");
   $(element).closest(".saved_address_data").addClass("selected_address");
-          if (window.location.pathname.endsWith("home.html")) {
-          getCurrentAddress();
-}
+  if (window.location.pathname.endsWith("home.html")) {
+    getCurrentAddress();
+  }
 
 
 
@@ -3324,13 +3342,17 @@ function selectAddress(
 
 function getExistingData(data) {
   let AddressId = localStorage.getItem("addressId");
-  let addressHolder = data.filter((item) => item.id === AddressId);
+  let addressHolder = data.filter((item) => item.id == AddressId);
+
+
+  console.log(addressHolder);
   let address = addressHolder[0];
 
+  $("#selectedRole").val(address?.type);
   $("#selectedAddress").html(`
   <h4>
     Delivering to
-    <b>${address.type || "Home"}</b>
+    <b>${address?.type || "Home"}</b>
   </h4>
 
   <p>
@@ -3400,7 +3422,7 @@ function updateAddress(e) {
   formData.append("number", $("#number").val().trim());
 
   // Address Type
-  formData.append("addressType", $("#selectedRole").val());
+  formData.append("addressType", $("#selectedRole").val() || "Home");
 
   // Location
   formData.append("latitude", latitude || "");
@@ -3510,7 +3532,7 @@ function handleOrder() {
   let selectedAddress = $("#addressId").val();
   let couponId = $("#couponId").val();
   let addressType = $("#selectedRole").val();
-  alert(addressType);
+  // alert(addressType);
   let totalAmount = parseFloat(
     $("#totalAmount")
       .text()
@@ -3823,185 +3845,236 @@ function filterDataAsPerCondition(type, value) {
   }
 }
 
-
 async function initGrocery() {
+  showLoader();
+  try {
+    await Promise.all([
+      getTopHeroBanner(1),
+      getTopLeftBanner(),
+      getTopRightBanner(),
+      getSubCategories(),
+      getAllHeading("home"),
+      getArivalsData(),
+      getGroceryProducts(),
+      getAllbrands("grocery"),
+      getBrandsProducts(),
+      getGroceryBanner1(),
+      getGroceryBanner2(),
+      getGroceryBanner3(),
+      getNewFindPrd(),
+      getRecentOrder(),
+      getBestSellingPrd()
+    ]);
 
-  await getTopHeroBanner(1);
-  await getTopLeftBanner();
-  await getTopRightBanner();
-  await getSubCategories();
-  await getAllHeading("home");
-  await getArivalsData();
-  await getGroceryProducts();
-  await getAllbrands("grocery");
-  await getBrandsProducts();
-  await getGroceryBanner1();
-  await getGroceryBanner2();
-  await getGroceryBanner3();
-  await getNewFindPrd();
-  await getRecentOrder();
-  await getBestSellingPrd();
+  } catch (error) {
+    console.error("Grocery loading error:", error);
 
-
-  hideLoader();
-}
-function initBeauty() {
-
-  getAllHeading("beauty");
-  getBeautyProducts();
-  getTopHeroBanner(2);
-  getBeautyTopChild();
-  getBeautyCategoryStore1();
-  getBeautyCategoryStore2();
-  getBeautyCategoryStore3();
-  getBeautyCategoryStore4();
-  getBeautyCategoryStore5();
-  getBeautyBanner1();
-  getBeautyBanner2();
-  getBeautyBanner3();
+  } finally {
     hideLoader();
-
-  // getCategoryStore();
-
-  // getCategoryStore3();
-  // getCategories2();
-  // handleCrousel();
-  // getProductDesign2();
+  }
 }
-function initFashion() {
-  getAllHeading("fashion");
-  getFashionProducts();
-  getfashionCategory1();
-  getfashionCategory2();
-  getfashionCategory3();
-  getfashionCategory4();
-  getfashionCategory5();
-  getFashionBanner1();
-  getFashionBanner2();
-  getFashionBanner3();
-  getSubcategoryWithProduct();
+async function initBeauty() {
+  showLoader();
+  try {
+    await Promise.all([
+      getAllHeading("beauty"),
+      getBeautyProducts(),
+      getTopHeroBanner(2),
+      getBeautyTopChild(),
+      getBeautyCategoryStore1(),
+      getBeautyCategoryStore2(),
+      getBeautyCategoryStore3(),
+      getBeautyCategoryStore4(),
+      getBeautyCategoryStore5(),
+      getBeautyBanner1(),
+      getBeautyBanner2(),
+      getBeautyBanner3()
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
+
+  } finally {
     hideLoader();
-    getTopHeroBanner();
-
-
-  // handleCrouselFashion();
-  // getFashionPrd();
-  // getBrandsProduct();
-  // getlastFashion();
+  }
 }
-function initElectric() {
-        getTopHeroBanner();
+async function initFashion() {
+  showLoader();
 
-    getAllHeading("electronic");
+  try {
+    await Promise.all([
+      getAllHeading("fashion"),
+      getFashionProducts(),
+      getfashionCategory1(),
+      getfashionCategory2(),
+      getfashionCategory3(),
+      getfashionCategory4(),
+      getfashionCategory5(),
+      getFashionBanner1(),
+      getFashionBanner2(),
+      getFashionBanner3(),
+      getSubcategoryWithProduct(),
+      getTopHeroBanner()
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
 
-  getCategoryElectricity1();
-  getCategoryElectricity2();
-  getCategoryElectricity3();
-  getCategoryElectricity3();
-  getCategoryElectricity4();
-  getCategoryElectricity5();
-  getElectricityBanner1();
-  getElectricityBanner2();
-  getElectricityBanner3();
-  getElictricityProducts();
+  } finally {
     hideLoader();
+  }
+
 
 
 }
-function initPharmacy() {
-  getAllHeading("pharmacy");
-  getTopPharmacyChildBanner();
-  getCategoryPharmacy1();
-  getTopHeroBanner(3);
-  getBannerPharmacy1();
-  getBannerPharmacy2();
-  getBannerPharmacy3();
-  getPharmacyProducts();
-  // getbrandPharmacy();
-  getCategoryPharmacy2();
-  getCategoryPharmacy3();
-  getCategoryPharmacy4();
-  getCategoryPharmacy5();
-  getAllbrands("");
+async function initElectric() {
+  showLoader();
+  try {
+    await Promise.all([
+      getTopHeroBanner(),
+
+      getAllHeading("electronic"),
+
+      getCategoryElectricity1(),
+      getCategoryElectricity2(),
+      getCategoryElectricity3(),
+      getCategoryElectricity3(),
+      getCategoryElectricity4(),
+      getCategoryElectricity5(),
+      getElectricityBanner1(),
+      getElectricityBanner2(),
+      getElectricityBanner3(),
+      getElictricityProducts()
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
+
+  } finally {
     hideLoader();
+  }
+
 
 
 }
-function init99Store() {
-    getAllHeading("99store");
+async function initPharmacy() {
+  showLoader();
+  try {
+    await Promise.all([
+      getAllHeading("pharmacy"),
+      getTopPharmacyChildBanner(),
+      getCategoryPharmacy1(),
+      getTopHeroBanner(3),
+      getBannerPharmacy1(),
+      getBannerPharmacy2(),
+      getBannerPharmacy3(),
+      getPharmacyProducts(),
+      // getbrandPharmacy();
+      getCategoryPharmacy2(),
+      getCategoryPharmacy3(),
+      getCategoryPharmacy4(),
+      getCategoryPharmacy5(),
+      getAllbrands("")
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
 
-  getTopHeroBanner(4);
-  getCategory99store1();
-  getCategory99store2();
-  getCategory99store3();
-  getCategory99store4();
-  getCategory99store5();
-
-  get99storeBanner1();
-  get99storeBanner2();
-  get99storeBanner3();
-  get99storeProducts();
-  getNewFind99store();
+  } finally {
     hideLoader();
+  }
 
 
 }
-function initKids() {
-    getAllHeading("kids");
+async function init99Store() {
+  showLoader();
+  try {
+    await Promise.all([
+      getAllHeading("99store"),
 
-  getTopHeroBanner(5);
-  getKidsProducts();
-  getTopChildBanner();
-  getCategoryKids1();
-  getCategoryKids2();
-  getCategoryKids3();
-  getCategoryKids4();
-  getCategoryKids5();
-  getNewFindKids();
+      getTopHeroBanner(4),
+      getCategory99store1(),
+      getCategory99store2(),
+      getCategory99store3(),
+      getCategory99store4(),
+      getCategory99store5(),
 
-  getKidsBanner1();
-  getKidsBanner2();
-  getKidsBanner3();
+      get99storeBanner1(),
+      get99storeBanner2(),
+      get99storeBanner3(),
+      get99storeProducts(),
+      getNewFind99store()
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
+
+  } finally {
     hideLoader();
+  }
 
 }
+async function initKids() {
+  showLoader();
+  try {
+    await Promise.all([
+      getAllHeading("kids"),
+
+      getTopHeroBanner(5),
+      getKidsProducts(),
+      getTopChildBanner(),
+      getCategoryKids1(),
+      getCategoryKids2(),
+      getCategoryKids3(),
+      getCategoryKids4(),
+      getCategoryKids5(),
+      getNewFindKids(),
+
+      getKidsBanner1(),
+      getKidsBanner2(),
+      getKidsBanner3()
+    ]);
+  } catch (error) {
+    console.error("Grocery loading error:", error);
+
+  } finally {
+    hideLoader();
+  }
+}
+
+
 
 
 
 function getBrandOfTheDay() {
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{type:"getBrandOfTheDay"},
-    success:function (response) {
-      if(response.status=="success"){
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: { type: "getBrandOfTheDay" },
+    success: function (response) {
+      if (response.status == "success") {
         let data = response?.data?.[0];
-        localStorage.setItem("brandId",data.id);
-        $("#imgBrandDay").attr("src",imgUrl+data?.logo_path)
-      }else{
+        localStorage.setItem("brandId", data.id);
+        $("#imgBrandDay").attr("src", imgUrl + data?.logo_path)
+      } else {
         console.log(response.message);
       }
     }
   })
-  
+
 }
-function getSingleBrandOfTheDay(){
+function getSingleBrandOfTheDay() {
   let brandId = localStorage.getItem("brandId");
   let branchId = localStorage.getItem("branchId");
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
-      type:"getSingleBrandOfTheDay",
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getSingleBrandOfTheDay",
       brandId,
       branchId
     },
-    success:function (response) {
-       if(response.status == "success"){
+    success: function (response) {
+      if (response.status == "success") {
         console.log(response.data);
-            let productList = response.data;
+        let productList = response.data;
         let html = "";
 
         productList.forEach((item, index) => {
@@ -4020,7 +4093,7 @@ function getSingleBrandOfTheDay(){
           </div>
 
           ${item.varient_count <= 1
-  ? `
+              ? `
       <div
         class="AddWrp productAddBtn"
         id="AddBtnToggle${item.p_id}"
@@ -4033,7 +4106,7 @@ function getSingleBrandOfTheDay(){
         </button>
       </div>
     `
-  : `
+              : `
       <div
         type="button"
         data-bs-toggle="offcanvas"
@@ -4050,7 +4123,7 @@ function getSingleBrandOfTheDay(){
 
       </div>
     `
-}
+            }
 
         </div>
 
@@ -4091,9 +4164,9 @@ function getSingleBrandOfTheDay(){
          `;
         });
         $("#brandOfTheDayPrd").html(html);
-       }else{
+      } else {
         console.log(response.message);
-       }
+      }
     }
   })
 }
@@ -4109,7 +4182,7 @@ function getGroceryBanner1() {
   let banner = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
- return $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4372,7 +4445,7 @@ function getBeautyTopChild() {
 function getBeautyCategoryStore1() {
   categoryId = localStorage.getItem("currentCategoryId");
   let categoryHtml = "";
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4408,7 +4481,7 @@ function getBeautyCategoryStore2() {
   let categoryArrowHtml = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4442,7 +4515,7 @@ function getBeautyCategoryStore3() {
   let categoryArrowHtml = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4479,7 +4552,7 @@ function getBeautyCategoryStore4() {
   let categoryArrowHtml = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4514,10 +4587,10 @@ function getBeautyCategoryStore4() {
 }
 
 function getBeautyCategoryStore5() {
- let categoryArrowHtml = "";
+  let categoryArrowHtml = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4557,7 +4630,7 @@ function getBeautyBanner1() {
   let banner = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4588,7 +4661,7 @@ function getBeautyBanner2() {
   let banner = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4619,7 +4692,7 @@ function getBeautyBanner3() {
   let banner = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4667,7 +4740,7 @@ function getfashionCategory1() {
   let category = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4701,7 +4774,7 @@ function getfashionCategory2() {
   let category = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4732,7 +4805,7 @@ function getfashionCategory2() {
 function getfashionCategory3() {
   let category = "";
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4764,7 +4837,7 @@ function getfashionCategory4() {
   let category = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4798,7 +4871,7 @@ function getfashionCategory5() {
   let category = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4837,7 +4910,7 @@ function getFashionBanner2() {
   let banner = "";
 
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4867,7 +4940,7 @@ function getFashionBanner2() {
 function getFashionBanner3() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4933,7 +5006,7 @@ function getFashionBanner3() {
 function getFashionBanner1() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4999,7 +5072,7 @@ function getFashionBanner1() {
 function getSubcategoryWithProduct() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5071,7 +5144,7 @@ function getTopPharmacyChildBanner() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5087,7 +5160,7 @@ function getTopPharmacyChildBanner() {
         console.log("zeenat");
         return;
       }
-              console.log("zeenat");
+      console.log("zeenat");
 
       console.log("child banner pharmacy")
       console.log(response.data)
@@ -5120,7 +5193,7 @@ function getTopPharmacyChildBanner() {
 function getBannerPharmacy1() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5189,7 +5262,7 @@ function getBannerPharmacy1() {
 function getBannerPharmacy2() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5258,7 +5331,7 @@ function getBannerPharmacy2() {
 function getBannerPharmacy3() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5330,7 +5403,7 @@ function getCategoryPharmacy1() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5370,7 +5443,7 @@ function getCategoryPharmacy2() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5411,7 +5484,7 @@ function getCategoryPharmacy3() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5451,7 +5524,7 @@ function getCategoryPharmacy4() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5491,7 +5564,7 @@ function getCategoryPharmacy5() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5539,7 +5612,7 @@ function getCategoryPharmacy5() {
 
 function getTopChildBanner() {
   const categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5572,7 +5645,7 @@ function getCategoryKids1() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5611,7 +5684,7 @@ function getCategoryKids2() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5650,7 +5723,7 @@ function getCategoryKids3() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5689,7 +5762,7 @@ function getCategoryKids4() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5727,7 +5800,7 @@ function getCategoryKids5() {
   const categoryId = localStorage.getItem("currentCategoryId");
 
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5764,7 +5837,7 @@ function getKidsBanner1() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5834,7 +5907,7 @@ function getKidsBanner2() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5904,7 +5977,7 @@ function getKidsBanner3() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -5987,7 +6060,7 @@ function getCategory99store1() {
   categoryId = localStorage.getItem("currentCategoryId");
   let storeHtml = "";
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6016,7 +6089,7 @@ function getCategory99store1() {
 }
 function getCategory99store2() {
   const categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6051,7 +6124,7 @@ function getCategory99store2() {
 }
 function getCategory99store3() {
   const categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6087,7 +6160,7 @@ function getCategory99store3() {
 }
 function getCategory99store4() {
   const categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6122,7 +6195,7 @@ function getCategory99store4() {
 }
 function getCategory99store5() {
   const categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6159,7 +6232,7 @@ function get99storeBanner1() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6229,7 +6302,7 @@ function get99storeBanner2() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6299,7 +6372,7 @@ function get99storeBanner3() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6382,7 +6455,7 @@ function get99storeBanner3() {
 
 function getCategoryElectricity1() {
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6412,7 +6485,7 @@ function getCategoryElectricity1() {
 }
 function getCategoryElectricity2() {
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6442,7 +6515,7 @@ function getCategoryElectricity2() {
 }
 function getCategoryElectricity3() {
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6473,7 +6546,7 @@ function getCategoryElectricity3() {
 }
 function getCategoryElectricity4() {
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6504,7 +6577,7 @@ function getCategoryElectricity4() {
 }
 function getCategoryElectricity5() {
   categoryId = localStorage.getItem("currentCategoryId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6537,7 +6610,7 @@ function getElectricityBanner1() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6607,7 +6680,7 @@ function getElectricityBanner2() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6678,7 +6751,7 @@ function getElectricityBanner3() {
 
   const categoryId = localStorage.getItem("currentCategoryId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -6837,8 +6910,8 @@ function getElectricityBanner3() {
 //             `,
 //         )
 //         .join("")}
-                
-                
+
+
 //               </div>
 //             </div>`;
 //   });
@@ -6893,7 +6966,7 @@ async function handleInput(e) {
           </div>
 
           ${item.varient_count <= 1
-  ? `
+                ? `
       <div
         class="AddWrp productAddBtn"
         id="AddBtnToggle${item.p_id}"
@@ -6906,7 +6979,7 @@ async function handleInput(e) {
         </button>
       </div>
     `
-  : `
+                : `
       <div
         type="button"
         data-bs-toggle="offcanvas"
@@ -6923,7 +6996,7 @@ async function handleInput(e) {
 
       </div>
     `
-}
+              }
 
         </div>
 
@@ -7050,12 +7123,12 @@ function checkLogin() {
 
   if (!userId) {
     if (!pagePath.includes('login') && !pagePath.includes('otp')) {
-    window.location.replace("login.html");
+      window.location.replace("login.html");
     }
     return false;
   }
 
-  if(pagePath.includes('login')) {
+  if (pagePath.includes('login')) {
     window.location.replace("../food/Pages/welcome.html");
   }
 
@@ -7067,78 +7140,178 @@ checkLogin();
 
 
 
- function toggleBrandDay() {
-      // Pehle Text dikhao
+function toggleBrandDay() {
+  // Pehle Text dikhao
+  $("#brandOfDay").fadeIn(400);
+  $("#imgBrandDay").fadeOut(400);
+
+  // 3 sec baad Image dikhao
+  setTimeout(() => {
+    $("#brandOfDay").fadeOut(400, function () {
+      $("#imgBrandDay").fadeIn(400);
+    });
+  }, 3000);
+
+  // 6 sec baad fir Text dikhao
+  setTimeout(() => {
+    $("#imgBrandDay").fadeOut(400, function () {
       $("#brandOfDay").fadeIn(400);
-      $("#imgBrandDay").fadeOut(400);
+    });
+  }, 6000);
+}
 
-      // 3 sec baad Image dikhao
-      setTimeout(() => {
-        $("#brandOfDay").fadeOut(400, function () {
-          $("#imgBrandDay").fadeIn(400);
-        });
-      }, 3000);
-
-      // 6 sec baad fir Text dikhao
-      setTimeout(() => {
-        $("#imgBrandDay").fadeOut(400, function () {
-          $("#brandOfDay").fadeIn(400);
-        });
-      }, 6000);
-    }
-
-    toggleBrandDay();
+toggleBrandDay();
 
 
-        setInterval(toggleBrandDay, 6000);
+setInterval(toggleBrandDay, 6000);
 
 
 
 
-        const main = document.querySelector(".main");
+const main = document.querySelector(".main");
 const footer = document.querySelector(".footer_tab");
 
 let lastScrollTop = 0;
 if (main)
-main.addEventListener("scroll", function () {
+  main.addEventListener("scroll", function () {
     let currentScroll = main.scrollTop;
 
     if (currentScroll > lastScrollTop) {
-        // Scroll Down
-        footer.style.transform = "translateY(100%)";
+      // Scroll Down
+      footer.style.transform = "translateY(100%)";
     } else {
-        // Scroll Up
-        footer.style.transform = "translateY(0)";
+      // Scroll Up
+      footer.style.transform = "translateY(0)";
     }
 
     lastScrollTop = currentScroll;
-});
+  });
 
 
 
-  function getCurrentAddress() {
-     addressId = localStorage.getItem("addressId")
-         $.ajax({
-          url:apiUrl,
-          method:"POST",
-          dataType:"JSON",
-          data:{
-            type:"getCurrentAddress",
-            userId,
-            addressId
-          },
-          success:function (response){
-            if(response.status == "success"){
-              console.log(response.data);
-              let data = response?.data?.[0];
-          
-              $("#addressTypeHome").html(data?.type);
-              $("#addressTxtHome").html(data?.full_address);
-              
-              
-            }else{
-              console.log(response.message);
-            }
-          }
-         });
+function getCurrentAddress() {
+  addressId = localStorage.getItem("addressId")
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getCurrentAddress",
+      userId,
+      addressId
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        console.log(response.data);
+        let data = response?.data?.[0];
+
+        $("#addressTypeHome").html(data?.type);
+        $("#addressTxtHome").html(data?.full_address);
+
+
+      } else {
+        console.log(response.message);
+      }
     }
+  });
+}
+
+
+// function getCurrentLocation() {
+
+//   navigator.geolocation.getCurrentPosition(
+//     (position) => {
+
+//       const lat = position.coords.latitude;
+//       const lng = position.coords.longitude;
+
+//       document.getElementById("latitude").value = lat;
+//       document.getElementById("longitude").value = lng;
+
+//       console.log("Latitude:", lat);
+//       console.log("Longitude:", lng);
+
+//     },
+//     (error) => {
+//       console.error("Location error:", error);
+//       alert("Please allow location permission.");
+//     },
+//     {
+//       enableHighAccuracy: true,
+//       timeout: 10000,
+//       maximumAge: 0
+//     }
+//   );
+// }
+
+
+async function getCurrentLocation() {
+
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      // Set latitude & longitude
+      document.getElementById("latitude").value = lat;
+      document.getElementById("longitude").value = lng;
+
+      // Get address
+      await getAddress2(lat, lng);
+
+    },
+    (error) => {
+      console.log(error);
+      alert("Please allow location permission.");
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
+  );
+}
+
+
+async function getAddress2(lat, lng) {
+
+  try {
+
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    );
+
+    const data = await response.json();
+
+    console.log("Full Address Data:", data);
+
+    const address = data.display_name;
+
+    $("#address").html(address);
+    let findText = $(".find_text");
+    if(findText){
+      if(location.pathname.includes("locationSearch.html")){
+        setTimeout(() => {
+          
+          location.href='home.html';
+        }, 1000);
+      }
+       findText.css("display","none");
+    }
+
+    // document.getElementById("address").html = address;
+
+  } catch (error) {
+
+    console.error("Address error:", error);
+
+    alert("Unable to get address.");
+
+  }
+}
