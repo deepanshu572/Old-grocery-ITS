@@ -45,9 +45,13 @@
 <script src="../assets/js/script.js"></script>
 <script>
       localStorage.setItem("currentCategoryName","Grocery");
-      document.addEventListener("DOMContentLoaded", function () {
-         getCurrentLocation();  
+      document.addEventListener("DOMContentLoaded", async function () {
+         const branchId = await getCurrentLocation();  
+       console.log("aa jaaa.")
+       if(branchId){
+         location.href="home.html";
 
+       }
       });
 
     // setTimeout(() => {

@@ -3,13 +3,15 @@ let userId = localStorage.getItem("userId");
 let cartData = JSON.parse(localStorage.getItem("cart"));
 let addressId = localStorage.getItem("addressId");
 
-localStorage.setItem("branchId", 27);
+// localStorage.setItem("branchId", 27);
+let branchId = localStorage.getItem("branchId")
 $("#cartPopup").hide();
-if (cartData && cartData.length > 0) {
+if(cartData && cartData.length>0){
+let branchCart = cartData.filter((item)=>item.branchId == branchId);
+if (branchCart && branchCart.length > 0) {
   $("#cartPopup").show();
-  $("#cartQty").html(cartData.length);
-} else {
-  localStorage.setItem("cart", JSON.stringify([]));
+  $("#cartQty").html(branchCart.length);
+} 
 }
 
 // let apiUrl =
@@ -1697,11 +1699,31 @@ function getSingleVarientId(id, type, image, name) {
 }
 
 function getCurrentIdfr() {
-  let idfr = localStorage.getItem("currentIdfr");
 
+  let branchId = localStorage.getItem("branchId");
+
+  if (!branchId) {
+    console.log("Branch ID not found");
+    return null;
+  }
+
+  let currentSession =
+    JSON.parse(localStorage.getItem("currentSession")) || {};
+
+  // Is branch ka existing IDFR hai?
+  let idfr = currentSession[branchId];
+
+  // Nahi hai to new IDFR create karo
   if (!idfr) {
+
     idfr = Date.now() + Math.floor(Math.random() * 9000 + 1000);
-    localStorage.setItem("currentIdfr", idfr);
+
+    currentSession[branchId] = idfr;
+
+    localStorage.setItem(
+      "currentSession",
+      JSON.stringify(currentSession)
+    );
   }
 
   return idfr;
@@ -1855,8 +1877,10 @@ getAllVarient();
 
 function updateCartUI(type, singleVarId) {
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let branchId = localStorage.getItem("branchId");
+  const branchCart = cart.filter((item) => item.branchId == branchId)
 
-  cart.forEach((cartItem) => {
+  branchCart.forEach((cartItem) => {
 
     // ================= Product List =================
     if (type == "prd") {
@@ -1893,7 +1917,7 @@ function updateCartUI(type, singleVarId) {
   // ================= Single Product =================
   if (type == "singleVarId") {
 
-    const item = cart.find(
+    const item = branchCart.find(
       (item) => item.varientId == singleVarId
     );
 
@@ -2524,55 +2548,73 @@ function varientToggle(id, varId, qty, selling, mrp, stock) {
 }
 
 function updateCartLocal(product, varData, varientId, qty) {
+  let branchId = localStorage.getItem("branchId");
   console.log(product);
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   console.log(cart);
   const existingIndex = varientId
     ? cart.findIndex(
-      (item) => item?.p_id == product?.p_id && item?.varientId == varientId,
+      (item) => item?.p_id == product?.p_id && item?.varientId == varientId && item?.branchId == branchId,
     )
-    : cart.findIndex((item) => item?.p_id == product?.p_id);
+    : cart.findIndex((item) => item?.p_id == product?.p_id && item?.branchId == branchId);
   if (existingIndex > -1) {
     cart[existingIndex].nop = qty;
   } else {
-    console.log("product,varData");
-    console.log("product,varData");
-    console.log(product, varData);
-    console.log("product,varData");
-    console.log("product,varData");
     cart.push({
       ...product,
       ...varData,
+      branchId,
       nop: qty,
       varientId,
     });
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  $("#cartPopup").show();
-  $("#cartQty").html(cart.length);
+  const branchCart = cart.filter(
+    (item) => item.branchId == branchId
+  );
+
+  // Popup
+  if (branchCart.length > 0) {
+    $("#cartPopup").show();
+    $("#cartQty").html(branchCart.length);
+  } else {
+    $("#cartPopup").hide();
+    $("#cartQty").html(0);
+  }
 }
+
+
 function removeCartLocal(productId, varId) {
+  let branchId = localStorage.getItem("branchId");
+
   console.log(productId, varId);
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (!varId) {
-    cart = cart.filter((item) => item.p_id != productId);
+    cart = cart.filter((item) => item.p_id != productId && item?.branchId == branchId);
   } else {
     cart = cart.filter(
-      (item) => !(item.p_id == productId && item.varientId == varId),
+      (item) => !(item.p_id == productId && item.varientId == varId && item?.branchId == branchId),
     );
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
+  const branchCart = cart.filter(
+    (item) => item.branchId == branchId
+  );
 
-  if (cart.length <= 0) {
+  $("#cartQty").html(branchCart.length);
+
+  if (branchCart.length === 0) {
     $("#cartPopup").hide();
+  } else {
+    $("#cartPopup").show();
   }
 
-  $("#cartQty").html(cart.length);
 }
+
 
 
 let allProducts = [];
@@ -2790,6 +2832,7 @@ $(document).on("click", ".category_btn", function () {
 });
 
 function getCart() {
+  let branchId = localStorage.getItem("branchId");
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -2797,6 +2840,7 @@ function getCart() {
     data: {
       type: "getCart",
       userId,
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
@@ -3051,11 +3095,13 @@ function calculationFnc() {
     totalSellingPrice += sellingPrice * qty;
     totalItems += qty;
   });
+  if(other && other?.length>0){
   other.map((item) => {
     if (item.type == "handling_charge") {
       handlingCharge = Number(item.min_amount);
     }
   });
+}
   let totalDiscount = totalMrp - totalSellingPrice;
   let totalAmt =
     totalSellingPrice + handlingCharge + deliveryCharge - couponDisc;
@@ -3524,8 +3570,11 @@ function openOffcanvas(id) {
 }
 
 function handleOrder() {
-  let idfr = localStorage.getItem("currentIdfr");
   const branchId = localStorage.getItem("branchId");
+  let currentSession = JSON.parse(localStorage.getItem("currentSession"));
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  const updatedBranchData = cart.filter((item)=>item.branchId !== branchId) 
+  let idfr = currentSession[branchId];
   //userId
   let selectedPayment = $("#payMethod1").val();
   let selectedSlot = $("#slot").val();
@@ -3588,14 +3637,28 @@ function handleOrder() {
     success: function (response) {
       if (response.status == "success") {
         console.log(response.message);
-        localStorage.setItem("cart", JSON.stringify([]));
+        localStorage.setItem("cart", JSON.stringify(updatedBranchData));
         location.href = "orders.html";
-        localStorage.removeItem("currentIdfr");
+        removeCurrentBranchSession();
       } else {
         console.log(response.message);
       }
     },
   });
+}
+function removeCurrentBranchSession() {
+
+  const branchId = localStorage.getItem("branchId");
+
+  let currentSession =
+    JSON.parse(localStorage.getItem("currentSession")) || {};
+
+  delete currentSession[branchId];
+
+  localStorage.setItem(
+    "currentSession",
+    JSON.stringify(currentSession)
+  );
 }
 
 function getOrder() {
@@ -7168,25 +7231,6 @@ setInterval(toggleBrandDay, 6000);
 
 
 
-const main = document.querySelector(".main");
-const footer = document.querySelector(".footer_tab");
-
-let lastScrollTop = 0;
-if (main)
-  main.addEventListener("scroll", function () {
-    let currentScroll = main.scrollTop;
-
-    if (currentScroll > lastScrollTop) {
-      // Scroll Down
-      footer.style.transform = "translateY(100%)";
-    } else {
-      // Scroll Up
-      footer.style.transform = "translateY(0)";
-    }
-
-    lastScrollTop = currentScroll;
-  });
-
 
 
 function getCurrentAddress() {
@@ -7246,37 +7290,51 @@ function getCurrentAddress() {
 
 
 async function getCurrentLocation() {
+  let lat = 23.39868927001953;
+  let lng = 85.33858489990234;
+  const branchId = await findNearestBranch(lat, lng);
+  return branchId;
 
-  if (!navigator.geolocation) {
-    alert("Geolocation is not supported.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-
-      // Set latitude & longitude
-      document.getElementById("latitude").value = lat;
-      document.getElementById("longitude").value = lng;
-
-      // Get address
-      await getAddress2(lat, lng);
-
-    },
-    (error) => {
-      console.log(error);
-      alert("Please allow location permission.");
-    },
-    {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
-    }
-  );
 }
+
+// async function getCurrentLocation() {
+
+//   if (!navigator.geolocation) {
+//     alert("Geolocation is not supported.");
+//     return;
+//   }
+
+//   navigator.geolocation.getCurrentPosition(
+//     async (position) => {
+
+//       const lat = position.coords.latitude;
+//       const lng = position.coords.longitude;
+
+//       // Set latitude & longitude
+//       document.getElementById("latitude").value = lat;
+//       document.getElementById("longitude").value = lng;
+
+//       // Get address
+//       await getAddress2(lat, lng);
+
+//       localStorage.setItem("user_latitude", lat);
+//       localStorage.setItem("user_longitude", lng);
+
+//       // Find nearest branch
+//       await findNearestBranch(lat, lng);
+
+//     },
+//     (error) => {
+//       console.log(error);
+//       alert("Please allow location permission.");
+//     },
+//     {
+//       enableHighAccuracy: true,
+//       timeout: 10000,
+//       maximumAge: 0
+//     }
+//   );
+// }
 
 
 async function getAddress2(lat, lng) {
@@ -7295,14 +7353,14 @@ async function getAddress2(lat, lng) {
 
     $("#address").html(address);
     let findText = $(".find_text");
-    if(findText){
-      if(location.pathname.includes("locationSearch.html")){
+    if (findText) {
+      if (location.pathname.includes("locationSearch.html")) {
         setTimeout(() => {
-          
-          location.href='home.html';
+
+          location.href = 'home.html';
         }, 1000);
       }
-       findText.css("display","none");
+      findText.css("display", "none");
     }
 
     // document.getElementById("address").html = address;
@@ -7314,4 +7372,29 @@ async function getAddress2(lat, lng) {
     alert("Unable to get address.");
 
   }
+}
+
+async function findNearestBranch(lat, lng) {
+  return $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "findNearestBranch",
+      lat,
+      lng
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        console.log(response.branch);
+        let data = response?.branch;
+        let branchId = data?.id;
+        localStorage.setItem("branchId", branchId);
+        console.log("hihihi....");
+        return branchId
+      } else {
+        console.log(response.branch);
+      }
+    }
+  })
 }
