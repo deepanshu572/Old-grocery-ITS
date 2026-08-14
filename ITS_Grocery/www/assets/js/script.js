@@ -6,12 +6,12 @@ let addressId = localStorage.getItem("addressId");
 // localStorage.setItem("branchId", 27);
 let branchId = localStorage.getItem("branchId")
 $("#cartPopup").hide();
-if(cartData && cartData.length>0){
-let branchCart = cartData.filter((item)=>item.branchId == branchId);
-if (branchCart && branchCart.length > 0) {
-  $("#cartPopup").show();
-  $("#cartQty").html(branchCart.length);
-} 
+if (cartData && cartData.length > 0) {
+  let branchCart = cartData.filter((item) => item.branchId == branchId);
+  if (branchCart && branchCart.length > 0) {
+    $("#cartPopup").show();
+    $("#cartQty").html(branchCart.length);
+  }
 }
 
 // let apiUrl =
@@ -21,10 +21,10 @@ if (branchCart && branchCart.length > 0) {
 //   "https://indiantechsolution.com/demos/multibranch/its-cart/admin/";
 
 let apiUrl =
-  "http://localhost/indian%20tech%20solution/Dashboard_multiBranch/apis/app/";
+  "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/apis/app/";
 
 let imgUrl =
-  "http://localhost/indian%20tech%20solution/Dashboard_multiBranch/admin/";
+  "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/admin/";
 
 let categoryId = localStorage.getItem("currentCategoryId") || '';
 
@@ -153,7 +153,7 @@ function getCategory() {
 
 
       } else {
-        alert(response.message);
+        console.log(response.message);
         console.log(response.data);
       }
     },
@@ -206,7 +206,7 @@ function getTopLeftBanner() {
 
         $("#topLeftBanner").html(bannerHTML);
       } else {
-        alert(response.message);
+        console.log(response.message);
       }
     },
   });
@@ -235,7 +235,7 @@ function getTopRightBanner() {
 
         $("#bannerRight").html(bannerRightHtml);
       } else {
-        alert(response.message);
+        console.log(response.message);
       }
     },
   });
@@ -518,6 +518,7 @@ function renderToAllPrd(cid, type, title) {
 }
 
 function getAllProductData() {
+  let branchId = localStorage.getItem("branchId");
   const params = new URLSearchParams(window.location.search);
 
   const cid = params.get("cid");
@@ -544,6 +545,7 @@ function getAllProductData() {
       type,
       id: cid,
       typeName,
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
@@ -697,6 +699,7 @@ function getAllbrands(type) {
 }
 function getBrandsProducts() {
   let categoryId = localStorage.getItem("currentCategoryId");
+  let branch_id = localStorage.getItem("branchId");
 
   return $.ajax({
     url: apiUrl,
@@ -704,7 +707,8 @@ function getBrandsProducts() {
     dataType: "JSON",
     data: {
       type: "getBrandProducts",
-      categoryId
+      categoryId,
+      branch_id
     },
     success: function (response) {
       if (response.status == "success") {
@@ -2296,6 +2300,7 @@ function moveIndicator(btn) {
 
 function getSingleProduct() {
   const params = new URLSearchParams(window.location.search);
+  let branchId = localStorage.getItem("branchId");
 
   const id = params.get("id");
 
@@ -2306,6 +2311,7 @@ function getSingleProduct() {
     data: {
       type: "getSingleProduct",
       id,
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
@@ -2422,6 +2428,7 @@ function getSingleProduct() {
 }
 
 function getRelatedProduct(pid, cid, sid) {
+  let branchId = localStorage.getItem("branchId");
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -2430,6 +2437,7 @@ function getRelatedProduct(pid, cid, sid) {
       type: "getRelatedPrd",
       sid,
       cid,
+      branchId
     },
     success: function (response) {
       if (response.status == "success") {
@@ -3071,7 +3079,8 @@ function applyCoupon(code) {
   ).hide();
 }
 
-function calculationFnc() {
+async function calculationFnc() {
+  let branchId = localStorage.getItem("branchId");
   let cart = JSON.parse(localStorage.getItem("cart"));
   let other = JSON.parse(localStorage.getItem("other"));
   let totalMrp = 0;
@@ -3086,7 +3095,10 @@ function calculationFnc() {
     ) || 0;
   let deliveryCharge = 0;
 
-  cart.map((item) => {
+
+
+  const branchCart = cart.filter((item) => item?.branchId == branchId);
+  branchCart.map((item) => {
     const qty = Number(item.nop);
     const mrp = Number(item.v_mrp);
     const sellingPrice = Number(item.v_seliing_price);
@@ -3095,14 +3107,18 @@ function calculationFnc() {
     totalSellingPrice += sellingPrice * qty;
     totalItems += qty;
   });
-  if(other && other?.length>0){
-  other.map((item) => {
-    if (item.type == "handling_charge") {
-      handlingCharge = Number(item.min_amount);
-    }
-  });
-}
+  if (other && other?.length > 0) {
+    other.map((item) => {
+      if (item.type == "handling_charge") {
+        handlingCharge = Number(item.min_amount);
+      }
+    });
+  }
   let totalDiscount = totalMrp - totalSellingPrice;
+  deliveryCharge = await getCurrentDeliveryBranch(totalSellingPrice);
+  // console.log("data");
+  // console.log(data);
+  // console.log("data");
   let totalAmt =
     totalSellingPrice + handlingCharge + deliveryCharge - couponDisc;
   console.log("couponDisc");
@@ -3115,7 +3131,30 @@ function calculationFnc() {
   $("#productDiscount").text(`-₹${totalDiscount}`);
   $("#savedAmt").text(`-₹${totalDiscount}`);
   $("#subTotal").text(`₹${totalSellingPrice}`);
+  $("#deliveryCharge").text(`₹${deliveryCharge}`)
 }
+async function getCurrentDeliveryBranch(totalSellingPrice) {
+  let branchId = localStorage.getItem("branchId");
+
+  const response = await $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getCurrentDeliveryBranch",
+      branchId: branchId,
+      totalSellingPrice
+    }
+  });
+
+  if (response.status === "success") {
+    return Number(response?.data?.[0]?.amount) || 0;
+  }
+
+  console.log(response.message);
+  return [];
+}
+
 function getAllOtherDetail() {
   $.ajax({
     url: apiUrl,
@@ -3206,7 +3245,7 @@ function handleAddress(e) {
 
     success: function (response) {
       if (response.status === "success") {
-        alert(response.message);
+        console.log(response.message);
 
         // Reset Form
         $("#addressId").val("");
@@ -3224,7 +3263,7 @@ function handleAddress(e) {
 
         getAddress();
       } else {
-        alert(response.message);
+        console.log(response.message);
       }
     },
 
@@ -3402,13 +3441,13 @@ function getExistingData(data) {
   </h4>
 
   <p>
-    ${address.o_username},
-    ${address.street}
-    ${address.o_floor ? `, Floor: ${address.o_floor}` : ""},
-    ${address.area},
-    ${address.city},
-    (${address.pin_code})
-    Ph: ${address.o_mobile}
+    ${address?.o_username || ""},
+    ${address?.street || ""}
+    ${address?.o_floor ? `, Floor: ${address.o_floor}` : ""},
+    ${address?.area || ""},
+    ${address?.city || ""},
+    (${address?.pin_code || ""})
+    Ph: ${address?.o_mobile || ""}
   </p>
 `);
 }
@@ -3443,6 +3482,12 @@ function editAddress(data) {
 
   $("#offcanvasBottomAddressLabel").text("Update Address");
 }
+$('#offcanvasBottomAddAddress').on('hidden.bs.offcanvas', function () {
+    $(this).find('.form_input').val('');
+        $("#offcanvasBottomAddressLabel").text("Add Address");
+
+    // alert();
+});
 
 function updateAddress(e) {
   e.preventDefault();
@@ -3484,7 +3529,7 @@ function updateAddress(e) {
 
     success: function (response) {
       if (response.status === "success") {
-        // alert(response.message);
+        // console.log(response.message);
 
         getAddress();
 
@@ -3508,7 +3553,7 @@ function updateAddress(e) {
 
         $("#offcanvasBottomAddressLabel").text("Add Address");
       } else {
-        alert(response.message);
+        console.log(response.message);
       }
     },
 
@@ -3531,10 +3576,10 @@ function deleteAddress(id) {
 
     success: function (response) {
       if (response.status === "success") {
-        alert(response.message);
+        console.log(response.message);
         getAddress();
       } else {
-        alert(response.message);
+        console.log(response.message);
       }
     },
 
@@ -3573,7 +3618,7 @@ function handleOrder() {
   const branchId = localStorage.getItem("branchId");
   let currentSession = JSON.parse(localStorage.getItem("currentSession"));
   let cart = JSON.parse(localStorage.getItem("cart"));
-  const updatedBranchData = cart.filter((item)=>item.branchId !== branchId) 
+  const updatedBranchData = cart.filter((item) => item.branchId !== branchId)
   let idfr = currentSession[branchId];
   //userId
   let selectedPayment = $("#payMethod1").val();
@@ -3611,12 +3656,26 @@ function handleOrder() {
         .text()
         .replace(/[^\d.]/g, ""),
     ) || 0;
-  let deliveryCharge = 0;
+  let deliveryCharge =
+    parseFloat(
+      $("#deliveryCharge")
+        .text()
+        .replace(/[^\d.]/g, ""),
+    ) || 0; let subTotal =
+      parseFloat(
+        $("#subTotal")
+          .text()
+          .replace(/[^\d.]/g, ""),
+      ) || 0;
+
+
   let formData = new FormData();
 
   formData.append("type", "handleOrder");
   formData.append("idfr", idfr);
   formData.append("branchId", branchId);
+  formData.append("deliveryCharge", deliveryCharge);
+  formData.append("subTotal", subTotal);
   formData.append("user_id", userId);
   formData.append("payMethod", selectedPayment);
   formData.append("selectAddress", selectedAddress);
@@ -3704,6 +3763,9 @@ function getSingleOrder() {
   const params = new URLSearchParams(window.location.search);
 
   const id = params.get("orderId");
+  $("#invoice").html(`<div class="invoice" onclick="location.href='invoice.html?orderId=${id}'">
+              <button><i class="ti ti-download"></i> Download invoice</button>
+          </div>`)
 
   $.ajax({
     url: apiUrl,
@@ -3731,7 +3793,13 @@ function getSingleOrder() {
               <div class="order_middle_txt">
                 <small>#ORD${item.idfr}</small>
                 <h5>${item.name}</h5>
-                <p>Qty : <b>${item.nop}</b></p>
+                <div class="order_price_flex">
+                <p>Price: <b>₹${item.selling_price}</b></p>
+                <p>✕</p>
+                  <p>Qty : <b>${item.nop}</b></p>
+                  <p>=</p>
+                  <p> Total : <b>₹${item.nop * item.selling_price}</b></p>
+                </div>
               </div>
             </div>
           </div>`;
@@ -3740,24 +3808,17 @@ function getSingleOrder() {
         $("#singleOrder").html(orderHtml);
 
         let calculationHtml = "";
-        calculationHtml += ` <div class="bill_field">
+        calculationHtml += `
+        <div class="bill_field">
                   <div class="left_bill_field">
-                    <i class="ti ti-credit-card"></i>
-                    <p>order_type</p>
+                    <i class="ti ti-shopping-cart"></i>
+                    <p>Subtotal</p>
                   </div>
                   <div class="right_bill_field">
-                    <small>${calculation.order_type}</small>
+                    <small id="subTotal">₹${calculation?.sub_total}</small>
                   </div>
                 </div>
-                <div class="bill_field ">
-                  <div class="left_bill_field">
-                    <i class="ti ti-tag-starred"></i>
-                    <p>Pay Mode</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small>${calculation.payment_method}</small>
-                  </div>
-                </div>
+                
                 <div class="bill_field green">
                   <div class="left_bill_field">
                     <img src="../assets/img/icon/coupons2.svg" alt="" />
@@ -3785,6 +3846,25 @@ function getSingleOrder() {
                     <small>₹${calculation.handling_charge}</small>
                   </div>
                 </div>
+                 <div class="bill_field">
+                  <div class="left_bill_field">
+                    <i class="ti ti-credit-card"></i>
+                    <p>order_type</p>
+                  </div>
+                  <div class="right_bill_field">
+                    <small>${calculation.order_type}</small>
+                  </div>
+                </div>
+                
+                <div class="bill_field ">
+                  <div class="left_bill_field">
+                    <i class="ti ti-tag-starred"></i>
+                    <p>Pay Mode</p>
+                  </div>
+                  <div class="right_bill_field">
+                    <small>${calculation.payment_method == "Online Payment" ? "Online" : "COD"}</small>
+                  </div>
+                </div>
                 <div class="img-design"></div>
                 <div class="bill_field bill_total">
                   <div class="left_bill_field">
@@ -3796,11 +3876,34 @@ function getSingleOrder() {
                 </div>`;
 
         $("#billCalc").html(calculationHtml);
+
       } else {
         console.log(response.message);
       }
     },
   });
+}
+function getInvoiceDetail() {
+  const params = new URLSearchParams(window.location.search);
+
+  const id = params.get("orderId");
+
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getSingleOrder",
+      idfr: id,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        console.log(response.data);
+      } else {
+        console.log(response.message);
+      }
+    }
+  })
 }
 
 $(".left_filter_btn_wrap").on("click", function () {
@@ -6994,6 +7097,7 @@ function toggleSystem() {
 }
 
 async function handleInput(e) {
+  let branchId = localStorage.getItem("branchId");
   const value = e.target.value;
 
   $.ajax({
@@ -7003,6 +7107,7 @@ async function handleInput(e) {
     data: {
       type: "handleSearch",
       query: value,
+      branchId
     },
     success: function (response) {
       let searchHtml = "";
@@ -7162,7 +7267,7 @@ function handleUpdateProfile(e) {
     },
     success: function (response) {
       if (response.status == "success") {
-        alert(response.message);
+        console.log(response.message);
         // getCurrentUserData();
         location.href = "profile.html";
       } else {
@@ -7289,12 +7394,65 @@ function getCurrentAddress() {
 // }
 
 
-async function getCurrentLocation() {
+async function getCurrentBranch() {
   let lat = 23.39868927001953;
   let lng = 85.33858489990234;
-  const branchId = await findNearestBranch(lat, lng);
-  return branchId;
+  const address = await getAddress2(lat, lng);
 
+  const branchId = await findNearestBranch(lat, lng);
+
+  return { branchId, address };
+
+}
+async function getCurrentLocation() {
+
+
+  let lat = 23.39868927001953;
+  let lng = 85.33858489990234;
+  const address = await getAddress2(lat, lng);
+  console.log(address.city);
+  const item = {
+    user_id: userId,
+    o_username: "",
+    o_mobile: "",
+    street: address?.address?.neighbourhood + "," + address?.address?.suburb,
+    o_floor: "",
+    type: "Home",
+    for: "Self",
+    area: address?.address?.neighbourhood + "," + address?.address?.suburb + "," + address?.address?.county,
+    full_address: address?.display_name,
+    city: address?.address?.city,
+    state: address?.address?.state,
+    pin_code: address?.address?.postcode,
+  };
+
+  const itemJson = JSON.stringify(item).replace(/'/g, "\\'");
+
+  console.log(itemJson)
+  $("#currentLocation").html(`<div class="modal_current_location" onclick='handleCurrentAddress(${itemJson})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomAddAddress" aria-controls="offcanvasBottomAddAddress">
+        <div class="saved_wrap_main_left">
+           <div class="modal_left_loc"><i class="ti ti-current-location"></i></div>
+           <div class="modal_right_loc">
+            <h5>Use current location</h5>
+            <p>Morabadi, South Chotanagpur Division, Ranchi, Jharkhand, 834008, India</p>
+        </div>
+      </div>
+      <i class="ti ti-chevron-right"></i>
+    
+        </div>`)
+
+}
+function handleCurrentAddress(item) {
+
+  console.log(item);
+  $("#houseNo").val(item?.street)
+  $("#floor").val(item?.o_floor)
+  $("#area").val(item?.area)
+  $("#city").val(item?.city)
+  $("#state").val(item?.state)
+  $("#pincode").val(item?.pin_code)
+  $("#selectedRole").val(item?.type);
+  console.log("zeenat....")
 }
 
 // async function getCurrentLocation() {
@@ -7349,21 +7507,26 @@ async function getAddress2(lat, lng) {
 
     console.log("Full Address Data:", data);
 
-    const address = data.display_name;
+    setTimeout(() => {
+      const address = data.display_name;
 
-    $("#address").html(address);
-    let findText = $(".find_text");
-    if (findText) {
-      if (location.pathname.includes("locationSearch.html")) {
-        setTimeout(() => {
+      // $("#address").html(address);
+      let findText = $(".find_text");
 
-          location.href = 'home.html';
-        }, 1000);
+      if (findText) {
+        if (location.pathname.includes("locationSearch.html")) {
+
+          setTimeout(() => {
+
+            location.href = 'home.html';
+          }, 1500);
+
+        }
+        findText.css("display", "none");
       }
-      findText.css("display", "none");
-    }
-
+    }, 1000);
     // document.getElementById("address").html = address;
+    return data;
 
   } catch (error) {
 

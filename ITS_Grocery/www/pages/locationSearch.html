@@ -46,12 +46,13 @@
 <script>
       localStorage.setItem("currentCategoryName","Grocery");
       document.addEventListener("DOMContentLoaded", async function () {
-         const branchId = await getCurrentLocation();  
-       console.log("aa jaaa.")
-       if(branchId){
-         location.href="home.html";
+          await getCurrentBranch();  
+        //  console.log(branchId);
+      //  if(branchId){
+      //    location.href="home.html";
 
-       }
+      //  }
+       
       });
 
     // setTimeout(() => {

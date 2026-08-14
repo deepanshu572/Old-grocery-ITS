@@ -117,7 +117,7 @@
     <input type="text" id="longitude" placeholder="Longitude" hidden>
 
     <!-- <input type="text" id="address" placeholder="Address"> -->
-     <p id="address"></p>
+     <!-- <p id="address"></p> -->
 
     <!--      
       <div class="main_content_sec" id="contentToggle">
@@ -175,14 +175,17 @@
     </div>
 
 
-    <div class="footer_tab">
+    
+     <div class="footer_tab">
       <div class="foot_tab" onclick="location.href = 'home.html'">
-        <div class="line"></div>
-        <img src="../assets/img/icon/home_fill.png" alt="">
+        <img src="../assets/img/icon/home_line.png" alt="">
+                <div class="line"></div>
+
+        <small>Home</small>
       </div>
       <div class="foot_tab" onclick="location.href = 'category.html'">
         <img src="../assets/img/icon/category_line.png" alt="">
-
+        <small>category</small>
       </div>
       <div class="foot_tab circle" onclick="location.href='brandOfTheDay.html'">
         <p id="brandOfDay">BRANDS <br> Of the <br> <b>Day</b></p>
@@ -191,13 +194,16 @@
       </div>
       <div class="foot_tab" onclick="location.href = 'orders.html'">
         <img src="../assets/img/icon/order_line.png" alt="">
+        <small>orders</small>
 
       </div>
       <div class="foot_tab" onclick="location.href = 'profile.html'">
         <img src="../assets/img/icon/user_line.png" alt="">
+        <small>profile</small>
 
       </div>
     </div>
+    
   </div>
 
 
@@ -230,9 +236,15 @@
           <span>Add Address</span>
         </button>
       </div>
-      <div class="saved_address">
-        <b>Saved addresses</b>
-        <div id="savedAddress"></div>
+      <div class="hidden"  id="currentLocation">
+      
+      </div>
+      <div class="saved_address_box_box_modal">
+     
+        <div class="saved_address">
+          <b>Saved addresses</b>
+          <div id="savedAddress"></div>
+        </div>
       </div>
     </div>
   </div>

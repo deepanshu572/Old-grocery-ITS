@@ -23,7 +23,7 @@
   </head>
   <body>
     <div class="main margin_box animate-fade-in">
-      <div class="back_btn" onclick="history.back()">
+      <div class="back_btn" onclick="location.href='home.html'">
         <div class="back_btn_arrow">
           <i class="ti ti-arrow-narrow-left"></i>
         </div>
@@ -35,26 +35,31 @@
       </div> -->
       <div class="order_wrapper" id="orderData"></div>
 
-       <div class="footer_tab">
+     
+     <div class="footer_tab">
       <div class="foot_tab" onclick="location.href = 'home.html'">
         <img src="../assets/img/icon/home_line.png" alt="">
+        
+        <small>Home</small>
       </div>
       <div class="foot_tab" onclick="location.href = 'category.html'">
         <img src="../assets/img/icon/category_line.png" alt="">
-
+        <small>category</small>
       </div>
       <div class="foot_tab circle" onclick="location.href='brandOfTheDay.html'">
         <p id="brandOfDay">BRANDS <br> Of the <br> <b>Day</b></p>
         <img id="imgBrandDay" class="imgBrdDay" src="" alt="" style="display: none;">
-
+        
       </div>
       <div class="foot_tab" onclick="location.href = 'orders.html'">
         <div class="line"></div>
-        <img src="../assets/img/icon/order_fill.png" alt="">
+        <img src="../assets/img/icon/order_line.png" alt="">
+        <small>orders</small>
 
       </div>
       <div class="foot_tab" onclick="location.href = 'profile.html'">
         <img src="../assets/img/icon/user_line.png" alt="">
+        <small>profile</small>
 
       </div>
     </div>

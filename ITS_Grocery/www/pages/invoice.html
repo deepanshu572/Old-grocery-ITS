@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ITS Mart - Invoice</title>
+
+   <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 15px 50px;
+}
+
+/* =========================
+   INVOICE
+========================= */
+
+.invoice_wrap {
+    width: 100%;
+    max-width: 510px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 32px 26px 28px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   INVOICE TOP
+========================= */
+
+.invoice_top {
+    text-align: center;
+}
+
+.invoice_top h3 {
+    font-size: 36px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    margin-bottom: 18px;
+}
+
+.invoice_top h3 small {
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.invoice_top h5 {
+    font-size: 21px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.invoice_top p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* =========================
+   DASHED LINE
+========================= */
+
+.line {
+    width: 100%;
+    border-top: 1px dashed #222;
+    margin: 16px 0 17px;
+}
+
+/* =========================
+   ORDER DETAILS
+========================= */
+
+.invoice_middle_top h5 {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.45;
+    margin-bottom: 2px;
+}
+
+.invoice_middle_top h5 strong {
+    font-weight: 700;
+}
+
+.invoice_middle_top h5 b {
+    font-weight: 400;
+}
+
+/* =========================
+   PRODUCT TABLE
+========================= */
+
+.product_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 17px;
+    table-layout: fixed;
+}
+
+.product_table th,
+.product_table td {
+    border: 1px solid #ccc;
+    padding: 9px 10px;
+    vertical-align: middle;
+}
+
+.product_table th {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.product_table td {
+    font-size: 14px;
+}
+
+.product_table th:nth-child(1),
+.product_table td:nth-child(1) {
+    width: 76px;
+    text-align: center;
+}
+
+.product_table th:nth-child(3),
+.product_table td:nth-child(3) {
+    width: 86px;
+}
+
+.qty {
+    text-align: center;
+    font-size: 14px;
+}
+
+.product_desc {
+    line-height: 1.25;
+}
+
+.product_desc .product_name {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.product_desc div {
+    margin-bottom: 1px;
+}
+
+.price {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* =========================
+   INVOICE SUMMARY
+========================= */
+
+.invoice_summary {
+    margin-top: 23px;
+}
+
+.summary_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+
+    font-size: 15px;
+    line-height: 1.4;
+
+    margin-bottom: 11px;
+}
+
+.summary_row .label {
+    flex: 1;
+}
+
+.summary_row .amount {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.summary_row.total {
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 3px;
+    margin-bottom: 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.invoice_footer {
+    text-align: center;
+    margin-top: 38px;
+}
+
+.invoice_footer p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.invoice_footer .thank_you {
+    margin-bottom: 2px;
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.video_card {
+    width: 100%;
+    max-width: 400px;
+    margin: 15px auto 0;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    background: #000;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+.video_card video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* =========================
+   PRINT BUTTON
+========================= */
+
+.action_area {
+    width: 100%;
+    max-width: 510px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+.print_btn {
+    border: none;
+
+    background: #111;
+    color: #fff;
+
+    padding: 11px 24px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.print_btn:hover {
+    opacity: 0.85;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .main {
+        padding: 14px 30px 40px;
+    }
+
+    .invoice_wrap {
+        max-width: 100%;
+        padding: 25px 18px 23px;
+    }
+
+    /* Header */
+
+    .invoice_top h3 {
+        font-size: 34px;
+        margin-bottom: 16px;
+    }
+
+    .invoice_top h3 small {
+        font-size: 22px;
+    }
+
+    .invoice_top h5 {
+        font-size: 19px;
+        margin-bottom: 5px;
+    }
+
+    .invoice_top p {
+        font-size: 13px;
+    }
+
+    /* Line */
+
+    .line {
+        margin: 14px 0 15px;
+    }
+
+    /* Order Details */
+
+    .invoice_middle_top h5 {
+        font-size: 16px;
+        line-height: 1.45;
+    }
+
+    /* Product Table */
+
+    .product_table {
+        margin-top: 15px;
+    }
+
+    .product_table th,
+    .product_table td {
+        padding: 8px 6px;
+        font-size: 13px;
+    }
+
+    .product_table th {
+        font-size: 13px;
+    }
+
+    .product_table th:nth-child(1),
+    .product_table td:nth-child(1) {
+        width: 65px;
+    }
+
+    .product_table th:nth-child(3),
+    .product_table td:nth-child(3) {
+        width: 75px;
+    }
+
+    .qty {
+        font-size: 13px;
+    }
+
+    .product_desc {
+        line-height: 1.25;
+    }
+
+    /* Summary */
+
+    .invoice_summary {
+        margin-top: 20px;
+    }
+
+    .summary_row {
+        font-size: 14px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+    }
+
+    .summary_row.total {
+        font-size: 16px;
+    }
+
+    /* Footer */
+
+    .invoice_footer {
+        margin-top: 33px;
+    }
+
+    .invoice_footer p {
+        font-size: 12px;
+    }
+
+    /* Video */
+
+    .video_card {
+        max-width: 400px;
+        border-radius: 20px;
+    }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+    .main {
+        padding: 10px 7px 30px;
+    }
+
+    .invoice_wrap {
+        padding: 23px 14px 21px;
+    }
+
+    /* Header */
+
+    .invoice_top h3 {
+        font-size: 31px;
+    }
+
+    .invoice_top h3 small {
+        font-size: 20px;
+    }
+
+    .invoice_top h5 {
+        font-size: 18px;
+    }
+
+    .invoice_top p {
+        font-size: 12px;
+    }
+
+    /* Order */
+
+    .invoice_middle_top h5 {
+        font-size: 15px;
+    }
+
+    /* Table */
+
+    .product_table th,
+    .product_table td {
+        padding: 7px 5px;
+        font-size: 12px;
+    }
+
+    .product_table th {
+        font-size: 12px;
+    }
+
+    .product_table th:nth-child(1),
+    .product_table td:nth-child(1) {
+        width: 58px;
+    }
+
+    .product_table th:nth-child(3),
+    .product_table td:nth-child(3) {
+        width: 68px;
+    }
+
+    /* Summary */
+
+    .summary_row {
+        font-size: 13px;
+        margin-bottom: 9px;
+    }
+
+    .summary_row.total {
+        font-size: 15px;
+    }
+
+    /* Footer */
+
+    .invoice_footer p {
+        font-size: 11px;
+    }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print {
+
+    body {
+        background: #fff;
+    }
+
+    .main {
+        padding: 0;
+    }
+
+    .invoice_wrap {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 25px;
+        box-shadow: none;
+    }
+
+    .action_area,
+    .video_card {
+        display: none !important;
+    }
+}
+   </style>
+</head>
+
+<body>
+
+    <div class="main">
+
+        <!-- ================= INVOICE ================= -->
+
+        <div class="invoice_wrap">
+
+            <!-- TOP -->
+            <div class="invoice_top">
+
+                <h3>
+                    ITS<small>Mart</small>
+                </h3>
+
+                <h5>ITS Mart</h5>
+
+                <p>Ranchi, Jharkhand</p>
+
+                <p>Phone: 9876543210</p>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <!-- ORDER DETAILS -->
+            <div class="invoice_middle">
+
+                <div class="invoice_middle_top">
+
+                    <h5>
+                        <strong>Order ID :</strong>
+                        <b>#49</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Name :</strong>
+                        <b>Test</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Mobile No :</strong>
+                        <b>7903737980</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Selected Date :</strong>
+                        <b>2026-08-13</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Delivery Type :</strong>
+                        <b>Home Delivery</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Payment Method :</strong>
+                        <b>Pay on delivery</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Address :</strong>
+                        <b>Masibari, Ranchi, Jharkhand, 834004</b>
+                    </h5>
+
+                </div>
+
+
+                <!-- PRODUCT -->
+                <table class="product_table">
+
+                    <thead>
+                        <tr>
+                            <th>QTY</th>
+                            <th>DESC</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td class="qty">
+                                1 kg
+                            </td>
+
+                            <td class="product_desc">
+
+                                <span class="product_name">
+                                    Aashirvaad Atta/Godihittu -
+                                    Multigrains, 1 kg
+                                </span>
+
+                                <div>
+                                    Unit Price: ₹70
+                                </div>
+
+                                <div>
+                                    Nop : 4
+                                </div>
+
+                                <div>
+                                    Discount: ₹2
+                                </div>
+
+                            </td>
+
+                            <td class="price">
+                                ₹272
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <!-- SUMMARY -->
+                <div class="invoice_summary">
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Item price:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 280.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Product Discount:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 8.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Subtotal:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 272.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Promo Discount:
+                        </span>
+
+                        <span class="amount">
+                            - ₹ 0
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Handling Charge:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 2.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Delivery Fee:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 50.00
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row total">
+
+                        <span class="label">
+                            Total:
+                        </span>
+
+                        <span class="amount">
+                            ₹ 324.00
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="invoice_footer">
+
+                <p class="thank_you">
+                    ** THANK YOU **
+                </p>
+
+                <p>
+                    Copyright © 2025, ITS Mart
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= VIDEO ================= -->
+
+       
+
+
+        <!-- ================= ACTION ================= -->
+
+        <div class="action_area">
+
+            <button
+                class="print_btn"
+                onclick="window.print()">
+
+                🖨 Print Invoice
+
+            </button>
+
+        </div>
+
+    </div>
+
+  <!-- jQuery (must be first) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Owl Carousel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+
+  <!-- Your Scripts -->
+  <script src="../assets/js/pageRender.js"></script>
+  <script src="../assets/js/script.js"></script>
+    <script>
+        getInvoiceDetail();
+    </script>
+
+</body>
+
+</html>

@@ -276,45 +276,43 @@
 
     <!-- Address Select Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom address_canvas reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomAddress"
-      aria-labelledby="offcanvasBottomAddressLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
-          Select Delivery Address
-        </h5>
+  <div class="offcanvas offcanvas-bottom address_canvas reuse_modal_box" tabindex="-1" id="offcanvasBottomAddress"
+    aria-labelledby="offcanvasBottomAddressLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+        Select Delivery Address
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+
+    </div>
+    <div class="offcanvas-body small">
+      <div class="btn_add_address1">
+        <button class="current-location-btn" onclick="getCurrentLocation()">
+          <i class="ti ti-current-location"></i>
+          <span>Use Current Location</span>
         </button>
 
+        <button class="add-address-btn" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasBottomAddAddress">
+          <i class="ti ti-plus"></i>
+          <span>Add Address</span>
+        </button>
       </div>
-      <div class="offcanvas-body small">
-        <div class="btn_add_address1">
-    <button class="current-location-btn">
-        <i class="ti ti-current-location"></i>
-        <span>Use Current Location</span>
-    </button>
-
-    <button
-        class="add-address-btn"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasBottomAddAddress">
-        <i class="ti ti-plus"></i>
-        <span>Add Address</span>
-    </button>
-</div>
+      <div class="hidden"  id="currentLocation">
+      
+      </div>
+      <div class="saved_address_box_box_modal">
+     
         <div class="saved_address">
           <b>Saved addresses</b>
           <div id="savedAddress"></div>
         </div>
       </div>
     </div>
-
+  </div>
     <!-- Add Address Canvas -->
 
     <div
@@ -372,6 +370,7 @@
                 id="houseNo"
                 class="form_input"
                 placeholder="House No / Flat No / Building Name *"
+                required
               />
 
               <input
@@ -386,6 +385,7 @@
                 id="area"
                 class="form_input"
                 placeholder="Area / Locality *"
+                required
               />
 
               <input
@@ -393,6 +393,7 @@
                 id="city"
                 class="form_input"
                 placeholder="City *"
+                required
               />
 
               <input
@@ -400,6 +401,7 @@
                 id="state"
                 class="form_input"
                 placeholder="State *"
+                required
               />
 
               <input
@@ -408,6 +410,7 @@
                 class="form_input"
                 maxlength="6"
                 placeholder="PIN Code *"
+                required
               />
 
               <p class="section_title">Receiver Details</p>
@@ -417,6 +420,7 @@
                 id="name"
                 class="form_input"
                 placeholder="Receiver Name *"
+                required
               />
 
               <input
@@ -425,6 +429,7 @@
                 class="form_input"
                 maxlength="10"
                 placeholder="Mobile Number *"
+                required
               />
             </div>
             <div class="button_save_add btn_reuse" id="btnToggleAddress">

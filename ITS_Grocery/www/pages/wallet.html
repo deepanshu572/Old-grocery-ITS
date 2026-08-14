@@ -1,47 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITS-grocery</title>
-        <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
-      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITS-grocery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+    integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css"
+    integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    /* =========================
+   WALLET CONTENT
+========================= */
+
+    .wallet_content {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 18px 16px 30px;
+      margin-top: 1.5rem;
+    }
+
+
+    /* =========================
+   BALANCE CARD
+========================= */
+
+    .balance_card {
+      background: var(--theme-color);
+      color: #fff;
+      border-radius: 18px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .balance_card::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      right: -65px;
+      top: -65px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .balance_card::before {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      right: 30px;
+      bottom: -70px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .balance_top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .wallet_icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 20px;
+    }
+
+    .balance_top span {
+      font-size: 14px;
+      color: #cfcfcf;
+    }
+
+    .balance_amount {
+      font-size: 34px;
+      font-weight: 700;
+      margin-top: 15px;
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .balance_bottom {
+      margin-top: 18px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .balance_bottom p {
+      font-size: 12px;
+      color: #bdbdbd;
+    }
+
+    .add_money_btn {
+      border: none;
+      background: #fff;
+      color: #111;
+
+      padding: 10px 17px;
+      border-radius: 9px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================
+   QUICK ADD
+========================= */
+
+    .quick_add {
+      background: #fff;
+      border-radius: 15px;
+
+      margin-top: 14px;
+      padding: 17px;
+
+      border: 1px solid #ededed;
+    }
+
+    .section_title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 13px;
+    }
+
+    .amount_options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .amount_btn {
+      height: 42px;
+
+      background: #fff;
+
+      border: 1px solid #ddd;
+      border-radius: 9px;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .amount_btn:hover {
+      border-color: #111;
+    }
+
+
+    /* =========================
+   ADD MONEY MODAL
+========================= */
+
+    .modal_overlay {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0, 0, 0, 0.45);
+
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+
+      z-index: 100;
+    }
+
+    .modal_overlay.active {
+      display: flex;
+    }
+
+    .wallet_modal {
+      width: 100%;
+      max-width: 600px;
+
+      background: #fff;
+
+      border-radius: 22px 22px 0 0;
+
+      padding: 22px 18px 30px;
+
+      animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+
+    }
+
+    .modal_top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal_top h3 {
+      font-size: 18px;
+    }
+
+    .close_modal {
+      border: none;
+
+      background: #f3f3f3;
+
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      font-size: 18px;
+
+      cursor: pointer;
+    }
+
+    .amount_input_wrap {
+      margin-top: 22px;
+
+      border: 1px solid #ddd;
+      border-radius: 11px;
+
+      height: 52px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 14px;
+    }
+
+    .amount_input_wrap span {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .amount_input {
+      border: none;
+      outline: none;
+
+      width: 100%;
+
+      font-size: 20px;
+
+      padding-left: 7px;
+
+      font-weight: 600;
+    }
+
+    .continue_btn {
+      width: 100%;
+      height: 48px;
+
+      border: none;
+      border-radius: 10px;
+
+      background: #111;
+      color: #fff;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      margin-top: 15px;
+
+      cursor: pointer;
+    }
+
+    /* =========================
+   WALLET INFO
+========================= */
+
+    .wallet_info {
+      margin-top: 18px;
+      padding: 14px 15px;
+
+      background: #fafafa;
+
+      border: 1px solid #ededed;
+      border-radius: 12px;
+    }
+
+    .wallet_info p {
+      font-size: 11px;
+      line-height: 1.6;
+      color: #777;
+    }
+
+    .wallet_info strong {
+      color: #444;
+      font-weight: 600;
+    }
+
+
+    /* Optional info icon layout */
+
+    .wallet_info_content {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .wallet_info_icon {
+      width: 22px;
+      height: 22px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #666;
+
+      font-size: 16px;
+    }
+
+    .wallet_info_text {
+      flex: 1;
+    }
+
+    .wallet_info_text h4 {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      color: #333;
+    }
+
+    .wallet_info_text p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #888;
+    }
+
+
+    /* =========================
+   RESPONSIVE
+========================= */
+
+    @media (max-width: 400px) {
+
+      .wallet_content {
+        padding: 15px 12px 25px;
+      }
+
+      .balance_card {
+        padding: 19px;
+      }
+
+      .balance_amount {
+        font-size: 31px;
+      }
+
+      .amount_options {
+        gap: 7px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="main animate-fade-in margin_box">
-          <div class="back_btn" onclick="history.back()">
-        <div class="back_btn_arrow">
-          <i class="ti ti-arrow-narrow-left"></i>
-        </div>
-        <h5>Wallet</h5>
+  <div class="main animate-fade-in margin_box">
+    <div class="back_btn" onclick="history.back()">
+      <div class="back_btn_arrow">
+        <i class="ti ti-arrow-narrow-left"></i>
       </div>
-      <div class="wallet_box">
-        <div class="wallet_item">
-            <h5>Rs. 0</h5>
+      <h5>Wallet</h5>
+    </div>
+
+    <div class="wallet_page">
+
+      <!-- HEADER -->
+
+
+
+      <main class="wallet_content">
+
+        <!-- ================= BALANCE ================= -->
+
+        <section class="balance_card">
+
+          <div class="balance_top">
+
+            <div class="wallet_icon">
+              <i class="ti ti-wallet"></i>
+            </div>
+
+            <span>Available balance</span>
+
+          </div>
+
+
+          <div class="balance_amount">
+            ₹ 250.00
+          </div>
+
+
+          <div class="balance_bottom">
+
+            <p>
+              Use wallet balance for your orders
+            </p>
+            <!-- 
+                    <button
+                        class="add_money_btn"
+                        onclick="openWalletModal()">
+
+                        + Add money
+
+                    </button> -->
+
+          </div>
+
+        </section>
+
+
+
+
+
+
+        <!-- ================= INFO ================= -->
+
+        <div class="wallet_info">
+
+          <p>
+            Wallet balance can be used for eligible orders.
+            Refunds may be credited back to your wallet.
+          </p>
+
         </div>
-      </div>
-        <div class="footer_tab">
+
+      </main>
+
+
+
+    </div>
+    <div class="footer_tab">
       <div class="foot_tab" onclick="location.href = 'home.html'">
         <img src="../assets/img/icon/home_line.png" alt="">
+        <small>Home</small>
       </div>
       <div class="foot_tab" onclick="location.href = 'category.html'">
         <img src="../assets/img/icon/category_line.png" alt="">
-
+        <small>category</small>
       </div>
       <div class="foot_tab circle" onclick="location.href='brandOfTheDay.html'">
         <p id="brandOfDay">BRANDS <br> Of the <br> <b>Day</b></p>
@@ -50,22 +484,23 @@
       </div>
       <div class="foot_tab" onclick="location.href = 'orders.html'">
         <img src="../assets/img/icon/order_line.png" alt="">
+        <small>orders</small>
 
       </div>
       <div class="foot_tab" onclick="location.href = 'profile.html'">
         <img src="../assets/img/icon/user_line.png" alt="">
+        <small>profile</small>
 
       </div>
     </div>
-    </div>
-    
-     <script src="../cordova.js"></script>
-     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+  </div>
+
+  <script src="../cordova.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../assets/js/script.js"></script>
 </body>
+
 </html>

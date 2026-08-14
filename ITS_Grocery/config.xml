@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="1" id="com.app.ITScart" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>ITS Cart</name>
+    <name>TEST Cart</name>
     <description>
-        Start Your Business With ITS Web Service
+        Start Your Business With TEST Web Service
     </description>
     <author email="support@itswebservice.com">
-        ITS Web Service
+        TEST Web Service
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
