@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ITS Mart - Invoice</title>
+    <link rel="stylesheet" href="../assets/css/style.cssx">
 
    <style>
     * {
@@ -122,7 +123,9 @@ body {
     padding: 9px 10px;
     vertical-align: middle;
 }
-
+.green_row{
+    color: green;
+}
 .product_table th {
     font-size: 14px;
     font-weight: 700;
@@ -322,7 +325,7 @@ body {
     /* Order Details */
 
     .invoice_middle_top h5 {
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.45;
     }
 
@@ -369,7 +372,7 @@ body {
     .summary_row {
         font-size: 14px;
         line-height: 1.35;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .summary_row.total {
@@ -429,7 +432,7 @@ body {
     /* Order */
 
     .invoice_middle_top h5 {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     /* Table */
@@ -458,7 +461,7 @@ body {
 
     .summary_row {
         font-size: 13px;
-        margin-bottom: 9px;
+        margin-bottom: 5px;
     }
 
     .summary_row.total {
@@ -504,11 +507,11 @@ body {
 
 <body>
 
-    <div class="main">
+    <div class="main animate-fade-in">
 
         <!-- ================= INVOICE ================= -->
 
-        <div class="invoice_wrap">
+        <div class="invoice_wrap ">
 
             <!-- TOP -->
             <div class="invoice_top">
@@ -519,9 +522,10 @@ body {
 
                 <h5>ITS Mart</h5>
 
-                <p>Ranchi, Jharkhand</p>
+                <p id="address1"></p>
+                <p id="address2"></p>
 
-                <p>Phone: 9876543210</p>
+                <p id="phoneNo"></p>
 
             </div>
 
@@ -532,99 +536,56 @@ body {
             <!-- ORDER DETAILS -->
             <div class="invoice_middle">
 
-                <div class="invoice_middle_top">
+                <div class="invoice_middle_top animate-fade-in" id="invoiceDetail">
 
                     <h5>
                         <strong>Order ID :</strong>
-                        <b>#49</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Name :</strong>
-                        <b>Test</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Mobile No :</strong>
-                        <b>7903737980</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Selected Date :</strong>
-                        <b>2026-08-13</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Delivery Type :</strong>
-                        <b>Home Delivery</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Payment Method :</strong>
-                        <b>Pay on delivery</b>
+                        <b></b>
                     </h5>
 
                     <h5>
                         <strong>Address :</strong>
-                        <b>Masibari, Ranchi, Jharkhand, 834004</b>
+                        <b></b>
                     </h5>
 
                 </div>
 
 
                 <!-- PRODUCT -->
-                <table class="product_table">
+                <table class="product_table" id="orderData">
 
-                    <thead>
-                        <tr>
-                            <th>QTY</th>
-                            <th>DESC</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-
-                            <td class="qty">
-                                1 kg
-                            </td>
-
-                            <td class="product_desc">
-
-                                <span class="product_name">
-                                    Aashirvaad Atta/Godihittu -
-                                    Multigrains, 1 kg
-                                </span>
-
-                                <div>
-                                    Unit Price: ₹70
-                                </div>
-
-                                <div>
-                                    Nop : 4
-                                </div>
-
-                                <div>
-                                    Discount: ₹2
-                                </div>
-
-                            </td>
-
-                            <td class="price">
-                                ₹272
-                            </td>
-
-                        </tr>
-
-                    </tbody>
+                  
 
                 </table>
 
 
                 <!-- SUMMARY -->
-                <div class="invoice_summary">
+                <div class="invoice_summary" id="totalOrderCalc">
 
                     <div class="summary_row">
 
@@ -633,7 +594,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 280.00
+                            ----
                         </span>
 
                     </div>
@@ -646,7 +607,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 8.00
+                            ----
                         </span>
 
                     </div>
@@ -659,7 +620,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 272.00
+                            ----
                         </span>
 
                     </div>
@@ -672,7 +633,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            - ₹ 0
+                            ----
                         </span>
 
                     </div>
@@ -685,7 +646,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 2.00
+                            ----
                         </span>
 
                     </div>
@@ -698,7 +659,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 50.00
+                          ----
                         </span>
 
                     </div>
@@ -711,7 +672,7 @@ body {
                         </span>
 
                         <span class="amount">
-                            ₹ 324.00
+                           ----
                         </span>
 
                     </div>
@@ -775,6 +736,7 @@ body {
   <script src="../assets/js/script.js"></script>
     <script>
         getInvoiceDetail();
+        getBranchData();
     </script>
 
 </body>

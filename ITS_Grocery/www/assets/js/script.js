@@ -1949,8 +1949,10 @@ function handleIncrement(id, varId, type, idfr) {
 
   const prdData = products[id];
   const allPrdData = AllProduct[id];
+  console.log(products)
 
-  // console.log(prdData, allPrdData, "prdData, allPrdData");
+  console.log(prdData, allPrdData, "prdData, allPrdData");
+  console.log("id, varId, type, idfr :", id, varId, type, idfr)
 
   // ================= Variant Data =================
   let varData;
@@ -2005,8 +2007,12 @@ function handleIncrement(id, varId, type, idfr) {
   // ================= Local Cart =================
   if (type === "prdDataVar") {
     updateCartLocal(prdData, varData, varId, qty);
+    console.log("Zeenat......")
+    console.log(prdData, varData, varId, qty)
   } else {
     updateCartLocal(allPrdData, varData, varId, qty);
+    console.log("NOT - Zeenat......")
+
   }
 
   // ================= Update All Matching Product Cards =================
@@ -2642,6 +2648,8 @@ function renderFilterProduct(prd, category) {
   let productHtml = "";
   if (prd.length > 0) {
     prd?.map((item, index) => {
+      products[item.p_id] = item;
+
       productHtml += `  <div class="product_design_item_wrap">
 
         <div class="product_top_wrap">
@@ -3483,10 +3491,10 @@ function editAddress(data) {
   $("#offcanvasBottomAddressLabel").text("Update Address");
 }
 $('#offcanvasBottomAddAddress').on('hidden.bs.offcanvas', function () {
-    $(this).find('.form_input').val('');
-        $("#offcanvasBottomAddressLabel").text("Add Address");
+  $(this).find('.form_input').val('');
+  $("#offcanvasBottomAddressLabel").text("Add Address");
 
-    // alert();
+  // alert();
 });
 
 function updateAddress(e) {
@@ -3737,8 +3745,8 @@ function getOrder() {
         orderData.map((item) => {
           orderHtml += ` <div class="order_data" onclick="location.href='orderDetail.html?orderId=${item.idfr}'">
                 <div class="order_left">
-                  <div class="order_left_img">
-                   <i class="ri-shopping-bag-4-line"></i>
+                  <div class="order_left_img order_img_wrap">
+                  <img src="../assets/img/icon/order_line.png" alt="crt">
                   </div>
                   <div class="order_middle_txt">
                     <h5>ORD${item.idfr}</h5>
@@ -3764,7 +3772,7 @@ function getSingleOrder() {
 
   const id = params.get("orderId");
   $("#invoice").html(`<div class="invoice" onclick="location.href='invoice.html?orderId=${id}'">
-              <button><i class="ti ti-download"></i> Download invoice</button>
+              <button><i class="ti ti-eye"></i> See invoice</button>
           </div>`)
 
   $.ajax({
@@ -3883,9 +3891,9 @@ function getSingleOrder() {
     },
   });
 }
+
 function getInvoiceDetail() {
   const params = new URLSearchParams(window.location.search);
-
   const id = params.get("orderId");
 
   $.ajax({
@@ -3899,8 +3907,186 @@ function getInvoiceDetail() {
     success: function (response) {
       if (response.status == "success") {
         console.log(response.data);
+        const { address, data, singleOrder } = response;
+        console.log(address, data, singleOrder);
+        let invoiceAddressHtml = '';
+        let orderDataHtml = '';
+        let priceTotalHtml ='';
+
+        invoiceAddressHtml += ` <h5>
+                        <strong>Order ID :</strong>
+                        <b>#ORD${data?.idfr}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Name :</strong>
+                        <b>${address?.o_username}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Mobile No :</strong>
+                        <b>${address?.o_mobile}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Selected Date :</strong>
+                        <b>${data?.dor}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Delivery Type :</strong>
+                        <b>${address?.type}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Payment Method :</strong>
+                        <b>${data?.payment_method}</b>
+                    </h5>
+
+                    <h5>
+                        <strong>Address :</strong>
+                        <b>${address?.full_address}</b>
+                    </h5>
+        `;
+
+        orderDataHtml = ` <thead>
+                        <tr>
+                            <th>QTY</th>
+                            <th>DESC</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>`;
+        singleOrder?.forEach((item) => {
+          orderDataHtml += ` 
+
+                    <tbody>
+
+                        <tr>
+
+                            <td class="qty">
+                                ${item?.quantity} ${item?.unit}
+                            </td>
+
+                            <td class="product_desc">
+
+                                <span class="product_name">
+                                    ${item?.name}
+                                </span>
+
+                                <div>
+                                    Unit Price: ₹${item?.selling_price}
+                                </div>
+
+                                <div>
+                                    Nop : ${item?.nop}
+                                </div>
+
+                                
+
+                            </td>
+
+                            <td class="price">
+                              ₹${Number(item?.nop) * Number(item?.selling_price)}
+                            </td>
+
+                        </tr>
+
+                    </tbody>`;
+        });
+        priceTotalHtml+=`<div class="summary_row">
+
+                        <span class="label">
+                            Item price:
+                        </span>
+
+                        <span class="amount">
+                            ₹${data?.sub_total}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row green_row">
+
+                        <span class="label">
+                            Product Discount:
+                        </span>
+
+                        <span class="amount">
+                            - ₹ ${data?.coupon_amount}
+                        </span>
+
+                    </div>
+
+
+                   
+
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Handling Charge:
+                        </span>
+
+                        <span class="amount">
+                            ₹ ${data?.handling_charge}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row">
+
+                        <span class="label">
+                            Delivery Fee:
+                        </span>
+
+                        <span class="amount">
+                            ₹ ${data?.del_charge}
+                        </span>
+
+                    </div>
+
+
+                    <div class="summary_row total">
+
+                        <span class="label">
+                            Total:
+                        </span>
+
+                        <span class="amount">
+                            ₹ ${data?.total}
+                        </span>
+
+                    </div>`;
+
+        $("#invoiceDetail").html(invoiceAddressHtml);
+        $("#orderData").html(orderDataHtml);
+        $("#totalOrderCalc").html(priceTotalHtml);
       } else {
         console.log(response.message);
+      }
+    }
+  })
+}
+function getBranchData() {
+  let branchId = localStorage.getItem("branchId");
+  $.ajax({
+    url:apiUrl,
+    method:"POST",
+    dataType:"JSON",
+    data:{
+      type:"getBranch",
+      branchId
+    },
+    success:function (response) {
+      if(response.status=="success"){
+        console.log(response.data);
+        let data = response?.data[0];
+        $("#address1").html(`${data?.address}`)
+        $("#address2").html(`${data?.city}, ${data?.state}`)
+        $("#phoneNo").html(`Phone: ${data?.phone_no}`)
       }
     }
   })
@@ -7232,6 +7418,10 @@ function getCurrentUserData() {
         $("#name").val(data.full_name);
         $("#email").val(data.email);
         $("#phone").val(data.mobile);
+        if (location.pathname.includes("wallet.html")) {
+
+        $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
+      }
 
         $("#profileNumber").html(` <i class="ti ti-phone-call"></i>
             <p>+91-<b>${data.mobile}</b></p>`);

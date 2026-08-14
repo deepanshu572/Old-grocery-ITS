@@ -5151,7 +5151,10 @@ button.coupon_btn.apply-btn {
     object-fit: cover;
     border-radius: 5px;
 }
-
+.order_img_wrap img{
+    width: 35px;
+    height: 35px;
+}
 .order_left_img i {
 
     font-size: 27px;
