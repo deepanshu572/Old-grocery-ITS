@@ -559,47 +559,56 @@ function getAllProductData() {
 
         <div class="product_top_wrap">
 
-          <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+
+        ${item?.stock > 0 ?
+              (`<div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
+          
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
             }">
             <i class="ti ti-heart-filled"></i>
           </div>
-
-          ${item.varient_count <= 1
-              ? `
-      <div
-        class="AddWrp productAddBtn"
-        id="AddBtnToggle${item.p_id}"
-        data-pid="${item.p_id}"
-      >
-        <button
-          onclick="getSingleVarientId('${item.p_id}','prd','${item.image_path}','${item.name}')"
-        >
-          Add
-        </button>
-      </div>
-    `
-              : `
-      <div
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasVarient"
-        aria-controls="offcanvasVarient"
-        class="cart_tag_Add varient"
-        onclick="getSingleVarientId('${item.p_id}','','${item.image_path}','${item.name}')">
-
-        Add
-
-        <div class="varient_btn">
-          ${item.varient_count} option
-        </div>
-
-      </div>
-    `
-            }
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
+              ${item.varient_count <= 1
+                ? `
+          <div
+            class="AddWrp productAddBtn"
+            id="AddBtnToggle${item.p_id}"
+            data-pid="${item.p_id}"
+          >
+            <button
+              onclick="getSingleVarientId('${item.p_id}','prd','${item.image_path}','${item.name}')"
+            >
+              Add
+            </button>
+          </div>
+        `
+                : `
+          <div
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasVarient"
+            aria-controls="offcanvasVarient"
+            class="cart_tag_Add varient"
+            onclick="getSingleVarientId('${item.p_id}','','${item.image_path}','${item.name}')">
+    
+            Add
+    
+            <div class="varient_btn">
+              ${item.varient_count} option
+            </div>
+    
+          </div>
+        `
+          }
+              </div>
 
         </div>
 
@@ -1345,17 +1354,24 @@ function renderProducts(productList) {
 
         <div class="product_top_wrap">
 
-          <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+         ${item?.stock > 0 ?
+              (`<div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
       }">
             <i class="ti ti-heart-filled"></i>
           </div>
-
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          
           ${item.varient_count <= 1
-        ? `
+            ? `
                 <div
                   class="AddWrp productAddBtn"
                   id="AddBtnToggle${item.p_id}"
@@ -1386,6 +1402,8 @@ function renderProducts(productList) {
                 </div>
               `
       }
+                </div>
+
 
         </div>
 
@@ -1439,15 +1457,24 @@ function renderProducts2(productList) {
 
         <div class="product_top">
 
-          <div class="product_img_fashion" onclick="location.href='productDetail.html?id=${item.p_id}'">
+         ${item?.stock > 0 ?
+              (` <div class="product_img_fashion" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img_fashion outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
+         
+          
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
       }">
             <i class="ti ti-heart-filled"></i>
           </div>
-
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          
           ${item.varient_count <= 1
         ? `
                 <div
@@ -1480,6 +1507,8 @@ function renderProducts2(productList) {
                 </div>
               `
       }
+          </div>
+
 
         </div>
 
@@ -1533,10 +1562,17 @@ function renderProducts3(productList) {
 
         <div class="product_top">
 
-          <div class="product_data_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+         ${item?.stock > 0 ?
+              (`  <div class="product_data_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_data_img  outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
+         
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
       }">
             <i class="ti ti-heart-filled"></i>
@@ -1575,6 +1611,7 @@ function renderProducts3(productList) {
 
           </div>
 
+          <div class="h ${item?.stock>0 ? 'show':'hide'}">
           ${item.varient_count <= 1
         ? `
                 <div
@@ -1604,6 +1641,7 @@ function renderProducts3(productList) {
                 </div>
               `
       }
+      </div>
 
         </div>
 
@@ -2459,16 +2497,23 @@ function getRelatedProduct(pid, cid, sid) {
 
             <div class="product_top_wrap">
 
-              <div class="product_img"
-                onclick="location.href='productDetail.html?id=${item.p_id}'">
-                <img src="${imgUrl + item.image_path}" alt="">
-              </div>
+           ${item?.stock > 0 ?
+              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
               <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
             }">
                 <i class="ti ti-heart-filled"></i>
               </div>
 
+              <div class="${item?.stock >0 ? 'show ':'hide'}">
+              
               ${item.varient_count <= 1
               ? `
                     <div
@@ -2500,6 +2545,8 @@ function getRelatedProduct(pid, cid, sid) {
                     </div>
                   `
             }
+                          </div>
+
 
             </div>
 
@@ -2654,15 +2701,21 @@ function renderFilterProduct(prd, category) {
 
         <div class="product_top_wrap">
 
-          <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+          ${item?.stock > 0 ?
+              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
         }">
             <i class="ti ti-heart-filled"></i>
           </div>
-
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
           ${item.varient_count <= 1
           ? `
       <div
@@ -2695,6 +2748,8 @@ function renderFilterProduct(prd, category) {
       </div>
     `
         }
+          </div>
+
 
         </div>
 
@@ -3911,7 +3966,7 @@ function getInvoiceDetail() {
         console.log(address, data, singleOrder);
         let invoiceAddressHtml = '';
         let orderDataHtml = '';
-        let priceTotalHtml ='';
+        let priceTotalHtml = '';
 
         invoiceAddressHtml += ` <h5>
                         <strong>Order ID :</strong>
@@ -3993,7 +4048,7 @@ function getInvoiceDetail() {
 
                     </tbody>`;
         });
-        priceTotalHtml+=`<div class="summary_row">
+        priceTotalHtml += `<div class="summary_row">
 
                         <span class="label">
                             Item price:
@@ -4073,15 +4128,15 @@ function getInvoiceDetail() {
 function getBranchData() {
   let branchId = localStorage.getItem("branchId");
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
-      type:"getBranch",
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getBranch",
       branchId
     },
-    success:function (response) {
-      if(response.status=="success"){
+    success: function (response) {
+      if (response.status == "success") {
         console.log(response.data);
         let data = response?.data[0];
         $("#address1").html(`${data?.address}`)
@@ -4435,15 +4490,22 @@ function getSingleBrandOfTheDay() {
 
         <div class="product_top_wrap">
 
-          <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+         ${item?.stock > 0 ?
+              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
             }">
             <i class="ti ti-heart-filled"></i>
           </div>
 
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
           ${item.varient_count <= 1
               ? `
       <div
@@ -4476,6 +4538,7 @@ function getSingleBrandOfTheDay() {
       </div>
     `
             }
+          </div>
 
         </div>
 
@@ -7310,15 +7373,21 @@ async function handleInput(e) {
 
         <div class="product_top_wrap">
 
-          <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+        ${item?.stock > 0 ?
+              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
-          </div>
+          </div>`)
+              :
+              (` <div class="product_img outStock" onclick="location.href='#'">
+          <div class='outOfStock'><p>Out Of Stock</p></div>
+            <img src="${imgUrl + item.image_path}" alt="">
+          </div>`)}
 
           <div class="like ${index == 0 || index == 3 || index == 4 ? "like_active" : ""
               }">
             <i class="ti ti-heart-filled"></i>
           </div>
-
+          <div class="${item?.stock >0 ? 'show ':'hide'}">
           ${item.varient_count <= 1
                 ? `
       <div
@@ -7351,6 +7420,7 @@ async function handleInput(e) {
       </div>
     `
               }
+          </div>
 
         </div>
 
@@ -7420,8 +7490,8 @@ function getCurrentUserData() {
         $("#phone").val(data.mobile);
         if (location.pathname.includes("wallet.html")) {
 
-        $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
-      }
+          $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
+        }
 
         $("#profileNumber").html(` <i class="ti ti-phone-call"></i>
             <p>+91-<b>${data.mobile}</b></p>`);
@@ -7585,11 +7655,14 @@ function getCurrentAddress() {
 
 
 async function getCurrentBranch() {
-  let lat = 23.39868927001953;
+// const lat = 18.921984;
+// const lng = 72.834654;
+    let lat = 23.39868927001953;
   let lng = 85.33858489990234;
   const address = await getAddress2(lat, lng);
 
   const branchId = await findNearestBranch(lat, lng);
+  console.log(branchId, address);
 
   return { branchId, address };
 
@@ -7700,18 +7773,11 @@ async function getAddress2(lat, lng) {
     setTimeout(() => {
       const address = data.display_name;
 
-      // $("#address").html(address);
+      $("#address").html(address);
       let findText = $(".find_text");
 
       if (findText) {
-        if (location.pathname.includes("locationSearch.html")) {
-
-          setTimeout(() => {
-
-            location.href = 'home.html';
-          }, 1500);
-
-        }
+      
         findText.css("display", "none");
       }
     }, 1000);
@@ -7743,7 +7809,7 @@ async function findNearestBranch(lat, lng) {
         let data = response?.branch;
         let branchId = data?.id;
         localStorage.setItem("branchId", branchId);
-        console.log("hihihi....");
+        console.log("hihihi...." + branchId);
         return branchId
       } else {
         console.log(response.branch);

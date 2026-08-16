@@ -566,7 +566,7 @@ function searchDataFetch() {
         response.data.forEach((item, index) => {
           productContainer += `
         
-        <a href="restaurants.html?rid=${item.id}" class="product_card">
+        <a href="restaurantDetail.html?rid=${item.id}" class="product_card">
 
           <div class="owl-carousel owl-theme product_slider product_slider_${index}">
             

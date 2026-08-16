@@ -44,16 +44,27 @@
     ></script>
 <script src="../assets/js/script.js"></script>
 <script>
-      localStorage.setItem("currentCategoryName","Grocery");
-      document.addEventListener("DOMContentLoaded", async function () {
-          await getCurrentBranch();  
-        //  console.log(branchId);
-      //  if(branchId){
-      //    location.href="home.html";
+      localStorage.setItem("currentCategoryName", "Grocery");
+        document.addEventListener("DOMContentLoaded", async function () {
+            const { branchId, address } = await getCurrentBranch();
+            // console.log(address.address?.city_district, address?.address?.state);
+           
 
-      //  }
-       
-      });
+            console.log(branchId, address)
+            if (address) {
+                if (branchId.status == "success") {
+                    location.href = "home.html";
+                }
+                else {
+                    location.href = "branchNotFound.html";
+                     let currentAddress = address.address?.city_district +' '+ address?.address?.state;
+            localStorage.setItem("currentLocation",currentAddress)
+                }
+            }
+            else {
+                console.log("address not found !")
+            }
+        });
 
     // setTimeout(() => {
     //     // $("#addrress").html("ITS Cart Mahaveer Nagar, Argora, Ranchi, 834002");
