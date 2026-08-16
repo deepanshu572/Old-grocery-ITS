@@ -1034,7 +1034,7 @@ body {
 
 .product_data {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     gap: 10px;
     overflow-x: auto;
     padding: 6px 25px;
