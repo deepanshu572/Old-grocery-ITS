@@ -176,7 +176,7 @@ function getTopLeftBanner() {
     },
     success: function (response) {
       if (response.status === "success") {
-        console.log("response.data============");
+        console.log("response.data============ 44444");
         console.log(response.data);
         console.log("response.data==========");
         let carouselItems = "";
@@ -575,9 +575,9 @@ function getAllProductData() {
             }">
             <i class="ti ti-heart-filled"></i>
           </div>
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
               ${item.varient_count <= 1
-                ? `
+              ? `
           <div
             class="AddWrp productAddBtn"
             id="AddBtnToggle${item.p_id}"
@@ -590,7 +590,7 @@ function getAllProductData() {
             </button>
           </div>
         `
-                : `
+              : `
           <div
             type="button"
             data-bs-toggle="offcanvas"
@@ -607,7 +607,7 @@ function getAllProductData() {
     
           </div>
         `
-          }
+            }
               </div>
 
         </div>
@@ -1346,7 +1346,7 @@ function getRecentOrder() {
 function renderProducts(productList) {
   let html = "";
 
-  productList.forEach((item, index) => {
+  productList.slice(0, 6).forEach((item, index) => {
     products[item.p_id] = item;
 
     html += `
@@ -1355,11 +1355,11 @@ function renderProducts(productList) {
         <div class="product_top_wrap">
 
          ${item?.stock > 0 ?
-              (`<div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+        (`<div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)
-              :
-              (` <div class="product_img outStock" onclick="location.href='#'">
+        :
+        (` <div class="product_img outStock" onclick="location.href='#'">
           <div class='outOfStock'><p>Out Of Stock</p></div>
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)}
@@ -1368,10 +1368,10 @@ function renderProducts(productList) {
       }">
             <i class="ti ti-heart-filled"></i>
           </div>
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
           
           ${item.varient_count <= 1
-            ? `
+        ? `
                 <div
                   class="AddWrp productAddBtn"
                   id="AddBtnToggle${item.p_id}"
@@ -1458,11 +1458,11 @@ function renderProducts2(productList) {
         <div class="product_top">
 
          ${item?.stock > 0 ?
-              (` <div class="product_img_fashion" onclick="location.href='productDetail.html?id=${item.p_id}'">
+        (` <div class="product_img_fashion" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)
-              :
-              (` <div class="product_img_fashion outStock" onclick="location.href='#'">
+        :
+        (` <div class="product_img_fashion outStock" onclick="location.href='#'">
           <div class='outOfStock'><p>Out Of Stock</p></div>
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)}
@@ -1473,7 +1473,7 @@ function renderProducts2(productList) {
       }">
             <i class="ti ti-heart-filled"></i>
           </div>
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
           
           ${item.varient_count <= 1
         ? `
@@ -1563,11 +1563,11 @@ function renderProducts3(productList) {
         <div class="product_top">
 
          ${item?.stock > 0 ?
-              (`  <div class="product_data_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+        (`  <div class="product_data_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)
-              :
-              (` <div class="product_data_img  outStock" onclick="location.href='#'">
+        :
+        (` <div class="product_data_img  outStock" onclick="location.href='#'">
           <div class='outOfStock'><p>Out Of Stock</p></div>
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)}
@@ -1611,7 +1611,7 @@ function renderProducts3(productList) {
 
           </div>
 
-          <div class="h ${item?.stock>0 ? 'show':'hide'}">
+          <div class="h ${item?.stock > 0 ? 'show' : 'pointerNone'}">
           ${item.varient_count <= 1
         ? `
                 <div
@@ -1623,7 +1623,7 @@ function renderProducts3(productList) {
                     class="green_btn"
                     onclick="getSingleVarientId('${item.p_id}','prd')"
                   >
-                    Add
+                    ${item?.stock > 0 ? 'Add' : 'Out of stock'}
                   </button>
                 </div>
               `
@@ -1636,10 +1636,14 @@ function renderProducts3(productList) {
                   class="cart_tag_Add varient"
                   onclick="getSingleVarientId('${item.p_id}','','${item.image_path}','${item.name}')">
 
-                  ${item.varient_count} option
+                   ${item?.stock > 0 ?
+          `${item.varient_count} option`
+          : 'Out of stock'
+        }
+                
 
-                </div>
-              `
+                </div >
+    `
       }
       </div>
 
@@ -2512,7 +2516,7 @@ function getRelatedProduct(pid, cid, sid) {
                 <i class="ti ti-heart-filled"></i>
               </div>
 
-              <div class="${item?.stock >0 ? 'show ':'hide'}">
+              <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
               
               ${item.varient_count <= 1
               ? `
@@ -2702,11 +2706,11 @@ function renderFilterProduct(prd, category) {
         <div class="product_top_wrap">
 
           ${item?.stock > 0 ?
-              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+          (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)
-              :
-              (` <div class="product_img outStock" onclick="location.href='#'">
+          :
+          (` <div class="product_img outStock" onclick="location.href='#'">
           <div class='outOfStock'><p>Out Of Stock</p></div>
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)}
@@ -2715,7 +2719,7 @@ function renderFilterProduct(prd, category) {
         }">
             <i class="ti ti-heart-filled"></i>
           </div>
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
           ${item.varient_count <= 1
           ? `
       <div
@@ -3103,15 +3107,37 @@ function renderCoupons(coupons) {
 // APPLY COUPON
 // ======================
 function applyCoupon(code) {
+  $(".apply-btn").text("Apply");
+    $(".apply-btn").removeClass("disabled");
+
+  localStorage.setItem("couponCode", code);
   const coupon = couponsData.find((item) => item.code === code);
   $("#couponId").val(coupon.id);
-  let limit = Number(coupon.limit);
-  limit--;
+
   $("#couponDiscount").html(`-₹${coupon.amount}`);
   calculationFnc();
 
+  if (!coupon) {
+    alert("Coupon not found");
+    return;
+  }
+
   // console.log(coupon.amount)
 
+
+
+  $(`#${code}`).text("Applied");
+  $(`#${code}`).addClass("disabled");
+  event.target.classList.add("active");
+  bootstrap.Offcanvas.getOrCreateInstance(
+    $("#offcanvasBottomCoupons")[0],
+  ).hide();
+}
+async function updateCoupon() {
+  let code = localStorage.getItem("couponCode");
+  const coupon = couponsData.find((item) => item.code === code);
+  let limit = Number(coupon.limit);
+  limit--;
   if (!coupon) {
     alert("Coupon not found");
     return;
@@ -3134,12 +3160,7 @@ function applyCoupon(code) {
     },
   });
 
-  $(`#${code}`).text("Applied");
-  $(`#${code}`).addClass("disabled");
-  event.target.classList.add("active");
-  bootstrap.Offcanvas.getOrCreateInstance(
-    $("#offcanvasBottomCoupons")[0],
-  ).hide();
+
 }
 
 async function calculationFnc() {
@@ -3760,8 +3781,10 @@ function handleOrder() {
       if (response.status == "success") {
         console.log(response.message);
         localStorage.setItem("cart", JSON.stringify(updatedBranchData));
-        location.href = "orders.html";
+        location.replace("orders.html");
         removeCurrentBranchSession();
+        updateCoupon();
+        localStorage.removeItem("couponCode");
       } else {
         console.log(response.message);
       }
@@ -4505,7 +4528,7 @@ function getSingleBrandOfTheDay() {
             <i class="ti ti-heart-filled"></i>
           </div>
 
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
           ${item.varient_count <= 1
               ? `
       <div
@@ -7374,11 +7397,11 @@ async function handleInput(e) {
         <div class="product_top_wrap">
 
         ${item?.stock > 0 ?
-              (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
+                (` <div class="product_img" onclick="location.href='productDetail.html?id=${item.p_id}'">
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)
-              :
-              (` <div class="product_img outStock" onclick="location.href='#'">
+                :
+                (` <div class="product_img outStock" onclick="location.href='#'">
           <div class='outOfStock'><p>Out Of Stock</p></div>
             <img src="${imgUrl + item.image_path}" alt="">
           </div>`)}
@@ -7387,7 +7410,7 @@ async function handleInput(e) {
               }">
             <i class="ti ti-heart-filled"></i>
           </div>
-          <div class="${item?.stock >0 ? 'show ':'hide'}">
+          <div class="${item?.stock > 0 ? 'show ' : 'hide'}">
           ${item.varient_count <= 1
                 ? `
       <div
@@ -7489,6 +7512,10 @@ function getCurrentUserData() {
         $("#email").val(data.email);
         $("#phone").val(data.mobile);
         if (location.pathname.includes("wallet.html")) {
+
+          $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
+        }
+        if (location.pathname.includes("home.html")) {
 
           $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
         }
@@ -7655,25 +7682,39 @@ function getCurrentAddress() {
 
 
 async function getCurrentBranch() {
-// const lat = 18.921984;
-// const lng = 72.834654;
-    let lat = 23.39868927001953;
-  let lng = 85.33858489990234;
+  let { lat, lng } = await getCurrentLatLong();
+
   const address = await getAddress2(lat, lng);
 
   const branchId = await findNearestBranch(lat, lng);
-  console.log(branchId, address);
+  // console.log(branchId, address);
 
   return { branchId, address };
+  // const lat = 18.921984;
+  // const lng = 72.834654;
+  // let lat = 23.39868927001953;
+  // let lng = 85.33858489990234;
 
 }
+
 async function getCurrentLocation() {
 
 
-  let lat = 23.39868927001953;
-  let lng = 85.33858489990234;
+  // let lat = 23.39868927001953;
+  // let lng = 85.33858489990234;
+
+  let { lat, lng } = await getCurrentLatLong();
+  $("#currentLocation").html('')
+  $(".current-location-btn").html(`<div class="location_loader">
+<span class="loader_loc"></span>    <span>Detecting your location...</span>
+</div>`)
+
+
+
+
+
   const address = await getAddress2(lat, lng);
-  console.log(address.city);
+  // console.log(address.city);
   const item = {
     user_id: userId,
     o_username: "",
@@ -7691,19 +7732,80 @@ async function getCurrentLocation() {
 
   const itemJson = JSON.stringify(item).replace(/'/g, "\\'");
 
-  console.log(itemJson)
+  // console.log(itemJson)
   $("#currentLocation").html(`<div class="modal_current_location" onclick='handleCurrentAddress(${itemJson})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomAddAddress" aria-controls="offcanvasBottomAddAddress">
         <div class="saved_wrap_main_left">
            <div class="modal_left_loc"><i class="ti ti-current-location"></i></div>
            <div class="modal_right_loc">
             <h5>Use current location</h5>
-            <p>Morabadi, South Chotanagpur Division, Ranchi, Jharkhand, 834008, India</p>
+            <p>${address?.display_name}</p>
         </div>
       </div>
       <i class="ti ti-chevron-right"></i>
     
         </div>`)
+  $(".current-location-btn").html(`<i class="ti ti-current-location"></i>
+          <span>Use Current Location</span>`)
 
+}
+async function getCurrentLatLong() {
+
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported.");
+    return null;
+  }
+
+  return new Promise((resolve, reject) => {
+
+    navigator.geolocation.getCurrentPosition(
+
+      (position) => {
+
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        console.log("Latitude:", lat);
+        console.log("Longitude:", lng);
+
+        resolve({
+          lat: lat,
+          lng: lng
+        });
+      },
+
+      (error) => {
+
+        console.log("Location Error:", error);
+
+        switch (error.code) {
+
+          case error.PERMISSION_DENIED:
+            alert("Please allow location permission.");
+            break;
+
+          case error.POSITION_UNAVAILABLE:
+            alert("Location is currently unavailable.");
+            break;
+
+          case error.TIMEOUT:
+            alert("Location request timed out.");
+            break;
+
+          default:
+            alert("Unable to get your location.");
+        }
+
+        reject(error);
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+
+  });
 }
 function handleCurrentAddress(item) {
 
@@ -7770,17 +7872,17 @@ async function getAddress2(lat, lng) {
 
     console.log("Full Address Data:", data);
 
-    setTimeout(() => {
+    // setTimeout(() => {
       const address = data.display_name;
 
       $("#address").html(address);
       let findText = $(".find_text");
 
       if (findText) {
-      
+
         findText.css("display", "none");
       }
-    }, 1000);
+    // }, 1000);
     // document.getElementById("address").html = address;
     return data;
 

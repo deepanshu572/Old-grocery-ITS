@@ -50,10 +50,15 @@
             // console.log(address.address?.city_district, address?.address?.state);
            
 
-            console.log(branchId, address)
+            console.log(branchId, address);
+            
+            setTimeout(() => {
+                
+            
             if (address) {
+                
                 if (branchId.status == "success") {
-                    location.href = "home.html";
+                    location.replace("home.html");
                 }
                 else {
                     location.href = "branchNotFound.html";
@@ -64,6 +69,7 @@
             else {
                 console.log("address not found !")
             }
+        }, 1500);
         });
 
     // setTimeout(() => {

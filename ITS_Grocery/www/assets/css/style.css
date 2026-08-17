@@ -1046,6 +1046,11 @@ body {
 
 }
 
+.pointerNone {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 .category_top_sub_item>p {
     position: absolute;
     background-color: rgb(255, 255, 255);
@@ -2495,18 +2500,23 @@ body {
 .product_img {
     position: relative;
 }
+
 .product_img img {
-    width: 112px;
-    height: 100px;
+    /* width: 112px;
+    height: 100px; */
+    width: 100%;
+    height: 121px;
     border-radius: 5px;
     object-fit: contain;
     mix-blend-mode: multiply;
     object-position: top;
 }
-.outStock img{
-        mix-blend-mode: unset;
+
+.outStock img {
+    mix-blend-mode: unset;
 
 }
+
 .outOfStock {
     position: absolute;
     background: #acacac40;
@@ -2529,10 +2539,11 @@ body {
     padding: 5px !important;
 }
 
-.outStock button{
+.outStock button {
     pointer-events: none;
 }
-.hide{
+
+.hide {
     display: none;
 }
 
@@ -3176,12 +3187,13 @@ input::-webkit-inner-spin-button {
     align-items: center;
     width: 38px;
 }
-.foot_tab small{
+
+.foot_tab small {
     font-size: 11px;
     text-transform: capitalize;
     margin-top: 5px !important;
 
-    
+
 }
 
 .foot_tab>i {
@@ -3189,7 +3201,7 @@ input::-webkit-inner-spin-button {
 }
 
 .line {
-       width: 100%;
+    width: 100%;
     height: 4px;
     background: var(--theme-color);
     POSITION: absolute;
@@ -4921,7 +4933,7 @@ button.coupon_btn.apply-btn {
 
 .inp_profile input {
     all: unset;
-    font-size: 14px;
+    font-size: 13px;
     width: 100%;
 }
 
@@ -4932,7 +4944,7 @@ button.coupon_btn.apply-btn {
     background: var(--theme-bg);
     margin: auto;
 
-    padding: 10px 12px;
+    padding: 8px 12px;
     margin-bottom: 10px;
     border-radius: 5px;
     width: 95%;
@@ -5186,10 +5198,12 @@ button.coupon_btn.apply-btn {
     object-fit: cover;
     border-radius: 5px;
 }
-.order_img_wrap img{
+
+.order_img_wrap img {
     width: 35px;
     height: 35px;
 }
+
 .order_left_img i {
 
     font-size: 27px;
@@ -5720,6 +5734,7 @@ button.coupon_btn.apply-btn {
     text-transform: capitalize;
     padding-top: 5px !important;
     font-weight: 500;
+    text-align: center;
 }
 
 .top_electric_img {
@@ -6054,21 +6069,25 @@ button.coupon_btn.apply-btn {
     font-size: 14px;
     text-transform: capitalize
 }
-.flex_top_bar{
+
+.flex_top_bar {
     display: flex;
     flex-direction: column;
 }
-.flex_top_bar span{
+
+.flex_top_bar span {
     font-size: 10px;
     color: rgb(51, 51, 51);
 }
-.txt_address_find{
-      text-align: center;
+
+.txt_address_find {
+    text-align: center;
     font-size: 13px;
     width: 83%;
     font-weight: 500;
 }
-.order_price_flex{
+
+.order_price_flex {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -6078,16 +6097,18 @@ button.coupon_btn.apply-btn {
 .modal_current_location {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    padding: 10px 16px;
+    padding: 12px 16px;
     background: #fff;
     color: var(--theme-color);
     border: 0.81px solid var(--theme-color) !important;
     border-radius: 10px;
     transition: cubic-bezier(0.19, 1, 0.22, 1)1s;
 }
-.modal_current_location:hover{
-        box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+
+.modal_current_location:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
 
 }
 
@@ -6095,18 +6116,20 @@ button.coupon_btn.apply-btn {
     font-size: 12px;
     color: var(--theme-color);
     font-weight: 700;
-        padding-bottom: 2px !important;
+    padding-bottom: 2px !important;
 }
 
 .modal_right_loc p {
     font-size: 9px;
     color: gray;
 }
+
 .saved_wrap_main_left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
 .action_img_modal img {
     width: 13px;
 }
@@ -6115,8 +6138,63 @@ button.coupon_btn.apply-btn {
     font-size: 22px;
     color: var(--theme-color);
 }
-.modal_current_location>i{
+
+.modal_current_location>i {
     font-size: 19px;
+}
+
+.loader_loc {
+    flex-shrink: 0;
+    --color-1: #fff;
+    --size: 1px;
+    /* width: calc(48 * var(--size)); */
+    /* height: calc(48 * var(--size)); */
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite;
+    width: 12px;
+    display: inline-block;
+    height: 12px;
+    /* border: 1px; */
+    margin-right: 1px !important;
+}
+
+.loader_loc::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    animation: prixClipFix 2s linear infinite;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+    }
 }
 
 

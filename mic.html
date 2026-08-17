@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .search_box {
+    width: 100%;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+}
+
+.search_box > i {
+    font-size: 21px;
+    color: #777;
+}
+
+.search_box input {
+    flex: 1;
+    min-width: 0;
+
+    border: 0;
+    outline: 0;
+    background: transparent;
+
+    font-size: 15px;
+}
+
+.mic_btn {
+    width: 36px;
+    height: 36px;
+
+    border: 0;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    cursor: pointer;
+
+    color: #333;
+    font-size: 20px;
+
+    transition: .2s;
+}
+
+.mic_btn:hover {
+    background: #f3f3f3;
+}
+
+.mic_btn.listening {
+    background: #e8f5e9;
+    color: #0c831f;
+    animation: micPulse 1.2s infinite;
+}
+
+#micStatus {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #777;
+}
+
+@keyframes micPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(12, 131, 31, .3);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(12, 131, 31, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(12, 131, 31, 0);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="search_box">
+    <i class="ti ti-search"></i>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for products"
+    >
+
+    <button type="button" id="micBtn" class="mic_btn">
+        <i class="ti ti-microphone"></i>
+    </button>
+</div>
+
+<div id="micStatus"></div>
+<script>
+    const micBtn = document.getElementById("micBtn");
+const searchInput = document.getElementById("searchInput");
+const micStatus = document.getElementById("micStatus");
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+if (!SpeechRecognition) {
+
+    micBtn.style.display = "none";
+
+    console.log("Speech Recognition is not supported");
+
+} else {
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-IN";
+    recognition.continuous = false;
+    recognition.interimResults = true;
+
+    micBtn.addEventListener("click", () => {
+
+        try {
+            recognition.start();
+        } catch (error) {
+            console.log("Recognition already running");
+        }
+
+    });
+
+    recognition.onstart = () => {
+
+        console.log("Mic started");
+
+        micBtn.classList.add("listening");
+
+        micStatus.innerText = "Listening...";
+    };
+
+    recognition.onresult = (event) => {
+
+        let transcript = "";
+
+        for (
+            let i = event.resultIndex;
+            i < event.results.length;
+            i++
+        ) {
+            transcript += event.results[i][0].transcript;
+        }
+
+        searchInput.value = transcript;
+
+        console.log("Voice:", transcript);
+    };
+
+    recognition.onend = () => {
+
+        console.log("Mic stopped");
+
+        micBtn.classList.remove("listening");
+
+        micStatus.innerText = "";
+
+        // Optional:
+        // searchProducts(searchInput.value);
+    };
+
+    recognition.onerror = (event) => {
+
+        console.log("Speech error:", event.error);
+
+        micBtn.classList.remove("listening");
+
+        if (event.error === "not-allowed") {
+            micStatus.innerText =
+                "Please allow microphone permission.";
+        }
+        else if (event.error === "no-speech") {
+            micStatus.innerText =
+                "Didn't hear anything.";
+        }
+        else {
+            micStatus.innerText =
+                "Something went wrong.";
+        }
+    };
+}
+</script>
+</body>
+</html>

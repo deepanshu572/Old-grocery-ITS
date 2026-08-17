@@ -82,5 +82,20 @@
       crossorigin="anonymous"
     ></script>
     <script src="../assets/js/script.js"></script>
+
+    <script>
+    if (location.pathname.includes("welcome.html")) {
+
+        // Current page ki ek extra history entry
+        history.pushState(null, "", location.href);
+
+        window.addEventListener("popstate", function () {
+
+            // Back press hone par same page par wapas push karo
+            history.pushState(null, "", location.href);
+
+        });
+    }
+    </script>
   </body>
 </html>

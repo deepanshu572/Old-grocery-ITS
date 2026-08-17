@@ -72,7 +72,7 @@
 
               <div class="header_right_icon" onclick="location.href='wallet.html'">
                 <img src="../assets/img/icon/wallet.svg" alt="">
-                <div class="box_wallet">100</div>
+                <div class="box_wallet" id="walletAmt"></div>
               </div>
 
               <div class="header_right_icon" onclick="location.href='profile.html'">
@@ -348,7 +348,7 @@
 
     function showLoader() {
 
-      console.log("hello inner....");
+      // console.log("hello inner....");
 
       const loader = document.getElementById("loader");
 
@@ -525,9 +525,25 @@ if (main)
 
 
 
+if (location.pathname.includes("home.html")) {
+
+        // Current page ki ek extra history entry
+        history.pushState(null, "", location.href);
+
+        window.addEventListener("popstate", function () {
+
+            // Back press hone par same page par wapas push karo
+            history.pushState(null, "", location.href);
+
+        });
+    }
 
 
-
+        window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
 
 
 

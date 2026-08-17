@@ -50,7 +50,9 @@ function handleOtpLogin(e) {
     success: function (response) {
       if (response.status == "success") {
         localStorage.setItem("userId", response?.userId);
-        location.href = "../food/Pages/welcome.html";
+        location.replace("../food/Pages/welcome.html");
+        // localStorage.removeItem("otp");
+        // localStorage.removeItem("phone");
       } else {
         console.log(response.message);
       }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="latitude" id="latitude">
+    <input type="text" placeholder="longitude" id="longitude">
+    <button onclick="getCurrentLocation()">Get location</button>
+    
+    <script>
+
+        document.addEventListener("deviceready", function () {
+    getCurrentLocation();
+}, false);
+
+async function getCurrentLocation() {
+
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            console.log("Latitude:", lat);
+            console.log("Longitude:", lng);
+
+            // Set latitude & longitude
+            const latitudeInput = document.getElementById("latitude");
+            const longitudeInput = document.getElementById("longitude");
+
+            if (latitudeInput) {
+                latitudeInput.value = lat;
+            }
+
+            if (longitudeInput) {
+                longitudeInput.value = lng;
+            }
+
+            // Save location
+            localStorage.setItem("user_latitude", lat);
+            localStorage.setItem("user_longitude", lng);
+
+            // Get address
+            // await getAddress2(lat, lng);
+
+            // Find nearest branch
+            // await findNearestBranch(lat, lng);
+
+        },
+
+        (error) => {
+
+            console.log("Location Error:", error);
+
+            switch (error.code) {
+
+                case error.PERMISSION_DENIED:
+                    alert("Please allow location permission.");
+                    break;
+
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location is currently unavailable.");
+                    break;
+
+                case error.TIMEOUT:
+                    alert("Location request timed out.");
+                    break;
+
+                default:
+                    alert("Unable to get your location.");
+            }
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}    </script>
+</body>
+</html>

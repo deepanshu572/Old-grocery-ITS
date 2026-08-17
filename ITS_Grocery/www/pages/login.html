@@ -277,6 +277,7 @@
             oninput="handleInputLogin(event)"
             id="phone"
             placeholder="Enter mobile number"
+            required
           />
         </div>
         <div id="btnLogin">
@@ -294,5 +295,12 @@
     ></script>
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/login.js"></script>
+
+    <script>
+      if(userId){
+        location.replace("../food/Pages/welcome.html");
+      }
+
+    </script>
   </body>
 </html>
