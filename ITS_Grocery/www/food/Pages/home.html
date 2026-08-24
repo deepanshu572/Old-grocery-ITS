@@ -1,110 +1,111 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ITS-Food</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
-    <style>
-      .top_nav {
-        padding-top: 25px !important;
-        background: #fca8ab !important;
-      }
-      .home {
-        color: #fff !important;
-        padding-right: 5px;
-      }
-      .home .home_left_top p {
-        color: #fff;
-      }
-      .home .home_search_wrap {
-        background-color: #fff !important;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="main animate-fade-in">
-      <div class="top_nav">
-        <div class="home_header home">
-          <div class="home_top_head">
-            <div class="home_left_top" onclick="location.href='location.html'">
-              <div class="top_icon">
-                <img src="../assets/image/icons/home2.svg" alt="" />
-                <h4>Home</h4>
-                <img src="../assets/image/icons/downArrow2.svg" alt="" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITS-Food</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+  <style>
+    .top_nav {
+      padding-top: 25px !important;
+      background: #fca8ab !important;
+    }
+
+    .home {
+      color: #fff !important;
+      padding-right: 5px;
+    }
+
+    .home .home_left_top p {
+      color: #fff;
+    }
+
+    .home .home_search_wrap {
+      background-color: #fff !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main animate-fade-in">
+    <div class="top_nav">
+      <div class="home_header home">
+        <div class="home_top_head">
+          <div class="home_left_top" onclick="location.href='location.html'">
+            <div class="top_icon">
+              <img src="../assets/image/icons/home2.svg" alt="" />
+              <h4>Home</h4>
+              <img src="../assets/image/icons/downArrow2.svg" alt="" />
+            </div>
+            <p>Ak jha, Girja Colony, Kuenartali, Ranchi, 834002</p>
+          </div>
+          <div class="right_top" onclick="location.href='profile.html'">
+            <img src="../assets/image/icons/profile.svg" alt="" />
+          </div>
+        </div>
+        <div class="home_search">
+          <div class="home_search_wrap" onclick="location.href='search.html';">
+            <label for="">
+              <img src="../assets/image/icons/search2.svg" alt="" />
+              Search for
+              <div class="animate_wrap">
+                <p class="animate_Inp" id="animateInp">‘Bread’</p>
+                <p class="animate_Inp" id="animateInp">‘Bread’</p>
+                <p class="animate_Inp" id="animateInp">‘Bread’</p>
+                <p class="animate_Inp" id="animateInp">‘Bread’</p>
               </div>
-              <p>Ak jha, Girja Colony, Kuenartali, Ranchi, 834002</p>
-            </div>
-            <div class="right_top" onclick="location.href='profile.html'">
-              <img src="../assets/image/icons/profile.svg" alt="" />
-            </div>
-          </div>
-          <div class="home_search">
-            <div class="home_search_wrap" onclick="location.href='search.html';">
-              <label for="">
-                <img src="../assets/image/icons/search2.svg" alt="" />
-                Search for
-                <div class="animate_wrap">
-                  <p class="animate_Inp" id="animateInp">‘Bread’</p>
-                  <p class="animate_Inp" id="animateInp">‘Bread’</p>
-                  <p class="animate_Inp" id="animateInp">‘Bread’</p>
-                  <p class="animate_Inp" id="animateInp">‘Bread’</p>
-                </div>
-              </label>
-              <input type="text" placeholder="" />
+            </label>
+            <input type="text" placeholder="" />
 
-              <div class="line"></div>
-              <button>
-                <img src="../assets/image/icons/mic.svg" alt="" />
-              </button>
-            </div>
+            <div class="line"></div>
+            <button>
+              <img src="../assets/image/icons/mic.svg" alt="" />
+            </button>
           </div>
         </div>
-        <div class="home_banner_img" >
-          <img id="heroBanner" src="" alt="" />
-        </div>
       </div>
+      <div class="home_banner_img">
+        <img id="heroBanner" src="" alt="" />
+      </div>
+    </div>
 
-      <div class="category_showcase1">
-        <div class="head">
-          <h3>BADAL, WHAT’S ON YOUR MIND?</h3>
-          <div class="border_box"></div>
-        </div>
-        <div class="body_showcase1" id="categoryShowcase1"></div>
+    <div class="category_showcase1">
+      <div class="head">
+        <h3>BADAL, WHAT’S ON YOUR MIND?</h3>
+        <div class="border_box"></div>
       </div>
-      <div class="banner_sec1_wrap" id="topBanner">
-      
+      <div class="body_showcase1" id="categoryShowcase1"></div>
+    </div>
+    <div class="banner_sec1_wrap" id="topBanner">
+
+    </div>
+    <div class="product_shocase product_showcase1">
+      <div class="head">
+        <h3>TOP RATED NEAR YOU</h3>
+        <div class="border_box"></div>
       </div>
-      <div class="product_shocase product_showcase1">
-        <div class="head">
-          <h3>TOP RATED NEAR YOU</h3>
-          <div class="border_box"></div>
-        </div>
-        <div class="wrapper_products">
-          <div class="product_wrap" id="prd1"></div>
-        </div>
+      <div class="wrapper_products">
+        <div class="product_wrap" id="prd1"></div>
       </div>
-      <div class="banner_sec2_wrap">
-        <img id="bottomBanner" src="" alt="" />
+    </div>
+    <div class="banner_sec2_wrap">
+      <img id="bottomBanner" src="" alt="" />
+    </div>
+    <div class="product_showcase product_showcase2">
+      <div class="head">
+        <h3>156 RESTAURANTS DELIVERING TO YOU</h3>
+        <div class="border_box"></div>
       </div>
-      <div class="product_showcase product_showcase2">
-        <div class="head">
-          <h3>156 RESTAURANTS DELIVERING TO YOU</h3>
-          <div class="border_box"></div>
-        </div>
-        <div class="product2_wrapper">
-          <div class="product_container" id="prd2"></div>
-        </div>
+      <div class="product2_wrapper">
+        <div class="product_container" id="prd2"></div>
       </div>
-      <!-- <div class="product_shocase product_showcase1">
+    </div>
+    <!-- <div class="product_shocase product_showcase1">
         <div class="head">
           <h3>TOP RATED NEAR YOU</h3>
           <div class="border_box"></div>
@@ -113,8 +114,8 @@
           <div class="product_wrap" id="prd2Last"></div>
         </div>
       </div> -->
-    </div>
-    <!-- <div class="footer_bottom">
+  </div>
+  <!-- <div class="footer_bottom">
         <a href="home.html" class="footer_tab active_foot">
           <i class="bi bi-house-door-fill"></i>
           <p>Home</p>
@@ -133,24 +134,85 @@
         </a>
       </div> -->
 
-    <div class="footer_img">
-      <img src="../assets/image/footer_img.svg" alt="" />
-    </div>
-    <script src="../../cordova.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="../assets/js/owl.carousel.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+  <div class="footer_modal_canvas" id="cartPopupAll" style="display: none;">
 
-    <script>
-      getBanners();
-      getCategory();
-      getTopResturant();
-      getBottomResturant();
-    </script>
-  </body>
+    <button class="footer_modal_trigger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+      aria-controls="offcanvasBottom">
+
+      <div class="footer_modal_cart_icon">
+        🛒
+      </div>
+
+      <div class="footer_modal_content">
+
+        <div class="footer_modal_title">
+          Your carts
+        </div>
+
+        <div class="footer_modal_subtitle">
+         <span id="restCount"> </span>  restaurants
+        </div>
+
+      </div>
+
+      <div class="footer_modal_arrow">
+        ›
+      </div>
+
+    </button>
+
+  </div>
+
+
+
+
+  <div class="footer_img">
+    <img src="../assets/image/footer_img.svg" alt="" />
+  </div>
+  <div class="offcanvas offcanvas-bottom cartFooter" tabindex="-1" id="offcanvasBottom"
+    aria-labelledby="offcanvasBottomLabel">
+
+    <!-- Header -->
+    <div class="cartFooter-header">
+
+      <h5 id="offcanvasBottomLabel">
+        Your Carts (<span id="restCount2"></span>)
+      </h5>
+
+      <!-- <button type="button" class="cartFooter-clear">
+        Clear all
+      </button> -->
+
+    </div>
+
+
+    <!-- Cart List -->
+    <div class="cartFooter-list" id="cartDataModal">
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <script src="../../cordova.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="../assets/js/owl.carousel.min.js"></script>
+  <script src="../assets/js/script.js"></script>
+
+  <script>
+    getBanners();
+    getCategory();
+    getTopResturant();
+    getBottomResturant();
+  </script>
+</body>
+
 </html>

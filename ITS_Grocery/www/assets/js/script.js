@@ -120,13 +120,16 @@ function getCategory() {
         console.log(response.data);
         let categories = response.data;
         let categoryHtml = `<div class="category_indicator"></div>`;
-        categoryId = localStorage.getItem("currentCategoryId");
+        let categoryId = localStorage.getItem("currentCategoryId");
         if (!categoryId || categoryId == '') {
           categoryId = categories[0]?.id;
           localStorage.setItem("currentCategoryId", categories[0]?.id);
         }
         let currentCategoryName = localStorage.getItem("currentCategoryName");
-
+        if (!currentCategoryName || currentCategoryName == '') {
+          currentCategoryName = categories[0]?.name;
+          localStorage.setItem("currentCategoryName", categories[0]?.name);
+        }
         renderCategory(currentCategoryName)
 
 
@@ -3108,7 +3111,7 @@ function renderCoupons(coupons) {
 // ======================
 function applyCoupon(code) {
   $(".apply-btn").text("Apply");
-    $(".apply-btn").removeClass("disabled");
+  $(".apply-btn").removeClass("disabled");
 
   localStorage.setItem("couponCode", code);
   const coupon = couponsData.find((item) => item.code === code);
@@ -7513,11 +7516,12 @@ function getCurrentUserData() {
         $("#phone").val(data.mobile);
         if (location.pathname.includes("wallet.html")) {
 
-          $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
+          $("#walletAmt").html(`₹ ${data?.wallet_balance == '' ? "0" : data?.wallet_balance }`)
         }
         if (location.pathname.includes("home.html")) {
+          
 
-          $("#walletAmt").html(`₹ ${data?.wallet_balance}`)
+          $("#walletAmt").html(`₹ ${data?.wallet_balance == '' ? "0" : data?.wallet_balance}`)
         }
 
         $("#profileNumber").html(` <i class="ti ti-phone-call"></i>
@@ -7682,7 +7686,12 @@ function getCurrentAddress() {
 
 
 async function getCurrentBranch() {
-  let { lat, lng } = await getCurrentLatLong();
+  // const lat = 18.921984;
+  // const lng = 72.834654;
+  let lat = 23.39868927001953;
+  let lng = 85.33858489990234;
+
+  // let { lat, lng } = await getCurrentLatLong();
 
   const address = await getAddress2(lat, lng);
 
@@ -7690,20 +7699,15 @@ async function getCurrentBranch() {
   // console.log(branchId, address);
 
   return { branchId, address };
-  // const lat = 18.921984;
-  // const lng = 72.834654;
-  // let lat = 23.39868927001953;
-  // let lng = 85.33858489990234;
-
 }
 
 async function getCurrentLocation() {
 
 
-  // let lat = 23.39868927001953;
-  // let lng = 85.33858489990234;
+  let lat = 23.39868927001953;
+  let lng = 85.33858489990234;
 
-  let { lat, lng } = await getCurrentLatLong();
+  // let { lat, lng } = await getCurrentLatLong();
   $("#currentLocation").html('')
   $(".current-location-btn").html(`<div class="location_loader">
 <span class="loader_loc"></span>    <span>Detecting your location...</span>
@@ -7873,15 +7877,15 @@ async function getAddress2(lat, lng) {
     console.log("Full Address Data:", data);
 
     // setTimeout(() => {
-      const address = data.display_name;
+    const address = data.display_name;
 
-      $("#address").html(address);
-      let findText = $(".find_text");
+    $("#address").html(address);
+    let findText = $(".find_text");
 
-      if (findText) {
+    if (findText) {
 
-        findText.css("display", "none");
-      }
+      findText.css("display", "none");
+    }
     // }, 1000);
     // document.getElementById("address").html = address;
     return data;

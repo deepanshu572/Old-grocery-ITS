@@ -1,3 +1,5 @@
+// const apiUrl = "http://localhost/food_backend/app/api/";
+// const imageUrl = "http://localhost/food_backend/admin/";
 const apiUrl = "https://indiantechsolution.com/demos/multivendor/food/app/api/";
 const imageUrl = "https://indiantechsolution.com/demos/multivendor/food/admin/";
 const userId = localStorage.getItem("userId");
@@ -74,8 +76,8 @@ async function handleLogin(e) {
         const martLoginResponse = await login();
         const data = JSON.parse(martLoginResponse);
         if (data.message == 'success') {
-        location.href = "welcome.html";
-        $("#btnLogin").prop("disabled", false);
+          location.href = "welcome.html";
+          $("#btnLogin").prop("disabled", false);
         }
       } else {
         alert(response.message || "Something went wrong");
@@ -203,12 +205,12 @@ async function handleOtpRegister(e) {
           console.log("register successfully!");
           // localStorage.clear();
           localStorage.setItem("userId", response?.userId);
-          localStorage.setItem('login_status',true);
+          localStorage.setItem('login_status', true);
           const martSignupResponse = await signUp();
-          if(martSignupResponse == 'success'){
+          if (martSignupResponse == 'success') {
             console.log(martSignupResponse);
-          location.href = "welcome.html";
-          }else{
+            location.href = "welcome.html";
+          } else {
             console.log(martSignupResponse);
           }
         } else {
@@ -620,44 +622,44 @@ function searchDataFetch() {
         });
         $("#prdSearch2").html(productContainer);
         $(document).ready(function () {
-  // check owl exists
-  if ($.fn.owlCarousel) {
-    $(".product_slider").each(function () {
-      // destroy if already initialized
-      if ($(this).hasClass("owl-loaded")) {
-        $(this).trigger("destroy.owl.carousel");
-        $(this).removeClass("owl-loaded");
-        $(this).find(".owl-stage-outer").children().unwrap();
-      }
+          // check owl exists
+          if ($.fn.owlCarousel) {
+            $(".product_slider").each(function () {
+              // destroy if already initialized
+              if ($(this).hasClass("owl-loaded")) {
+                $(this).trigger("destroy.owl.carousel");
+                $(this).removeClass("owl-loaded");
+                $(this).find(".owl-stage-outer").children().unwrap();
+              }
 
-      // init carousel
-      $(this).owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: false,
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 5500,
-        autoplayHoverPause: true,
-        smartSpeed: 600,
+              // init carousel
+              $(this).owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 5500,
+                autoplayHoverPause: true,
+                smartSpeed: 600,
 
-        responsive: {
-          0: {
-            items: 1,
-          },
-          768: {
-            items: 1,
-          },
-          1024: {
-            items: 1,
-          },
-        },
-      });
-    });
-  } else {
-    console.log("Owl Carousel file not loaded");
-  }
-});
+                responsive: {
+                  0: {
+                    items: 1,
+                  },
+                  768: {
+                    items: 1,
+                  },
+                  1024: {
+                    items: 1,
+                  },
+                },
+              });
+            });
+          } else {
+            console.log("Owl Carousel file not loaded");
+          }
+        });
       } else {
         console.log(response.message);
       }
@@ -944,13 +946,13 @@ function getBottomResturant() {
 
       
       ${item.food_images
-        ?.split(",")
-        .map((prd, index) => {
-          let prdId = item.food_id?.split(",");
-          let names = item.food_name?.split(",");
-          let prices = item.food_price?.split(",");
+              ?.split(",")
+              .map((prd, index) => {
+                let prdId = item.food_id?.split(",");
+                let names = item.food_name?.split(",");
+                let prices = item.food_price?.split(",");
 
-          return `
+                return `
           
       <div class="item">
         <img  onclick="location.href='restaurantDetail.html?rid=${item?.id}&pid=${prdId[index]}'" src="${imageUrl + prd}" alt="${names[index]}">
@@ -961,8 +963,8 @@ function getBottomResturant() {
         
       </div>
     `;
-        })
-        .join("")}
+              })
+              .join("")}
 
     </div>
 
@@ -997,44 +999,44 @@ function getBottomResturant() {
         $("#prd2").html(productContainer);
 
         $(document).ready(function () {
-  // check owl exists
-  if ($.fn.owlCarousel) {
-    $(".product_slider").each(function () {
-      // destroy if already initialized
-      if ($(this).hasClass("owl-loaded")) {
-        $(this).trigger("destroy.owl.carousel");
-        $(this).removeClass("owl-loaded");
-        $(this).find(".owl-stage-outer").children().unwrap();
-      }
+          // check owl exists
+          if ($.fn.owlCarousel) {
+            $(".product_slider").each(function () {
+              // destroy if already initialized
+              if ($(this).hasClass("owl-loaded")) {
+                $(this).trigger("destroy.owl.carousel");
+                $(this).removeClass("owl-loaded");
+                $(this).find(".owl-stage-outer").children().unwrap();
+              }
 
-      // init carousel
-      $(this).owlCarousel({
-        loop: true,
-        margin: 10,
-        nav: false,
-        dots: true,
-        autoplay: true,
-        autoplayTimeout: 5500,
-        autoplayHoverPause: true,
-        smartSpeed: 600,
+              // init carousel
+              $(this).owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 5500,
+                autoplayHoverPause: true,
+                smartSpeed: 600,
 
-        responsive: {
-          0: {
-            items: 1,
-          },
-          768: {
-            items: 1,
-          },
-          1024: {
-            items: 1,
-          },
-        },
-      });
-    });
-  } else {
-    console.log("Owl Carousel file not loaded");
-  }
-});
+                responsive: {
+                  0: {
+                    items: 1,
+                  },
+                  768: {
+                    items: 1,
+                  },
+                  1024: {
+                    items: 1,
+                  },
+                },
+              });
+            });
+          } else {
+            console.log("Owl Carousel file not loaded");
+          }
+        });
       } else {
         console.log(response.message);
       }
@@ -1157,6 +1159,8 @@ function getResturantData() {
         console.log(response);
         let resturant = response.data[0];
         let resturantHtml = "";
+        let r_name = resturant?.name
+        $("#resturantName").text(r_name)
 
         resturantHtml += `<h4><i class="bi bi-shop"></i> ${resturant.name}</h4>
           <p>
@@ -1266,15 +1270,13 @@ function getProduct() {
           
             <div class="resturant_prd_left">
             
-              ${
-                item.food_type == "veg"
-                  ? `<img src="../assets/image/icons/success.svg" alt="">`
-                  : ""
+              ${item.food_type == "veg"
+                ? `<img src="../assets/image/icons/success.svg" alt="">`
+                : ""
               }            
-              ${
-                item.food_type == "nonveg"
-                  ? `<img src="../assets/image/icons/failed.svg" alt="">`
-                  : ""
+              ${item.food_type == "nonveg"
+                ? `<img src="../assets/image/icons/failed.svg" alt="">`
+                : ""
               }            
                   
               
@@ -1297,7 +1299,7 @@ function getProduct() {
               <div class="desc_prd">
                 <p>
                   ${item?.description}
-                  <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
+                  <button onclick='handleModalData(${JSON.stringify(item)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
                 </p>
               </div>
 
@@ -1307,9 +1309,8 @@ function getProduct() {
             
               <img onclick='handleModalData(${JSON.stringify(item)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox" src="${imageUrl}${item?.image}" alt="${item?.name}">
                   
-             ${
-               !item?.varient
-                 ? `<div
+             ${!item?.varient
+                ? `<div
                    class="btn_add_data"
                    onclick='handleModalCartData(${JSON.stringify(item)})'
                    type="button"
@@ -1319,7 +1320,7 @@ function getProduct() {
                  >
                    Add
                  </div>`
-                 : ` <div
+                : ` <div
                      class="btn_add_data AddBtn"
                      id="AddBtn"
                       onclick="handleToggleBtn(this)"
@@ -1332,7 +1333,7 @@ function getProduct() {
                      <input type="number" value="1" />
                      <button>+</button>
                    </div>`
-             }
+              }
        
 
                     </div>
@@ -1378,16 +1379,14 @@ function getProduct() {
           
             <div class="resturant_prd_left">
             
-              ${
-                products.food_type == "veg"
-                  ? `<img src="../assets/image/icons/success.svg" alt="">`
-                  : ""
-              }            
-              ${
-                products.food_type == "nonveg"
-                  ? `<img src="../assets/image/icons/failed.svg" alt="">`
-                  : ""
-              }            
+              ${products.food_type == "veg"
+              ? `<img src="../assets/image/icons/success.svg" alt="">`
+              : ""
+            }            
+              ${products.food_type == "nonveg"
+              ? `<img src="../assets/image/icons/failed.svg" alt="">`
+              : ""
+            }            
                   
               
               
@@ -1409,7 +1408,7 @@ function getProduct() {
               <div class="desc_prd">
                 <p>
                   ${products?.description}
-                  <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
+                  <button onclick='handleModalData(${JSON.stringify(products)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
                 </p>
               </div>
 
@@ -1419,9 +1418,8 @@ function getProduct() {
             
               <img onclick='handleModalData(${JSON.stringify(products)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox" src="${imageUrl}${products?.image}" alt="${products?.name}">
 
-             ${
-               !products?.varient
-                 ? `<div
+             ${!products?.varient
+              ? `<div
                    class="btn_add_data"
                    onclick='handleModalCartData(${JSON.stringify(products)})'
                    type="button"
@@ -1431,7 +1429,7 @@ function getProduct() {
                  >
                    Add
                  </div>`
-                 : ` <div
+              : ` <div
                      class="btn_add_data AddBtn"
                      id="AddBtn"
                       onclick="handleToggleBtn(this)"
@@ -1444,7 +1442,7 @@ function getProduct() {
                      <input type="number" value="1" />
                      <button>+</button>
                    </div>`
-             }
+            }
        
 
                     </div>
@@ -1489,7 +1487,7 @@ function handleModalData(data) {
                 <p>(${data?.reviews})</p>
               </div>
             </div>
-            <button>Add</button>
+            <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductModal" aria-controls="offcanvasProductModal" onclick='handleModalCartData(${JSON.stringify(data)})'>Add</button>
           </div>
           <p>
                ${data?.description}
@@ -1547,11 +1545,18 @@ function handleSaveData(itemId, itemType) {
   });
 }
 
+// function renderToModalCart(data) {
+//   console.log(data);
+//   // handleModalCartData(data);
+
+// }
 function handleModalCartData(data) {
+  // console.log(data);
+  // alert("okkk....");
   $("#prdNameModal").text(data?.name);
   $("#PrdImage").attr("src", imageUrl + data?.image);
 
-  let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+  let cartData = JSON.parse(localStorage.getItem("foodCart")) || [];
 
   $.ajax({
     url: apiUrl,
@@ -1566,24 +1571,32 @@ function handleModalCartData(data) {
         let varientData = response.data;
 
         if (!varientData.length) return;
+        console.log(varientData);
 
-        let foodId = varientData[0].food_item_id;
+        let foodId = varientData[0]?.food_item_id;
 
         // Current food item from cart
         let currentCartItem = cartData.find((item) => item.foodId == foodId);
+        console.log(currentCartItem);
+
 
         let qty = currentCartItem ? currentCartItem.qty : 1;
         let totalPrice = currentCartItem ? currentCartItem.Totalprice : "";
+        // console.log(qty,totalPrice, currentCartItem);
+        // console.log(currentCartItem.Totalprice);
 
         let varientHtml = "";
         let btnHtml = "";
 
         varientData.forEach((item) => {
+          totalPrice = Math.floor(item?.price);
+          console.log(totalPrice)
           let checked = "";
 
           if (currentCartItem && currentCartItem.id == item.id) {
             checked = "checked";
           }
+
 
           varientHtml += `
             <label
@@ -1671,7 +1684,6 @@ function handleModalCartData(data) {
           let firstVariant = varientData[0];
 
           $(`#varient${firstVariant.id}`).prop("checked", true);
-
           $(`#varientType${foodId}`).val(firstVariant.variant_name);
           $(`#varientId${foodId}`).val(firstVariant.id);
           $(`#price${foodId}`).val(firstVariant.price);
@@ -1687,14 +1699,19 @@ function handleModalCartData(data) {
     },
   });
 }
-let qtyValue = 1;
 
 function handleTogglePrice(price, vid, name, id) {
-  $("#totalPrice").html("");
-  $(`#totalPrice${id}`).html(price);
+  let cartData = JSON.parse(localStorage.getItem("foodCart")) || [];
+  // console.log(cartData)
+
+  let currentCartItem = cartData.find((item) => item.id == vid);
+  console.log(currentCartItem, cartData);
+  let qty = currentCartItem ? currentCartItem.qty : 1;
+
+  // $("#totalPrice").html("");
+  $(`#totalPrice${id}`).html(price * Number(qty));
   $(`#price${id}`).val(price);
-  qtyValue = 1;
-  $(`#inp${id}`).val(qtyValue);
+  $(`#inp${id}`).val(qty);
   $(`#varientType${id}`).val(name);
   $(`#varientId${id}`).val(vid);
   $(".cart_btn_add").removeClass("active_disable");
@@ -1703,19 +1720,21 @@ function handleTogglePrice(price, vid, name, id) {
 function incrementCounter(foodId, name) {
   const params = new URLSearchParams(window.location.search);
 
+  let qty = Number($(`#inp${foodId}`).val());
+  // alert(qty);
   const rid = params.get("rid");
   let variant_id = $(`#varientId${foodId}`).val();
-  qtyValue += 1;
+  qty = qty + 1;
   let priceData = $(`#totalPrice${foodId}`).text();
   let varientType = $(`#varientType${foodId}`).val();
   let basePrice = $(`#price${foodId}`).val();
-  let updatedPrice = Number(basePrice) * Number(qtyValue);
+  let updatedPrice = Number(basePrice) * Number(qty);
   console.log(basePrice, updatedPrice);
 
-  $(`#inp${foodId}`).val(qtyValue);
+  $(`#inp${foodId}`).val(qty);
   $(`#totalPrice${foodId}`).html(updatedPrice);
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
   console.log(cart);
 
   let existingItem = cart?.find(
@@ -1727,7 +1746,7 @@ function incrementCounter(foodId, name) {
       if (item.foodId == foodId && item.Type == varientType) {
         return {
           ...item,
-          qty: qtyValue,
+          qty: qty,
           Totalprice: updatedPrice,
         };
       }
@@ -1742,26 +1761,24 @@ function incrementCounter(foodId, name) {
       restaurant_id: rid,
       price: basePrice,
       Totalprice: updatedPrice,
-      qty: qtyValue,
+      qty: qty,
       Type: varientType,
     };
 
     cart.push(product);
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("foodCart", JSON.stringify(cart));
 }
 
 function decrementCounter(foodId) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let priceData = $(`#totalPrice${foodId}`).text();
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
+  let qty = Number($(`#inp${foodId}`).val());
+  // let priceData = $(`#totalPrice${foodId}`).text();
   let varientType = $(`#varientType${foodId}`).val();
   let basePrice = $(`#price${foodId}`).val();
-  let updatedPrice = Number(basePrice) * Number(qtyValue);
-  $(`#inp${foodId}`).val(qtyValue);
-  $(`#totalPrice${foodId}`).html(updatedPrice);
 
-  if (qtyValue == 0) {
+  if (qty == 1) {
     $(`#inp${foodId}`).val(1);
     const offcanvasEl = document.getElementById("offcanvasProductModal");
     const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
@@ -1770,13 +1787,26 @@ function decrementCounter(foodId) {
       offcanvas.hide();
     }
     $(`#totalPrice${foodId}`).html(Number(basePrice));
-    cart = cart.filter((item) => item.id != foodId && item.Type != varientType);
+    // console.log(foodId,varientType)
+    cart = cart.filter((item) => {
+      return !(item.foodId == foodId && item.Type == varientType)
+      // console.log( item.foodId == foodId , item.Type == varientType);
+      // console.log(item.foodId, foodId , item.Type , varientType)
+    });
+    // console.log(cart)
     console.log("remove item !");
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("foodCart", JSON.stringify(cart));
     return false;
   } else {
-    qtyValue -= 1;
+    qty--;
   }
+
+
+  let updatedPrice = Number(basePrice) * Number(qty);
+  $(`#inp${foodId}`).val(qty);
+  $(`#totalPrice${foodId}`).html(updatedPrice);
+
+
 
   let existingItem = cart.find(
     (item) => item.foodId == foodId && item.Type == varientType,
@@ -1787,7 +1817,7 @@ function decrementCounter(foodId) {
       if (item.foodId == foodId && item.Type == varientType) {
         return {
           ...item,
-          qty: qtyValue,
+          qty: qty,
           Totalprice: updatedPrice,
         };
       }
@@ -1798,7 +1828,7 @@ function decrementCounter(foodId) {
     console.log("something wents wrong !");
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("foodCart", JSON.stringify(cart));
 }
 
 function renderCartPage(fid) {
@@ -1828,7 +1858,14 @@ function renderCartPage(fid) {
     success: function (response) {
       if (response.status === "success") {
         console.log(response);
-        location.href = `cart.html?rid=${rid}`;
+        cartPopupData();
+        // location.href = `cart.html?rid=${rid}`;
+        const offcanvasEl = document.getElementById("offcanvasProductModal");
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+
+        if (offcanvas) {
+          offcanvas.hide();
+        }
       } else {
         console.log(response.message || "Something went wrong");
       }
@@ -1839,6 +1876,127 @@ function renderCartPage(fid) {
     },
   });
 }
+function cartPopupData() {
+  const params = new URLSearchParams(window.location.search);
+
+  const rid = params.get("rid");
+
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getCart",
+      userId,
+    },
+    success: function (response) {
+      if (response.status == "success") {
+        let data = response.data;
+        let filterdData = data?.filter((item) => item?.restaurant_id == rid);
+        if (filterdData?.length > 0) {
+          $("#cartPopup").show();
+        }
+        let cartPopup = `<div class="footer_pop_tab" onclick="location.href='cart.html?rid=${rid}'">
+        <div class="footer_left">
+          <div class="img_footer_pop_img" id="cartPopupImg">
+            
+          `;
+        filterdData.slice(0, 3)?.map((item, index) => {
+          cartPopup += `<div class="img_popup img${index + 1}">
+              <img src="${imageUrl + item?.image}" alt="">
+            </div>
+            `;
+        })
+        cartPopup += `</div>
+          <p> <b id="popupCount">${filterdData?.length}</b> item added <br>
+            <span>View your cart</span>
+          </p>
+        </div>
+        <div class="footer_right">
+          <p>continue</p> <i class="bi bi-chevron-right"></i>
+        </div>
+
+      </div>`
+        $("#cartPopup").html(cartPopup);
+
+      } else {
+        $("#cartPopup").hide();
+      }
+    }
+  });
+}
+function handleAllCartPopup(){
+  // let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
+  $.ajax({
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getAllCart",
+      userId,
+    },
+    success: function (response) {
+      if(response.status == "success"){
+      console.log(response.data);
+      let {data,restaurantCount} = response;
+      let cartDataHtml = '';
+      $("#cartPopupAll").show();
+      $("#restCount").html(restaurantCount);
+      $("#restCount2").html(restaurantCount);
+      data?.forEach((item)=>{
+        cartDataHtml+=`    <div class="cartFooter-item">
+
+        <div class="cartFooter-info">
+
+          <img src="${imageUrl+item?.restaurant_logo}" alt="The Ruin House"
+            class="cartFooter-image">
+
+          <div class="cartFooter-details">
+
+            <h4>${item?.restaurant_name}</h4>
+
+            <div class="cartFooter-menu">
+              View Menu
+              <span>›</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button type="button" class="cartFooter-viewCart" onclick="location.href='cart.html?rid=${item?.restaurant_id}'">
+
+          <strong>View Cart</strong>
+
+          <small>${item?.product_count} items</small>
+
+        </button>
+
+
+        <button type="button" class="cartFooter-remove" onclick="renderPopupDelete('${item?.restaurant_id}')">
+          ×
+        </button>
+
+      </div>`;
+      })
+      $("#cartDataModal").html(cartDataHtml);
+      
+      }
+      else{
+        console.log(response.message);
+        
+      }
+    }
+  })
+
+}
+handleAllCartPopup();
+function renderPopupDelete(rid) {
+  handleCartDelete(rid)
+  
+}
+
 
 function getCart() {
   const params = new URLSearchParams(window.location.search);
@@ -1885,18 +2043,19 @@ function getCart() {
                 "${item.id}",
                 "${item.restaurant_id}",
                 "${item.food_item_id}",
-                "${item.name}",)
+                "${item?.variant_id}")
                 '>-</button>
-                <input id="inp${item.food_item_id}" type="number" value="${item.quantity}" />
+                <input id="inp${item.variant_id}" type="number" value="${item.quantity}" />
                 <button  onclick='cartIncremetCounter(
                  "${item.id}",
                   "${item.restaurant_id}",
-                "${item.food_item_id}")' class="plus" >+</button>
-                  <input id="varientType${item.food_item_id}" value="${item.variant_name}" type="hidden" />
-                <input id="varientId${item.food_item_id}" value="${item.variant_id}" type="hidden" />
-                <input id="price${item.food_item_id}" value="${item.price}" type="hidden" /></div>
+                "${item.food_item_id}",
+                "${item?.variant_id}")' class="plus" >+</button>
+                  <input id="varientType${item.variant_id}" value="${item.variant_name}" type="hidden" />
+                <input id="varientId${item.variant_id}" value="${item.variant_id}" type="hidden" />
+                <input id="price${item.variant_id}" value="${item.price}" type="hidden" /></div>
               <span>
-              <p id="totalPrice${item.food_item_id}">₹${Math.floor(item.total)}</p>
+              <p id="totalPrice${item.variant_id}">₹${Math.floor(item.total)}</p>
               </span>
               </div>
               
@@ -1928,18 +2087,19 @@ function getCart() {
   });
 }
 let cartQty;
-function cartIncremetCounter(cartId, rid, foodId, name) {
-  let cartQty = Number($(`#inp${foodId}`).val()) + 1;
-  let varientId = $(`#varientId${foodId}`).val();
-  let varientType = $(`#varientType${foodId}`).val();
-  let basePrice = Number($(`#price${foodId}`).val());
+function cartIncremetCounter(cartId, rid, foodId, vid) {
+  console.log(cartId, rid, foodId, name, vid)
+  let cartQty = Number($(`#inp${vid}`).val()) + 1;
+  let varientId = $(`#varientId${vid}`).val();
+  let varientType = $(`#varientType${vid}`).val();
+  let basePrice = Number($(`#price${vid}`).val());
 
   let updatedPrice = basePrice * cartQty;
 
-  $(`#inp${foodId}`).val(cartQty);
-  $(`#totalPrice${foodId}`).html(`₹${updatedPrice}`);
+  $(`#inp${vid}`).val(cartQty);
+  $(`#totalPrice${vid}`).html(`₹${updatedPrice}`);
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
   console.log(cart);
   // if (!Array.isArray(cart)) {
   //   cart = [cart];
@@ -1974,31 +2134,32 @@ function cartIncremetCounter(cartId, rid, foodId, name) {
     });
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("foodCart", JSON.stringify(cart));
   getSubtotal();
 
   console.log(cart);
   updateCartDataBase(cartId, varientId, rid, updatedPrice, cartQty, foodId);
 }
-function cartdecrementCounter(cartId, rid, foodId) {
-  let cartQty = Number($(`#inp${foodId}`).val());
-  let varientId = $(`#varientId${foodId}`).val();
-  let varientType = $(`#varientType${foodId}`).val();
-  let basePrice = Number($(`#price${foodId}`).val());
+function cartdecrementCounter(cartId, rid, foodId,vid) {
+  console.log(cartId, rid, foodId,vid)
+  let cartQty = Number($(`#inp${vid}`).val());
+  let varientId = $(`#varientId${vid}`).val();
+  let varientType = $(`#varientType${vid}`).val();
+  let basePrice = Number($(`#price${vid}`).val());
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
 
   cartQty--;
 
   if (cartQty == 0) {
-    $("#cartWrap").html(
-      `<div class="not_found"><img src="../assets/image/icons/notFound.gif" alt=""/>No Meal Found ! <button onclick="location.href='home.html'">Go to resturants </button></div>`,
-    );
+    // $("#cartWrap").html(
+    //   `<div class="not_found"><img src="../assets/image/icons/notFound.gif" alt=""/>No Meal Found ! <button onclick="location.href='home.html'">Go to resturants </button></div>`,
+    // );
     cart = cart.filter(
       (item) => !(item.foodId == foodId && item.Type == varientType),
     );
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("foodCart", JSON.stringify(cart));
 
     updateCartDataBase(cartId, varientId, rid, 0, 0, foodId);
     return;
@@ -2006,8 +2167,8 @@ function cartdecrementCounter(cartId, rid, foodId) {
 
   let updatedPrice = basePrice * cartQty;
 
-  $(`#inp${foodId}`).val(cartQty);
-  $(`#totalPrice${foodId}`).html(`₹${updatedPrice}`);
+  $(`#inp${vid}`).val(cartQty);
+  $(`#totalPrice${vid}`).html(`₹${updatedPrice}`);
 
   cart = cart.map((item) => {
     if (item.foodId == foodId && item.Type == varientType) {
@@ -2020,7 +2181,8 @@ function cartdecrementCounter(cartId, rid, foodId) {
     return item;
   });
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("foodCart", JSON.stringify(cart));
+  getSubtotal();
 
   updateCartDataBase(cartId, varientId, rid, updatedPrice, cartQty, foodId);
 }
@@ -2094,15 +2256,16 @@ function getCoupons() {
 // VALIDATE COUPON
 // ======================
 function isCouponValid(coupon) {
+  // console.log(coupon)
   const now = new Date();
 
   if (coupon.status !== "active") {
     return false;
   }
 
-  if (now < new Date(coupon.start_date)) {
-    return false;
-  }
+  // if (now < new Date(coupon.start_date)) {
+  //   return false;
+  // }
 
   if (now > new Date(coupon.end_date)) {
     return false;
@@ -2167,27 +2330,30 @@ function renderCoupons(coupons) {
 // CART SUBTOTAL
 // ======================
 function getSubtotal() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const params = new URLSearchParams(window.location.search);
+  const rid = params.get("rid");
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
+  let filteredCart = cart?.filter((item) => item?.restaurant_id == rid);
 
-  // let data = cart.reduce((total, item) => {
-  //   return total + Number(item.price);
-  // }, 0);
+  const subTotal = filteredCart.reduce(
+    (sum, num) => sum + Number(num?.Totalprice || 0),
+    0
+  );
+  let total = subTotal + 20 + 20;
 
-  let dataTotal = cart.reduce((total, item) => {
-    return total + Number(item.Totalprice);
-  }, 0);
-  $("#subTotal").html(dataTotal);
-  $("#grandTotal").html(dataTotal + 20 + 20);
-  $("#checkPlaceOrder").html(dataTotal + 20 + 20);
-  $("#payAmtTotal").html(dataTotal + 20 + 20);
+  $("#subTotal").html(subTotal);
+  $("#grandTotal").html(total);
+  $("#checkPlaceOrder").html(total);
+  $("#payAmtTotal").html(total);
 
-  return dataTotal; // ye hona zaroori hai
+  return total; // ye hona zaroori hai
 }
 
 // ======================
 // CALCULATE DISCOUNT
 // ======================
 function calculateCouponDiscount(coupon, subtotal) {
+  console.log(coupon);
   // Minimum Order Check
   if (
     Number(coupon.minimum_order_amount) > 0 &&
@@ -2204,8 +2370,9 @@ function calculateCouponDiscount(coupon, subtotal) {
 
   // Percentage Discount
   if (coupon.discount_type === "percentage") {
-    discount = (subtotal * Number(coupon.discount_value)) / 100;
-
+ discount = Number(
+    ((subtotal * Number(coupon.discount_value)) / 100).toFixed(2)
+);
     // Max Discount Check
     if (
       Number(coupon.max_discount_amount) > 0 &&
@@ -2253,18 +2420,22 @@ function applyCoupon(code) {
   selectedCoupon = coupon;
 
   const grandTotal = subtotal - result.discount;
+  $(".bottom_coupons").show();
+  $(".discount_data").show();
 
-  console.log(subtotal, result.discount);
+  // console.log(subtotal, result.discount);
 
   $("#couponDisc").text(`${Math.floor(result.discount.toFixed(2))}`);
-  $("#amountApplied").text(result.discount.toFixed(2));
-  $("#saved2").text(coupon.minimum_order_amount);
-  $("#saved").text(coupon.minimum_order_amount);
+  $("#amountApplied").text(Math.floor(coupon.minimum_order_amount));
+  $("#saved2").text(`${Math.floor(result.discount.toFixed(2))}`);
+  $("#saved").text(`${Math.floor(result.discount.toFixed(2))}`);
 
   $("#grandTotal").text(`${Math.floor(grandTotal.toFixed(2))}`);
+  $("#checkPlaceOrder").text(`${Math.floor(grandTotal.toFixed(2))}`);
+  $("#payAmtTotal").text(`${Math.floor(grandTotal.toFixed(2))}`);
 
   $(".coupon_btn").removeClass("active");
-  // $(".coupon_btn").text("Apply");
+  $(".coupon_btn").text("Apply");
 
   $(`#${code}`).text("Applied");
   event.target.classList.add("active");
@@ -2281,14 +2452,14 @@ $(".form_icon").on("click", function () {
   let role = $(this).find("p").text();
   $("#selectedRole").val(role);
 });
-function toggleAddressBtn (){
+function toggleAddressBtn() {
   $("#btnToggleAddress").html(`
     <button type="button" onclick="handleAddress(event)">
         Add Address
     </button>
 `);
- 
-         $("#addressId").val("");
+
+  $("#addressId").val("");
   $("#houseNo").val("");
   $("#area").val("");
   $("#instruction").val("");
@@ -2299,7 +2470,7 @@ function toggleAddressBtn (){
   $("#number").val("");
   $("#landmark").val("");
   $("#selectedRole").val("");
-$("#offcanvasBottomAddressLabel").html("Add Address");
+  $("#offcanvasBottomAddressLabel").html("Add Address");
 
 }
 
@@ -2330,19 +2501,19 @@ function handleAddress(e) {
     success: function (response) {
       if (response.status == "success") {
         alert(response.message);
-        
-         $("#addressId").val("");
-  $("#houseNo").val("");
-  $("#area").val("");
-  $("#instruction").val("");
-  $("#city").val("");
-  $("#state").val("");
-  $("#pincode").val("");
-  $("#name").val("");
-  $("#number").val("");
-  $("#landmark").val("");
-  $("#selectedRole").val("");
-        
+
+        $("#addressId").val("");
+        $("#houseNo").val("");
+        $("#area").val("");
+        $("#instruction").val("");
+        $("#city").val("");
+        $("#state").val("");
+        $("#pincode").val("");
+        $("#name").val("");
+        $("#number").val("");
+        $("#landmark").val("");
+        $("#selectedRole").val("");
+
         getAddress();
       } else {
         alert(response.message);
@@ -2460,6 +2631,7 @@ function selectAddress(
   $(".saved_address_left").removeClass("selected_address");
 
   $(element).addClass("selected_address");
+  $(".cart_sec3_box").show();
 
   let address = `
         <h4>
@@ -2504,7 +2676,7 @@ function editAddress(data) {
         Update Address
     </button>
 `);
-$("#offcanvasBottomAddressLabel").html("Update Address");
+  $("#offcanvasBottomAddressLabel").html("Update Address");
 
 }
 function updateAddress(e) {
@@ -2536,20 +2708,20 @@ function updateAddress(e) {
     success: function (response) {
       if (response.status === "success") {
         alert(response.message);
-        
+
         getAddress(); // refresh address list
 
-         $("#addressId").val("");
-  $("#houseNo").val("");
-  $("#area").val("");
-  $("#instruction").val("");
-  $("#city").val("");
-  $("#state").val("");
-  $("#pincode").val("");
-  $("#name").val("");
-  $("#number").val("");
-  $("#landmark").val("");
-  $("#selectedRole").val("");
+        $("#addressId").val("");
+        $("#houseNo").val("");
+        $("#area").val("");
+        $("#instruction").val("");
+        $("#city").val("");
+        $("#state").val("");
+        $("#pincode").val("");
+        $("#name").val("");
+        $("#number").val("");
+        $("#landmark").val("");
+        $("#selectedRole").val("");
       } else {
         alert(response.message);
       }
@@ -2565,22 +2737,22 @@ function deleteAddress(id) {
     method: "POST",
     dataType: "JSON",
     data: {
-        type: "deleteAddress",
-        addressId: id,
-        userId: userId
+      type: "deleteAddress",
+      addressId: id,
+      userId: userId
     },
-    success: function(response){
-      if(response.status == "success"){
+    success: function (response) {
+      if (response.status == "success") {
         alert("delete successfully !");
-         getAddresses();
+        getAddresses();
       }
-      else{
+      else {
         alert(response.message);
 
       }
     }
-});
-  
+  });
+
 }
 
 $(".payment_option").on("click", function () {
@@ -2602,7 +2774,7 @@ function handleCheckout() {
   let grandTotal = $("#grandTotal").text();
   let payMethod = $("#payMethod").html();
   let taxAmt = $("#taxAmount").text();
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = JSON.parse(localStorage.getItem("foodCart")) || [];
   cartData = cart.filter((item) => item.restaurant_id == rid);
 
   let formData = new FormData();
@@ -2618,7 +2790,7 @@ function handleCheckout() {
   formData.append("payment_method", payMethod);
   formData.append("taxAmt", taxAmt);
 
-  formData.append("cart", JSON.stringify(cartData));
+  formData.append("foodCart", JSON.stringify(cartData));
   console.log(cart);
 
   $.ajax({
@@ -2631,7 +2803,7 @@ function handleCheckout() {
     success: function (response) {
       if (response.status == "success") {
         console.log(response.message);
-        
+
 
         handleCartDelete(rid);
         location.href = `placeOrder.html?id=${response.order_id}`;
@@ -2646,41 +2818,41 @@ function getCurrentOrderData() {
   const params = new URLSearchParams(window.location.search);
   const order_id = params.get("id");
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
       type: "getCurrentOrder",
       order_id
     },
-    success : function (response) {
-      if(response.status == "success"){
-           console.log(response.data);
-           let orderData = response.data;
-           let orderHtml='';
-           orderData.map((item)=>{
-            orderHtml+=`<div class="place_order_data_item">
+    success: function (response) {
+      if (response.status == "success") {
+        console.log(response.data);
+        let orderData = response.data;
+        let orderHtml = '';
+        orderData.map((item) => {
+          orderHtml += `<div class="place_order_data_item">
                      <h5>${item.food_name}</h5>
                      <p>${item.total}</p>
                 </div>`;
-           });
-           $("#orderData").html(orderHtml);
-      }else{
-         console.log(response.message)
+        });
+        $("#orderData").html(orderHtml);
+      } else {
+        console.log(response.message)
 
       }
     }
   })
-  
+
 
 }
 
 function handleCartDelete(rid) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
 
-    cart = cart.filter(item => item.restaurant_id != rid);
+  cart = cart.filter(item => item.restaurant_id != rid);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("foodCart", JSON.stringify(cart));
   $.ajax({
     url: apiUrl,
     method: "POST",
@@ -2692,6 +2864,8 @@ function handleCartDelete(rid) {
     success: function (response) {
       if (response.status == "success") {
         console.log(response.message);
+          handleAllCartPopup();
+
       } else {
         console.log(response.message);
       }
@@ -2718,19 +2892,21 @@ function getOrders() {
           console.log(order);
 
           const foodItems = order.food_items.split("||");
+          console.log(foodItems);
 
-          foodItems.forEach((item) => {
-            const [name, type] = item?.split("|") || "undefined";
+          // foodItems.forEach((item) => {
+          //   const [name, type] = item?.split("|") || "undefined";
+          //   console.log(name, type)
 
-            itemsHtml += `
-                <div class="order_middle_box">
-              ${type == "nonveg" ? `<img src="../assets/image/icons/failed.svg" alt="">` : ""}
-              ${type == "veg" ? `<img src="../assets/image/icons/success.svg" alt="">` : ""}
+          //   itemsHtml += `
+          //       <div class="order_middle_box">
+          //     ${type == "nonveg" ? `<img src="../assets/image/icons/failed.svg" alt="">` : ""}
+          //     ${type == "veg" ? `<img src="../assets/image/icons/success.svg" alt="">` : ""}
 
-                <p>${name}</p>
-              </div>
-            `;
-          });
+          //       <p>${name}</p>
+          //     </div>
+          //   `;
+          // });
 
           ordersHtml += `
     <div onclick="location.href='orderDetails.html?id=${order.id}'" class="order_data_item">
@@ -2747,7 +2923,6 @@ function getOrders() {
       </div>
 
       <div class="order_middle_wrap">
-        ${itemsHtml}
       </div>
 
       <div class="order_bottom_wrap">
@@ -2802,11 +2977,10 @@ function getOrderDetail() {
 
     itemsHtml += `
             <div class="order_middle_box">
-                ${
-                  type === "nonveg"
-                    ? '<img src="../assets/image/icons/failed.svg" alt="">'
-                    : '<img src="../assets/image/icons/success.svg" alt="">'
-                }
+                ${type === "nonveg"
+        ? '<img src="../assets/image/icons/failed.svg" alt="">'
+        : '<img src="../assets/image/icons/success.svg" alt="">'
+      }
                 <p>${name}</p>
             </div>
         `;
@@ -3081,15 +3255,13 @@ function handleApplyFilter() {
           
             <div class="resturant_prd_left">
             
-              ${
-                item.food_type == "veg"
-                  ? `<img src="../assets/image/icons/success.svg" alt="">`
-                  : ""
+              ${item.food_type == "veg"
+                ? `<img src="../assets/image/icons/success.svg" alt="">`
+                : ""
               }            
-              ${
-                item.food_type == "nonveg"
-                  ? `<img src="../assets/image/icons/failed.svg" alt="">`
-                  : ""
+              ${item.food_type == "nonveg"
+                ? `<img src="../assets/image/icons/failed.svg" alt="">`
+                : ""
               }            
                   
               
@@ -3112,7 +3284,7 @@ function handleApplyFilter() {
               <div class="desc_prd">
                 <p>
                   ${item?.description}
-                  <button data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
+                  <button onclick='handleModalData(${JSON.stringify(item)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox">more</button>
                 </p>
               </div>
 
@@ -3122,9 +3294,8 @@ function handleApplyFilter() {
             
               <img onclick='handleModalData(${JSON.stringify(item)})' data-bs-toggle="offcanvas" data-bs-target="#offcanvasProductBox" aria-controls="offcanvasProductBox" src="${imageUrl}${item?.image}" alt="${item?.name}">
                   
-             ${
-               !item?.varient
-                 ? `<div
+             ${!item?.varient
+                ? `<div
                    class="btn_add_data"
                    onclick='handleModalCartData(${JSON.stringify(item)})'
                    type="button"
@@ -3134,7 +3305,7 @@ function handleApplyFilter() {
                  >
                    Add
                  </div>`
-                 : ` <div
+                : ` <div
                      class="btn_add_data AddBtn"
                      id="AddBtn"
                       onclick="handleToggleBtn(this)"
@@ -3147,7 +3318,7 @@ function handleApplyFilter() {
                      <input type="number" value="1" />
                      <button>+</button>
                    </div>`
-             }
+              }
        
 
                     </div>
@@ -3199,25 +3370,25 @@ function handleToggleBtn(el) {
 
 function getUser() {
   $.ajax({
-    url:apiUrl,
-    method:"POST",
-    dataType:"JSON",
-    data:{
-      type:"getUser",
+    url: apiUrl,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      type: "getUser",
       userId
     },
     success: function (response) {
-      if(response.status == "success"){
+      if (response.status == "success") {
         console.log(response.data);
         let userData = response.data;
         $("#name").html(userData.name)
         $("#phone").html(userData.phone);
-      }else{
+      } else {
         console.log(response.message);
       }
     }
   })
-     
+
 }
 
 // Logout
@@ -3227,40 +3398,62 @@ function logoutFood() {
   window.location.replace("../../pages/login.html");
 }
 
+// Check Login
+function checkLogin() {
+  const pagePath = window.location.pathname;
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    if (!pagePath.includes('login') && !pagePath.includes('otp')) {
+      window.location.replace("../../pages/login.html");
+    }
+    return false;
+  }
+
+  if (pagePath.includes('login')) {
+    window.location.replace("../food/Pages/welcome.html");
+  }
+
+  return true;
+}
+
+// Call on every protected page
+checkLogin();
+
 async function setStatusBar(color, style, isTrue) {
 
-    // if (!window.StatusBar) {
-    //     alert("StatusBar plugin not available");
-    //     return;
-    // }
+  // if (!window.StatusBar) {
+  //     alert("StatusBar plugin not available");
+  //     return;
+  // }
 
-    StatusBar.overlaysWebView(isTrue);
-    StatusBar.backgroundColorByHexString(color);
-    
-    if (style == "light") {
-         StatusBar.styleLightContent();
-    } else {
-         StatusBar.styleDefault();
-    }
+  StatusBar.overlaysWebView(isTrue);
+  StatusBar.backgroundColorByHexString(color);
+
+  if (style == "light") {
+    StatusBar.styleLightContent();
+  } else {
+    StatusBar.styleDefault();
+  }
 }
 
 async function applyPageStatusBar() {
 
-    let page = window.location.pathname;
+  let page = window.location.pathname;
 
-    if (page.includes("home.html")) {
-        await setStatusBar("#fca8ab", "light", false); // false is not working 
-        
-    }else if(page.includes("splash1.html") || page.includes("splash2.html") || page.includes("splash3.html")){
-        await setStatusBar("#00000000", "light", true);
+  if (page.includes("home.html")) {
+    await setStatusBar("#fca8ab", "light", false); // false is not working 
 
-    }
-    else{
-        await setStatusBar("#fff", "dark", false); // false is not working
-    }
+  } else if (page.includes("splash1.html") || page.includes("splash2.html") || page.includes("splash3.html")) {
+    await setStatusBar("#00000000", "light", true);
+
+  }
+  else {
+    await setStatusBar("#fff", "dark", false); // false is not working
+  }
 
 }
 
-document.addEventListener("deviceready", async function () { 
-        await applyPageStatusBar();
+document.addEventListener("deviceready", async function () {
+  await applyPageStatusBar();
 }, false);

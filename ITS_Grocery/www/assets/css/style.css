@@ -1084,6 +1084,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    overflow: hidden;
+}
+.product_data_img .outOfStock{
+   border-radius: 0 !important;
 }
 
 .product_text {
@@ -2499,17 +2505,20 @@ body {
 
 .product_img {
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .product_img img {
     /* width: 112px;
     height: 100px; */
     width: 100%;
-    height: 121px;
+    height: 100px;
+    /* height: 121px; */
     border-radius: 5px;
     object-fit: contain;
     mix-blend-mode: multiply;
-    object-position: top;
+    /* object-position: top; */
 }
 
 .outStock img {
@@ -2522,7 +2531,7 @@ body {
     background: #acacac40;
     height: 100%;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4667,7 +4676,14 @@ button.coupon_btn.apply-btn {
     margin-left: auto;
     grid-auto-rows: max-content;
 }
-
+.sub_category_right .product_img{
+    height: 140px !important;
+    width: 100%;
+}
+.sub_category_right .product_img img{
+    height: 100% !important;
+    width: 100% !important;
+}
 .sub_category_box i {
     font-size: 28px;
 }
@@ -5664,7 +5680,7 @@ button.coupon_btn.apply-btn {
 .sub_category_right .product_design_item_wrap {
     /* width: 26vw; */
     width: 100%;
-    height: 188px;
+    height: 100%;
 
 }
 

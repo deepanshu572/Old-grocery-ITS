@@ -10,6 +10,13 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+        <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../assets/css/style.css" />
     <style>
       .main {
@@ -38,17 +45,19 @@
 
     <input type="number" id="addressId"  style="display: none;"/>
     <div class="main margin_box">
-      <div class="header_nav">
-        <a href="restaurantDetail.html" class="category_left_head">
-         <img src="../assets/image/icons/leftArrow.svg" alt="">
-          <h4>Checkout</h4>
-        </a>
+   
+        <div class="back_btn" onclick="history.back()">
+        <div class="back_btn_arrow">
+          <i class="ti ti-arrow-narrow-left"></i>
+        </div>
+        <h5>Checkout</h5>
       </div>
       <div id="cartWrap" class="animate-fade-in" style="display: none;">
       <div class="cart_data" >
         <div
           class="cart_data_sec discount_data alert alert-dismissible fade show"
           role="alert"
+          style="display: none;"
         >
           <h4>🥳 You save ₹ <b id="saved2"></b> on this order</h4>
 
@@ -100,7 +109,7 @@
               <img src="../assets/image/icons/gif2.svg" alt="" />
             </div>
           </div>
-          <div class="bottom_coupons">
+          <div class="bottom_coupons" style="display: none;">
             <div class="img_coupons">
               <i class="bi bi-check-circle-fill"></i>
             </div>
@@ -120,7 +129,7 @@
               <h4>View All Coupons</h4>
             </div>
             <div class="check">
-              <i class="bi bi-chevron-down"></i>
+              <i class="bi bi-chevron-right"></i>
             </div>
           </div>
         </div>
@@ -149,8 +158,8 @@
             </div>
             <i class="bi bi-chevron-right"></i>
           </div>
-          <div class="cart_sec_box cart_sec3_box">
-            <div class="left_cart_box_sec" id="telephoneValue">
+          <div class="cart_sec_box cart_sec3_box" style="display: none;">
+            <div class="left_cart_box_sec" id="telephoneValue" >
               <!-- <i class="bi bi-telephone-fill" style="color: rgb(200, 0, 0);"></i>
               <h4>_______________</h4> -->
             </div>
@@ -261,7 +270,7 @@
       id="offcanvasBottomAddress"
       aria-labelledby="offcanvasBottomAddressLabel"
     >
-      <div class="offcanvas-header">
+      <!-- <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
           Select Delivery Address
         </h5>
@@ -269,9 +278,9 @@
         <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
           <i class="bi bi-x"></i>
         </button>
-      </div>
+      </div> -->
       <div class="offcanvas-body small">
-        <div class="btn_add_address btn_reuse">
+        <div class="btn_add_address ">
           <button
             type="button"
             data-bs-toggle="offcanvas"
@@ -279,7 +288,7 @@
             aria-controls="offcanvasBottomAddAddress"
             onclick="toggleAddressBtn()"
           >
-            + Add New <i class="bi bi-chevron-right"></i>
+            + Add New 
           </button>
         </div>
         <div class="saved_address">
@@ -437,9 +446,27 @@
             </div>
 
             <div class="bill_format_data">
+              <!-- <div class="bill_field">
+                  <div class="left_bill_field">
+                    <i class="ti ti-credit-card"></i>
+                    <p>Total MRP</p>
+                  </div>
+                  <div class="right_bill_field">
+                    <small id="totalMrp">₹1300</small>
+                  </div>
+                </div>
+                <div class="bill_field green">
+                  <div class="left_bill_field">
+                    <i class="ti ti-tag-starred"></i>
+                    <p>Product Discount</p>
+                  </div>
+                  <div class="right_bill_field">
+                    <small id="productDiscount">-₹800</small>
+                  </div>
+                </div> -->
               <div class="bill_field">
                 <div class="left_bill_field">
-                  <i class="bi bi-card-text"></i>
+                    <i class="ti ti-credit-card"></i>
                   <p>Sub Total</p>
                 </div>
                 <div class="right_bill_field">
@@ -452,7 +479,7 @@
               <div class="bill_field green">
                 <div class="left_bill_field">
                   <img src="../assets/image/icons/coupons2.svg" alt="" />
-                  <p>Promo Discount</p>
+                  <p>Coupon Discount</p>
                 </div>
                 <div class="right_bill_field">
                   -₹

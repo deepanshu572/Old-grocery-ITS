@@ -13,10 +13,17 @@
       <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
     <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="main animate-fade-in margin_box">
-      <div class="header_nav searchDetail">
+      <!-- <div class="header_nav searchDetail">
         <div class="category_left_head">
           <i class="bi bi-chevron-left"></i>
           <h4 id="searchQuery"></h4>
@@ -24,6 +31,15 @@
         <div onclick="location.href = 'search.html'" class="search_bar">
           <img src="../assets/image/icons/search2.svg" alt="" />
         </div>
+      </div> -->
+      <div class="searchDetail">  
+      <div class="back_btn" onclick="history.back()">
+        <div class="back_btn_arrow">
+          <i class="ti ti-arrow-narrow-left"></i>
+        </div>
+        <h5 id="searchQuery"></h5>
+
+      </div>
       </div>
       <!-- <div class="filter_data_tab">
         <div class="filter_tab_box">
@@ -47,6 +63,63 @@
           <div class="product_container" id="prdSearch2"></div>
         </div>
       </div>
+
+
+      
+       <div class="footer_modal_canvas" id="cartPopupAll" style="display: none;">
+
+    <button class="footer_modal_trigger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+      aria-controls="offcanvasBottom">
+
+      <div class="footer_modal_cart_icon">
+        🛒
+      </div>
+
+      <div class="footer_modal_content">
+
+        <div class="footer_modal_title">
+          Your carts
+        </div>
+
+        <div class="footer_modal_subtitle">
+         <span id="restCount"> </span>  restaurants
+        </div>
+
+      </div>
+
+      <div class="footer_modal_arrow">
+        ›
+      </div>
+
+    </button>
+
+  </div>
+
+
+        <div class="offcanvas offcanvas-bottom cartFooter" tabindex="-1" id="offcanvasBottom"
+    aria-labelledby="offcanvasBottomLabel">
+
+    <!-- Header -->
+    <div class="cartFooter-header">
+
+      <h5 id="offcanvasBottomLabel">
+        Your Carts (<span id="restCount2"></span>)
+      </h5>
+
+      <!-- <button type="button" class="cartFooter-clear">
+        Clear all
+      </button> -->
+
+    </div>
+
+
+    <!-- Cart List -->
+    <div class="cartFooter-list" id="cartDataModal">
+
+
+    </div>
+
+  </div>
     </div>
     <script src="../../cordova.js"></script>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

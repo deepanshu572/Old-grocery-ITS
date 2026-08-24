@@ -44,7 +44,7 @@
     ></script>
 <script src="../assets/js/script.js"></script>
 <script>
-      localStorage.setItem("currentCategoryName", "Grocery");
+    //   localStorage.setItem("currentCategoryName", "Grocery");
         document.addEventListener("DOMContentLoaded", async function () {
             const { branchId, address } = await getCurrentBranch();
             // console.log(address.address?.city_district, address?.address?.state);
@@ -63,7 +63,7 @@
                 else {
                     location.href = "branchNotFound.html";
                      let currentAddress = address.address?.city_district +' '+ address?.address?.state;
-            localStorage.setItem("currentLocation",currentAddress)
+                     localStorage.setItem("currentLocation",currentAddress)
                 }
             }
             else {
