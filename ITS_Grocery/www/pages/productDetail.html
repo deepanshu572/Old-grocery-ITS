@@ -23,6 +23,16 @@
   
   </head>
   <body>
+       <div id="loader">
+    <div class="data_loader">
+      <div class="wrapeer_data">
+        <img class="loader-img" src="../assets/img/icon/1.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/2.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/3.png" alt="">
+      </div>
+      <h6>Everything you need, delivered at your <br> doorstep</h6>
+    </div>
+  </div>
     <div class="main product_main">
       <div class="product_detail_box">
         <div class="product_detail_head">
@@ -176,12 +186,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 
     <script src="../assets/js/pageRender.js"></script>
     <script src="../assets/js/script.js"></script>
 
   <script>
-  getSingleProduct();
+      async function fncCalling() {
+
+      showLoader();
+
+      try {
+
+        await getSingleProduct();
+
+      } catch (error) {
+
+        console.error("brands loading error:", error);
+
+      } finally {
+
+        hideLoader();
+
+      }
+    }
+    fncCalling();
     
  </script>
 </html>

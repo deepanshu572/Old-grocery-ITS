@@ -65,6 +65,103 @@ document.addEventListener("deviceready", async function () {
 
 
 
+   let loaderTl;
+
+    function showLoader() {
+
+      // console.log("hello inner....");
+
+      const loader = document.getElementById("loader");
+
+      // IMPORTANT: show loader again
+      loader.style.display = "flex";
+
+      // Reset loader opacity
+      gsap.set(loader, {
+        opacity: 1
+      });
+
+      // Kill previous timeline if exists
+      if (loaderTl) {
+        loaderTl.kill();
+      }
+
+      // Heading
+      gsap.set(".data_loader h6", {
+        opacity: 0
+      });
+
+      gsap.to(".data_loader h6", {
+        opacity: 1,
+        duration: 0.3
+      });
+
+      // Images
+      const images = gsap.utils.toArray(".loader-img");
+
+      // Reset images
+      gsap.set(images, {
+        opacity: 0,
+        y: 40
+      });
+
+      // Create new timeline
+      loaderTl = gsap.timeline({
+        repeat: -1
+      });
+
+      images.forEach((img) => {
+
+        loaderTl
+          .fromTo(
+            img,
+            {
+              opacity: 0,
+              y: 40
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.45,
+              ease: "power2.out"
+            }
+          )
+
+          .to({}, {
+            duration: 0.7
+          })
+
+          .to(img, {
+            opacity: 0,
+            y: -40,
+            duration: 0.35,
+            ease: "power2.in"
+          });
+
+      });
+    }
+
+
+    function hideLoader() {
+
+      // Stop animation
+      if (loaderTl) {
+        loaderTl.kill();
+        loaderTl = null;
+      }
+
+      const loader = document.getElementById("loader");
+
+      gsap.to(loader, {
+        opacity: 0,
+        duration: 0.4,
+
+        onComplete() {
+          loader.style.display = "none";
+        }
+      });
+    }
+
 
 
 
@@ -183,6 +280,7 @@ function getTopLeftBanner() {
         console.log(response.data);
         console.log("response.data==========");
         let carouselItems = "";
+        
 
         response.data.forEach((item, index) => {
           carouselItems += `
@@ -207,7 +305,10 @@ function getTopLeftBanner() {
       </div>
     `;
 
+
         $("#topLeftBanner").html(bannerHTML);
+
+$(".slide").css("background", `url("${imgUrl+response.bg.img_path}")`);
       } else {
         console.log(response.message);
       }
@@ -540,7 +641,7 @@ function getAllProductData() {
   } else {
     type = "getAllProductBrandData"
   }
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -804,7 +905,7 @@ function renderSubCategories2(data) {
 
 
 function createSubCategoryHTML2(categories = []) {
-  return categories
+  return categories.slice(0, 8)
     .map(
       (item) => `
       <div class="cateogy_box_new_design"
@@ -822,6 +923,7 @@ function createSubCategoryHTML2(categories = []) {
 }
 function createSubCategoryHTML1(categories = []) {
   return categories
+  .slice(0, 8)
     .map(
       (item) => `
       <div class="cateogy_box"
@@ -1904,7 +2006,7 @@ function toggleAdd(id, varId, type, stock, isRestore = false) {
 function getAllVarient() {
   const branchId = localStorage.getItem("branchId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -2343,9 +2445,9 @@ function moveIndicator(btn) {
   const container = $(".category_icons");
 
   indicator.css({
-    width: btn.outerWidth() * 0.7,
+    width: btn.outerWidth() * 0.9,
     left:
-      btn.position().left + container.scrollLeft() + btn.outerWidth() * 0.15,
+      btn.position().left + container.scrollLeft() + btn.outerWidth() * 0.10,
   });
 }
 
@@ -2355,7 +2457,7 @@ function getSingleProduct() {
 
   const id = params.get("id");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -2849,7 +2951,7 @@ function getSingleCategory() {
   let sid = localStorage.getItem("subCatId");
   let branchId = localStorage.getItem("branchId");
 
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -2911,7 +3013,7 @@ $(document).on("click", ".category_btn", function () {
 
 function getCart() {
   let branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -2997,7 +3099,7 @@ let couponsData = [];
 // GET COUPONS
 // ======================
 function getCoupons() {
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -3017,7 +3119,7 @@ function getCoupons() {
 }
 
 function expiredCoupon() {
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -3243,7 +3345,7 @@ async function getCurrentDeliveryBranch(totalSellingPrice) {
 }
 
 function getAllOtherDetail() {
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -3361,7 +3463,7 @@ function handleAddress(e) {
   });
 }
 function getAddress() {
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -3810,7 +3912,7 @@ function removeCurrentBranchSession() {
 }
 
 function getOrder() {
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -4495,7 +4597,7 @@ function getBrandOfTheDay() {
 function getSingleBrandOfTheDay() {
   let brandId = localStorage.getItem("brandId");
   let branchId = localStorage.getItem("branchId");
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -7631,7 +7733,7 @@ setInterval(toggleBrandDay, 6000);
 
 function getCurrentAddress() {
   addressId = localStorage.getItem("addressId")
-  $.ajax({
+  return $.ajax({
     url: apiUrl,
     method: "POST",
     dataType: "JSON",
@@ -7688,10 +7790,10 @@ function getCurrentAddress() {
 async function getCurrentBranch() {
   // const lat = 18.921984;
   // const lng = 72.834654;
-  let lat = 23.39868927001953;
-  let lng = 85.33858489990234;
+  // let lat = 23.39868927001953;
+  // let lng = 85.33858489990234;
 
-  // let { lat, lng } = await getCurrentLatLong();
+  let { lat, lng } = await getCurrentLatLong();
 
   const address = await getAddress2(lat, lng);
 
@@ -7704,10 +7806,10 @@ async function getCurrentBranch() {
 async function getCurrentLocation() {
 
 
-  let lat = 23.39868927001953;
-  let lng = 85.33858489990234;
+  // let lat = 23.39868927001953;
+  // let lng = 85.33858489990234;
 
-  // let { lat, lng } = await getCurrentLatLong();
+  let { lat, lng } = await getCurrentLatLong();
   $("#currentLocation").html('')
   $(".current-location-btn").html(`<div class="location_loader">
 <span class="loader_loc"></span>    <span>Detecting your location...</span>
@@ -7754,62 +7856,127 @@ async function getCurrentLocation() {
 }
 async function getCurrentLatLong() {
 
-  if (!navigator.geolocation) {
-    alert("Geolocation is not supported.");
-    return null;
-  }
+    // Check geolocation support
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported.");
+        return null;
+    }
 
-  return new Promise((resolve, reject) => {
+    const getLocation = (highAccuracy = true) => {
 
-    navigator.geolocation.getCurrentPosition(
+        return new Promise((resolve, reject) => {
 
-      (position) => {
+            navigator.geolocation.getCurrentPosition(
 
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
+                (position) => {
 
-        console.log("Latitude:", lat);
-        console.log("Longitude:", lng);
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
 
-        resolve({
-          lat: lat,
-          lng: lng
+                    console.log("Latitude:", lat);
+                    console.log("Longitude:", lng);
+                    console.log("Accuracy:", position.coords.accuracy);
+
+                    resolve({
+                        lat: lat,
+                        lng: lng,
+                        accuracy: position.coords.accuracy
+                    });
+                },
+
+                (error) => {
+
+                    console.log(
+                        `Location Error (${highAccuracy ? "High" : "Low"} Accuracy):`,
+                        error
+                    );
+
+                    reject(error);
+                },
+
+                {
+                    enableHighAccuracy: highAccuracy,
+                    timeout: highAccuracy ? 20000 : 10000,
+                    maximumAge: highAccuracy ? 0 : 60000
+                }
+            );
+
         });
-      },
 
-      (error) => {
+    };
 
-        console.log("Location Error:", error);
 
-        switch (error.code) {
+    try {
 
-          case error.PERMISSION_DENIED:
-            alert("Please allow location permission.");
-            break;
+        // --------------------------------
+        // First attempt: GPS
+        // --------------------------------
 
-          case error.POSITION_UNAVAILABLE:
-            alert("Location is currently unavailable.");
-            break;
+        console.log("Getting high accuracy location...");
 
-          case error.TIMEOUT:
-            alert("Location request timed out.");
-            break;
+        const location = await getLocation(true);
 
-          default:
-            alert("Unable to get your location.");
+        return location;
+
+    } catch (error) {
+
+        console.log("High accuracy failed.");
+
+        // --------------------------------
+        // Second attempt: Network location
+        // --------------------------------
+
+        try {
+
+            console.log("Trying low accuracy location...");
+
+            const location = await getLocation(false);
+
+            return location;
+
+        } catch (error2) {
+
+            console.log("Second location attempt failed:", error2);
+
+            switch (error2.code) {
+
+                case error2.PERMISSION_DENIED:
+
+                    alert(
+                        "Location permission denied. Please allow location permission from App Settings."
+                    );
+
+                    break;
+
+
+                case error2.POSITION_UNAVAILABLE:
+
+                    alert(
+                        "Location is currently unavailable. Please turn ON GPS and try again."
+                    );
+
+                    break;
+
+
+                case error2.TIMEOUT:
+
+                    alert(
+                        "Location request timed out. Please check your GPS and try again."
+                    );
+
+                    break;
+
+
+                default:
+
+                    alert(
+                        "Unable to get your current location."
+                    );
+            }
+
+            return null;
         }
-
-        reject(error);
-      },
-
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-      }
-    );
-
-  });
+    }
 }
 function handleCurrentAddress(item) {
 
@@ -7823,45 +7990,6 @@ function handleCurrentAddress(item) {
   $("#selectedRole").val(item?.type);
   console.log("zeenat....")
 }
-
-// async function getCurrentLocation() {
-
-//   if (!navigator.geolocation) {
-//     alert("Geolocation is not supported.");
-//     return;
-//   }
-
-//   navigator.geolocation.getCurrentPosition(
-//     async (position) => {
-
-//       const lat = position.coords.latitude;
-//       const lng = position.coords.longitude;
-
-//       // Set latitude & longitude
-//       document.getElementById("latitude").value = lat;
-//       document.getElementById("longitude").value = lng;
-
-//       // Get address
-//       await getAddress2(lat, lng);
-
-//       localStorage.setItem("user_latitude", lat);
-//       localStorage.setItem("user_longitude", lng);
-
-//       // Find nearest branch
-//       await findNearestBranch(lat, lng);
-
-//     },
-//     (error) => {
-//       console.log(error);
-//       alert("Please allow location permission.");
-//     },
-//     {
-//       enableHighAccuracy: true,
-//       timeout: 10000,
-//       maximumAge: 0
-//     }
-//   );
-// }
 
 
 async function getAddress2(lat, lng) {

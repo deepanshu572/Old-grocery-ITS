@@ -1,280 +1,262 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ITS-grocery</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
-      integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
-  </head>
-  <body cz-shortcut-listen="true">
-    <div class="main margin_box">
-      <input type="text" id="addressId" hidden>
-      <input type="text" id="slot" hidden>
-      <input type="text" id="payMethod1" hidden>
-      <input type="text" id="couponId" hidden>
-      <div class="back_btn" onclick="location.href='home.html'">
-        <div class="back_btn_arrow">
-          <i class="ti ti-arrow-narrow-left"></i>
-        </div>
-        <h5>Cart</h5>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ITS-grocery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.35.0/tabler-icons.min.css"
+    integrity="sha512-gzw5zNP2TRq+DKyAqZfDclaTG4dOrGJrwob2Fc8xwcJPDPVij0HowLIMZ8c1NefFM0OZZYUUUNoPfcoI5jqudw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+</head>
+
+<body cz-shortcut-listen="true">
+   <div id="loader">
+    <div class="data_loader">
+      <div class="wrapeer_data">
+        <img class="loader-img" src="../assets/img/icon/1.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/2.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/3.png" alt="">
       </div>
-      <div id="cartWrap">
-        <div class="cart_data">
-          <div class="cart_data_sec cart_data_sec1">
-            <div class="cart_data_header">
-              <div class="cart_head_img">
-                <img src="../assets/img/icon/timer.svg" alt="" />
-              </div>
-              <div class="cart_head_txt">
-                <h4>Delivery in 30-35 min</h4>
-                <p>Shipment of 2 items</p>
-              </div>
+      <h6>Everything you need, delivered at your <br> doorstep</h6>
+    </div>
+  </div>
+  <div class="main margin_box">
+    <input type="text" id="addressId" hidden>
+    <input type="text" id="slot" hidden>
+    <input type="text" id="payMethod1" hidden>
+    <input type="text" id="couponId" hidden>
+    <div class="back_btn" onclick="location.href='home.html'">
+      <div class="back_btn_arrow">
+        <i class="ti ti-arrow-narrow-left"></i>
+      </div>
+      <h5>Cart</h5>
+    </div>
+    <div id="cartWrap">
+      <div class="cart_data">
+        <div class="cart_data_sec cart_data_sec1">
+          <div class="cart_data_header">
+            <div class="cart_head_img">
+              <img src="../assets/img/icon/timer.svg" alt="" />
             </div>
-            <div class="cart_data_box" id="cartData"></div>
-          </div>
-          <div class="cart_data_sec cart_data_sec2">
-            <div class="top_cart_gift">
-              <div class="top_cart_gift_left">
-                <h4>Claim Your Free Gift</h4>
-                <p>Use Gift</p>
-              </div>
-              <div class="top_cart_gift_right">
-                <img src="../assets/img/icon/gift.svg" alt="" />
-              </div>
-            </div>
-            <div
-              class="last_cart_gift"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasBottomCoupons"
-              aria-controls="offcanvasBottomCoupons"
-            >
-              <div class="gift_head_wrap">
-                <img src="../assets/img/icon/coupons.svg" alt="" />
-                <h4>View All Coupons</h4>
-              </div>
-              <div class="check">
-                <i class="bi bi-chevron-down"></i>
-              </div>
+            <div class="cart_head_txt">
+              <h4>Delivery in 30-35 min</h4>
+              <p>Shipment of 2 items</p>
             </div>
           </div>
-          <div class="cart_data_sec cart_data_sec3">
-            <div class="cart_address_wrap">
-              <div class="cart_address_left">
-                <div class="box_home">
-                  <img src="../assets/img/icon/home.svg" alt="" />
-                </div>
-
-                <div class="box_data_address" id="selectedAddress">
-                  <h4>Delivering to <b></b></h4>
-                  <p></p>
-                </div>
-              </div>
-              <div class="cart_address_right btn_reuse">
-                <button
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasBottomAddress"
-                  aria-controls="offcanvasBottomAddress"
-                  
-                >
-                  Change
-                </button>
-              </div>
+          <div class="cart_data_box" id="cartData"></div>
+        </div>
+        <div class="cart_data_sec cart_data_sec2">
+          <div class="top_cart_gift">
+            <div class="top_cart_gift_left">
+              <h4>Claim Your Free Gift</h4>
+              <p>Use Gift</p>
             </div>
-            <div class="delivery_time">
-              <div class="delivery_left_txt">
-                <i class="ti ti-clock-hour-3"></i>
-                <h4 id="slotTime">Select Delivery Slot</h4>
-              </div>
-              <div class="btn_reuse">
-                <button
-                  type="button"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasBottomDeliverySlot"
-                  aria-controls="offcanvasBottomDeliverySlot"
-                >
-                  Select Delivery Slot
-                </button>
-              </div>
+            <div class="top_cart_gift_right">
+              <img src="../assets/img/icon/gift.svg" alt="" />
             </div>
           </div>
-          <div class="cart_data_sec cart_data_sec4">
-            <div class="bill_wrapper">
-              <h4>Bill details</h4>
-              <div class="bill_format_data">
-                <!-- Total MRP -->
-                <div class="bill_field">
-                  <div class="left_bill_field">
-                    <i class="ti ti-credit-card"></i>
-                    <p>Total MRP</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="totalMrp">₹0</small>
-                  </div>
-                </div>
-
-                <!-- Product Discount -->
-                <div class="bill_field green">
-                  <div class="left_bill_field">
-                    <i class="ti ti-tag-starred"></i>
-                    <p>Product Discount</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="productDiscount">-₹0</small>
-                  </div>
-                </div>
-
-                <!-- Subtotal -->
-                <div class="bill_field">
-                  <div class="left_bill_field">
-                    <i class="ti ti-shopping-cart"></i>
-                    <p>Subtotal</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="subTotal">₹0</small>
-                  </div>
-                </div>
-
-                <!-- Coupon -->
-                <div class="bill_field green">
-                  <div class="left_bill_field">
-                    <img src="../assets/img/icon/coupons2.svg" alt="" />
-                    <p>Coupon Discount</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="couponDiscount">-₹0</small>
-                  </div>
-                </div>
-
-                <!-- Delivery -->
-                <div class="bill_field">
-                  <div class="left_bill_field">
-                    <i class="ti ti-truck-delivery"></i>
-                    <p>Delivery Charge</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="deliveryCharge">FREE</small>
-                  </div>
-                </div>
-
-                <!-- Handling -->
-                <div class="bill_field">
-                  <div class="left_bill_field">
-                    <i class="ti ti-package"></i>
-                    <p>Handling Charge</p>
-                  </div>
-                  <div class="right_bill_field">
-                    <small id="handlingCharge">₹0</small>
-                  </div>
-                </div>
-
-                <div class="img-design"></div>
-
-                <!-- Grand Total -->
-                <div class="bill_field bill_total">
-                  <div class="left_bill_field">
-                    <strong>Grand Total</strong>
-                  </div>
-                  <div class="right_bill_field">
-                    <strong id="totalAmount">₹0</strong>
-                  </div>
-                </div>
-              </div>
+          <div class="last_cart_gift" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomCoupons"
+            aria-controls="offcanvasBottomCoupons">
+            <div class="gift_head_wrap">
+              <img src="../assets/img/icon/coupons.svg" alt="" />
+              <h4>View All Coupons</h4>
             </div>
-          </div>
-          <div class="cart_data_sec cart_data_sec5">
-            <div class="bill_saved">
-              <div class="wrap_saved">
-                <img src="../assets/img/icon/coupons.svg" alt="" />
-                <h4>Savings on this order</h4>
-              </div>
-              <p id="savedAmt">₹0</p>
+            <div class="check">
+              <i class="bi bi-chevron-down"></i>
             </div>
           </div>
         </div>
-        <div class="footer footer_cart">
-          <div class="footer_cart_wrap">
-            <div
-              class="footer_cart_left"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasBottomPay"
-              aria-controls="offcanvasBottomPay"
-            >
-              <div class="">
-                <i class="ti ti-cash"></i>
-                <h4>PAY USING</h4>
-                <i class="ti ti-caret-up-filled"></i>
+        <div class="cart_data_sec cart_data_sec3">
+          <div class="cart_address_wrap">
+            <div class="cart_address_left">
+              <div class="box_home">
+                <img src="../assets/img/icon/home.svg" alt="" />
               </div>
-              <p id="payMethod2"></p>
+
+              <div class="box_data_address" id="selectedAddress">
+                <h4>Delivering to <b></b></h4>
+                <p></p>
+              </div>
             </div>
-            <div class="footer_cart_right btn_reuse">
-              <button onclick="handleOrder()">
-                <b id="grandTotal"> </b> MRP (Tax incuded)
-                <i class="ti ti-caret-right-filled"></i>
+            <div class="cart_address_right btn_reuse">
+              <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomAddress"
+                aria-controls="offcanvasBottomAddress">
+                Change
+              </button>
+            </div>
+          </div>
+          <div class="delivery_time">
+            <div class="delivery_left_txt">
+              <i class="ti ti-clock-hour-3"></i>
+              <h4 id="slotTime">Select Delivery Slot</h4>
+            </div>
+            <div class="btn_reuse">
+              <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomDeliverySlot"
+                aria-controls="offcanvasBottomDeliverySlot">
+                Select Delivery Slot
               </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div class="cart_data_sec cart_data_sec4">
+          <div class="bill_wrapper">
+            <h4>Bill details</h4>
+            <div class="bill_format_data">
+              <!-- Total MRP -->
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <i class="ti ti-credit-card"></i>
+                  <p>Total MRP</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="totalMrp">₹0</small>
+                </div>
+              </div>
 
-    <!-- Payment Select Canvas -->
-    <div
-      class="offcanvas offcanvas-bottom reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomPay"
-      aria-labelledby="offcanvasBottomPayLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
-          Select Payment Option
-        </h5>
+              <!-- Product Discount -->
+              <div class="bill_field green">
+                <div class="left_bill_field">
+                  <i class="ti ti-tag-starred"></i>
+                  <p>Product Discount</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="productDiscount">-₹0</small>
+                </div>
+              </div>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <div class="offcanvas-body small">
-        <div class="payment_options reuse_options">
-          <label class="payment_option reuse_option ">
-            <div class="left_pay_box reuse_left_box">
-              <input type="radio" name="payment" value="online" hidden="" />
-              <i class="ti ti-building-bank"></i>
+              <!-- Subtotal -->
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <i class="ti ti-shopping-cart"></i>
+                  <p>Subtotal</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="subTotal">₹0</small>
+                </div>
+              </div>
 
-              <h5>Online Payment</h5>
+              <!-- Coupon -->
+              <div class="bill_field green">
+                <div class="left_bill_field">
+                  <img src="../assets/img/icon/coupons2.svg" alt="" />
+                  <p>Coupon Discount</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="couponDiscount">-₹0</small>
+                </div>
+              </div>
+
+              <!-- Delivery -->
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <i class="ti ti-truck-delivery"></i>
+                  <p>Delivery Charge</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="deliveryCharge">FREE</small>
+                </div>
+              </div>
+
+              <!-- Handling -->
+              <div class="bill_field">
+                <div class="left_bill_field">
+                  <i class="ti ti-package"></i>
+                  <p>Handling Charge</p>
+                </div>
+                <div class="right_bill_field">
+                  <small id="handlingCharge">₹0</small>
+                </div>
+              </div>
+
+              <div class="img-design"></div>
+
+              <!-- Grand Total -->
+              <div class="bill_field bill_total">
+                <div class="left_bill_field">
+                  <strong>Grand Total</strong>
+                </div>
+                <div class="right_bill_field">
+                  <strong id="totalAmount">₹0</strong>
+                </div>
+              </div>
             </div>
-            <i class="ti ti-circle-check-filled"></i>
-          </label>
-
-          <label class="payment_option reuse_option">
-            <div class="left_pay_box reuse_left_box">
-              <input type="radio" name="payment" value="cod" hidden="" />
+          </div>
+        </div>
+        <div class="cart_data_sec cart_data_sec5">
+          <div class="bill_saved">
+            <div class="wrap_saved">
+              <img src="../assets/img/icon/coupons.svg" alt="" />
+              <h4>Savings on this order</h4>
+            </div>
+            <p id="savedAmt">₹0</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer footer_cart">
+        <div class="footer_cart_wrap">
+          <div class="footer_cart_left" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottomPay"
+            aria-controls="offcanvasBottomPay">
+            <div class="">
               <i class="ti ti-cash"></i>
-              <h5>Cash on Delivery</h5>
+              <h4>PAY USING</h4>
+              <i class="ti ti-caret-up-filled"></i>
             </div>
-            <i class="ti ti-circle-check-filled"></i>
-          </label>
+            <p id="payMethod2"></p>
+          </div>
+          <div class="footer_cart_right btn_reuse">
+            <button onclick="handleOrder()">
+              <b id="grandTotal"> </b> MRP (Tax incuded)
+              <i class="ti ti-caret-right-filled"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Address Select Canvas -->
+  <!-- Payment Select Canvas -->
+  <div class="offcanvas offcanvas-bottom reuse_modal_box" tabindex="-1" id="offcanvasBottomPay"
+    aria-labelledby="offcanvasBottomPayLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+        Select Payment Option
+      </h5>
+
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body small">
+      <div class="payment_options reuse_options">
+        <label class="payment_option reuse_option ">
+          <div class="left_pay_box reuse_left_box">
+            <input type="radio" name="payment" value="online" hidden="" />
+            <i class="ti ti-building-bank"></i>
+
+            <h5>Online Payment</h5>
+          </div>
+          <i class="ti ti-circle-check-filled"></i>
+        </label>
+
+        <label class="payment_option reuse_option">
+          <div class="left_pay_box reuse_left_box">
+            <input type="radio" name="payment" value="cod" hidden="" />
+            <i class="ti ti-cash"></i>
+            <h5>Cash on Delivery</h5>
+          </div>
+          <i class="ti ti-circle-check-filled"></i>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address Select Canvas -->
 
   <div class="offcanvas offcanvas-bottom address_canvas reuse_modal_box" tabindex="-1" id="offcanvasBottomAddress"
     aria-labelledby="offcanvasBottomAddressLabel">
@@ -301,11 +283,11 @@
           <span>Add Address</span>
         </button>
       </div>
-      <div class="hidden"  id="currentLocation">
-      
+      <div class="hidden" id="currentLocation">
+
       </div>
       <div class="saved_address_box_box_modal">
-     
+
         <div class="saved_address">
           <b>Saved addresses</b>
           <div id="savedAddress"></div>
@@ -313,218 +295,180 @@
       </div>
     </div>
   </div>
-    <!-- Add Address Canvas -->
+  <!-- Add Address Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom add_address_canvas reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomAddAddress"
-      aria-labelledby="offcanvasBottomAddAddressLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
-          Add Address
-        </h5>
+  <div class="offcanvas offcanvas-bottom add_address_canvas reuse_modal_box" tabindex="-1"
+    id="offcanvasBottomAddAddress" aria-labelledby="offcanvasBottomAddAddressLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomAddressLabel">
+        Add Address
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <div class="offcanvas-body small">
-        <div class="add_address_wrap">
-          <input type="text" id="selectedRole" hidden />
-          <div class="add_address_highlight">
-            A detailed address will help our delivery partner reach your
-            doorstep easily.
-          </div>
-          <div class="add_address_form_sec">
-            <h4>Save address as*</h4>
-            <div class="form_address_wrap">
-              <div class="form_icons">
-                <div class="form_icon role_active" data-role="Home">
-                  <i class="bi bi-house-add"></i>
-                  <p>Home</p>
-                </div>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body small">
+      <div class="add_address_wrap">
+        <input type="text" id="selectedRole" hidden />
+        <div class="add_address_highlight">
+          A detailed address will help our delivery partner reach your
+          doorstep easily.
+        </div>
+        <div class="add_address_form_sec">
+          <h4>Save address as*</h4>
+          <div class="form_address_wrap">
+            <div class="form_icons">
+              <div class="form_icon role_active" data-role="Home">
+                <i class="bi bi-house-add"></i>
+                <p>Home</p>
+              </div>
 
-                <div class="form_icon" data-role="Work">
-                  <i class="bi bi-buildings"></i>
-                  <p>Work</p>
-                </div>
+              <div class="form_icon" data-role="Work">
+                <i class="bi bi-buildings"></i>
+                <p>Work</p>
+              </div>
 
-                <div class="form_icon" data-role="Friends & Family">
-                  <i class="bi bi-people"></i>
-                  <p>Friends &amp; Family</p>
-                </div>
+              <div class="form_icon" data-role="Friends & Family">
+                <i class="bi bi-people"></i>
+                <p>Friends &amp; Family</p>
+              </div>
 
-                <div class="form_icon" data-role="Other">
-                  <i class="bi bi-geo-alt"></i>
-                  <p>Other</p>
-                </div>
+              <div class="form_icon" data-role="Other">
+                <i class="bi bi-geo-alt"></i>
+                <p>Other</p>
               </div>
             </div>
+          </div>
 
-            <div class="address_form">
-              <!-- Address Details -->
-              <input
-                type="text"
-                id="houseNo"
-                class="form_input"
-                placeholder="House No / Flat No / Building Name *"
-                required
-              />
+          <div class="address_form">
+            <!-- Address Details -->
+            <input type="text" id="houseNo" class="form_input" placeholder="House No / Flat No / Building Name *"
+              required />
 
-              <input
-                type="text"
-                id="floor"
-                class="form_input"
-                placeholder="Floor (Optional)"
-              />
+            <input type="text" id="floor" class="form_input" placeholder="Floor (Optional)" />
 
-              <input
-                type="text"
-                id="area"
-                class="form_input"
-                placeholder="Area / Locality *"
-                required
-              />
+            <input type="text" id="area" class="form_input" placeholder="Area / Locality *" required />
 
-              <input
-                type="text"
-                id="city"
-                class="form_input"
-                placeholder="City *"
-                required
-              />
+            <input type="text" id="city" class="form_input" placeholder="City *" required />
 
-              <input
-                type="text"
-                id="state"
-                class="form_input"
-                placeholder="State *"
-                required
-              />
+            <input type="text" id="state" class="form_input" placeholder="State *" required />
 
-              <input
-                type="text"
-                id="pincode"
-                class="form_input"
-                maxlength="6"
-                placeholder="PIN Code *"
-                required
-              />
+            <input type="text" id="pincode" class="form_input" maxlength="6" placeholder="PIN Code *" required />
 
-              <p class="section_title">Receiver Details</p>
+            <p class="section_title">Receiver Details</p>
 
-              <input
-                type="text"
-                id="name"
-                class="form_input"
-                placeholder="Receiver Name *"
-                required
-              />
+            <input type="text" id="name" class="form_input" placeholder="Receiver Name *" required />
 
-              <input
-                type="tel"
-                id="number"
-                class="form_input"
-                maxlength="10"
-                placeholder="Mobile Number *"
-                required
-              />
-            </div>
-            <div class="button_save_add btn_reuse" id="btnToggleAddress">
-              <button onclick="handleAddress(event)">Save Address</button>
-            </div>
+            <input type="tel" id="number" class="form_input" maxlength="10" placeholder="Mobile Number *" required />
+          </div>
+          <div class="button_save_add btn_reuse" id="btnToggleAddress">
+            <button onclick="handleAddress(event)">Save Address</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Delivery Slot Canvas -->
+  <!-- Delivery Slot Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomDeliverySlot"
-      aria-labelledby="offcanvasBottomDeliverySlotLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomDeliverySlotLabel">
-          Select Delivery slot
-        </h5>
+  <div class="offcanvas offcanvas-bottom reuse_modal_box" tabindex="-1" id="offcanvasBottomDeliverySlot"
+    aria-labelledby="offcanvasBottomDeliverySlotLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomDeliverySlotLabel">
+        Select Delivery slot
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <div class="offcanvas-body small">
-        <div class="slot_options reuse_options">
-          <label class="slot_option reuse_option ">
-            <div class="left_slot_box reuse_left_box">
-              <input type="radio" name="payment" value="online" hidden="" />
-              <i class="ti ti-clock-hour-2"></i>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+    <div class="offcanvas-body small">
+      <div class="slot_options reuse_options">
+        <label class="slot_option reuse_option ">
+          <div class="left_slot_box reuse_left_box">
+            <input type="radio" name="payment" value="online" hidden="" />
+            <i class="ti ti-clock-hour-2"></i>
 
-              <h5>Morning 10:00 AM - 02:00 PM</h5>
-            </div>
-            <i class="ti ti-circle-check-filled"></i>
-          </label>
+            <h5>Morning 10:00 AM - 02:00 PM</h5>
+          </div>
+          <i class="ti ti-circle-check-filled"></i>
+        </label>
 
-          <label class="slot_option reuse_option">
-            <div class="left_slot_box reuse_left_box">
-              <input type="radio" name="payment" value="cod" hidden="" />
-              <i class="ti ti-clock-hour-2"></i>
-              <h5>Morning 12:00 AM - 03:00 PM</h5>
-            </div>
-            <i class="ti ti-circle-check-filled"></i>
-          </label>
-        </div>
+        <label class="slot_option reuse_option">
+          <div class="left_slot_box reuse_left_box">
+            <input type="radio" name="payment" value="cod" hidden="" />
+            <i class="ti ti-clock-hour-2"></i>
+            <h5>Morning 12:00 AM - 03:00 PM</h5>
+          </div>
+          <i class="ti ti-circle-check-filled"></i>
+        </label>
       </div>
     </div>
+  </div>
 
-    <!-- coupons Canvas -->
+  <!-- coupons Canvas -->
 
-    <div
-      class="offcanvas offcanvas-bottom address_canvas coupon_modal reuse_modal_box"
-      tabindex="-1"
-      id="offcanvasBottomCoupons"
-      aria-labelledby="offcanvasBottomCouponsLabel"
-    >
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasBottomCouponsLabel">
-          Apply Coupons
-        </h5>
+  <div class="offcanvas offcanvas-bottom address_canvas coupon_modal reuse_modal_box" tabindex="-1"
+    id="offcanvasBottomCoupons" aria-labelledby="offcanvasBottomCouponsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomCouponsLabel">
+        Apply Coupons
+      </h5>
 
-        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-          <i class="ti ti-x"></i>
-        </button>
-      </div>
-      <div class="offcanvas-body small coupons_item_wrap">
-        <div id="couponsData1" class="coupons_fnt"></div>
-        <div id="couponsData2" class="coupons_fnt"></div>
-      </div>
+      <button type="button" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="ti ti-x"></i>
+      </button>
     </div>
+    <div class="offcanvas-body small coupons_item_wrap">
+      <div id="couponsData1" class="coupons_fnt"></div>
+      <div id="couponsData2" class="coupons_fnt"></div>
+    </div>
+  </div>
 
-     <script src="../cordova.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../cordova.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="../assets/js/owl.carousel.min.js"></script>
+  <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
 
-    <script src="../assets/js/pageRender.js"></script>
-    <script src="../assets/js/script.js"></script>
+  <script src="../assets/js/pageRender.js"></script>
+  <script src="../assets/js/script.js"></script>
 
-    <script>
-      getCart();
-      getCoupons();
-      getAllVarient();
-      getAllOtherDetail();
-      getCurrentAddress();
-       getAddress();
-       expiredCoupon();
-    </script>
-  </body>
+  <script>
+
+    async function fncCalling() {
+
+      showLoader();
+
+      try {
+
+        await Promise.all([
+          getCart(),
+          getCoupons(),
+          getAllVarient(),
+          getAllOtherDetail(),
+          getCurrentAddress(),
+          getAddress(),
+          expiredCoupon()
+        ]);
+
+      } catch (error) {
+
+        console.error("Kids loading error:", error);
+
+      } finally {
+
+        hideLoader();
+
+      }
+    }
+    fncCalling();
+
+  </script>
+</body>
+
 </html>

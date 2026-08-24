@@ -18,6 +18,16 @@
 </head>
 
 <body>
+  <div id="loader">
+    <div class="data_loader">
+      <div class="wrapeer_data">
+        <img class="loader-img" src="../assets/img/icon/1.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/2.png" alt="">
+        <img class="loader-img" src="../assets/img/icon/3.png" alt="">
+      </div>
+      <h6>Everything you need, delivered at your <br> doorstep</h6>
+    </div>
+  </div>
   <div class="main margin_box animate-fade-in">
     <div class="back_btn" onclick="location.href='home.html'">
       <div class="back_btn_arrow">
@@ -103,16 +113,36 @@
   </div>
 
 
- <script src="../cordova.js"></script>
+  <script src="../cordova.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+
 
   <script src="../assets/js/script.js"></script>
- <script>
-    getSingleBrandOfTheDay();
- </script>
+  <script>
+    async function fncCalling() {
+
+      showLoader();
+
+      try {
+
+        await getSingleBrandOfTheDay();
+
+      } catch (error) {
+
+        console.error("brands loading error:", error);
+
+      } finally {
+
+        hideLoader();
+
+      }
+    }
+    fncCalling();
+  </script>
 </body>
 
 </html>

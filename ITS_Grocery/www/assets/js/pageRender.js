@@ -43,18 +43,11 @@ function renderCategory(name) {
         </div>
         <div class="reuse_category new_arivals">
           <div class="category_wrap_new_arrival">
-            <h4>New Arrivals</h4>
+            <h4 id="categoryhead1"></h4>
             <div class="new_arivals_design" id="newArrival"></div>
           </div>
         </div>
-        <div class="reuse_category wrap_category2">
-          <div class="category_wrap reuse_wrap_head">
-            <h4 id="categoryhead1"></h4>
-            <div class="category_box_design" id="categoryBox1">
-             
-            </div>
-          </div>
-        </div>
+
         <div class="reuse_category wrap_category3">
           <div class="category_wrap reuse_wrap_head">
             <h4 id="categoryhead2"></h4>

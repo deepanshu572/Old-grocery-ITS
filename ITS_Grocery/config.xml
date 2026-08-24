@@ -1,41 +1,154 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="1" id="com.app.ITScart" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+
+<widget
+    id="com.app.ITScart"
+    version="1.0"
+    android-versionCode="1"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
     <name>TEST Cart</name>
+
     <description>
         Start Your Business With TEST Web Service
     </description>
+
     <author email="support@itswebservice.com">
         TEST Web Service
     </author>
+
     <content src="index.html" />
+
+    <!-- =========================
+         GENERAL PREFERENCES
+    ========================== -->
+
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="24" />
-    <preference name="android-targetSdkVersion" value="35" />
-    <preference name="android-compileSdkVersion" value="35" />
-    <preference name="AndroidXEnabled" value="true" />
-    <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/assets/img/logo/splashicon.png" />
-    <preference name="AndroidWindowSplashScreenBackground" value="#f7cb45" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <plugin name="cordova-plugin-network-information" />
-    <plugin name="cordova-plugin-statusbar" />
-    <plugin name="cordova-plugin-x-socialsharing" />
-    <plugin name="cordova-plugin-android-permissions" />
-    <plugin name="cordova-plugin-speechrecognition" />
-    <plugin name="cordova-plugin-in-app-updates" />
-    <platform name="android">
-        <icon src="www/assets/img/logo/icon.png" />
-        <config-file parent="/manifest" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.RECORD_AUDIO" />
-            <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-        </config-file>
-        <allow-intent href="market:*" />
-        
-    </platform>
+
+    <preference
+        name="android-minSdkVersion"
+        value="24"
+    />
+
+    <preference
+        name="android-targetSdkVersion"
+        value="35"
+    />
+
+    <preference
+        name="android-compileSdkVersion"
+        value="35"
+    />
+
+    <preference
+        name="AndroidXEnabled"
+        value="true"
+    />
+
+    <!-- Splash Screen -->
+
+    <preference
+        name="AndroidWindowSplashScreenAnimatedIcon"
+        value="www/assets/img/logo/splashicon.png"
+    />
+
+    <preference
+        name="AndroidWindowSplashScreenBackground"
+        value="#f7cb45"
+    />
+
+    <!-- Status Bar -->
+
+    <preference
+        name="StatusBarOverlaysWebView"
+        value="false"
+    />
+
+
+    <!-- =========================
+         ACCESS
+    ========================== -->
+
     <access origin="*" />
+
+    <allow-navigation href="*" />
+
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+
+
+    <!-- =========================
+         ANDROID
+    ========================== -->
+
+    <platform name="android">
+
+        <!-- App Icon -->
+
+        <icon src="www/assets/img/logo/icon.png" />
+
+        <!-- Permissions -->
+
+        <config-file
+            target="AndroidManifest.xml"
+            parent="/manifest"
+            mode="merge">
+
+            <uses-permission
+                android:name="android.permission.POST_NOTIFICATIONS"
+            />
+
+            <uses-permission
+                android:name="android.permission.RECORD_AUDIO"
+            />
+
+            <uses-permission
+                android:name="android.permission.ACCESS_COARSE_LOCATION"
+            />
+
+            <uses-permission
+                android:name="android.permission.ACCESS_FINE_LOCATION"
+            />
+
+        </config-file>
+
+    </platform>
+
+
+    <!-- =========================
+         PLUGINS
+    ========================== -->
+
+    <plugin name="cordova-plugin-statusbar" />
+
+    <plugin name="cordova-plugin-network-information" />
+
+    <plugin name="cordova.plugins.diagnostic" />
+
+    <plugin name="cordova-plugin-geolocation" />
+
+    <plugin name="cordova-plugin-in-app-updates" />
+
+    <plugin name="cordova-plugin-inappbrowser" />
+
+    <plugin name="cordova-plugin-android-permissions" />
+
+    <plugin name="cordova-plugin-speechrecognition" />
+
+    <plugin name="cordova-plugin-x-socialsharing" />
+
+    <plugin name="es6-promise-plugin" />
+
+    <plugin name="com.razorpay.cordova" />
+
+    <!-- Firebase -->
+    <!--
+    <plugin name="cordova-plugin-firebasex" />
+    -->
+
 </widget>
