@@ -7804,16 +7804,16 @@ async function getCurrentBranch() {
 }
 
 async function getCurrentLocation() {
-
+  $("#currentLocation").html('')
+  $(".current-location-btn").html(`<div class="location_loader">
+<span class="loader_loc"></span>    <span>Detecting your location...</span>
+</div>`)
 
   // let lat = 23.39868927001953;
   // let lng = 85.33858489990234;
 
   let { lat, lng } = await getCurrentLatLong();
-  $("#currentLocation").html('')
-  $(".current-location-btn").html(`<div class="location_loader">
-<span class="loader_loc"></span>    <span>Detecting your location...</span>
-</div>`)
+
 
 
 

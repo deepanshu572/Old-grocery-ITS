@@ -71,6 +71,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: var(--font1);
+    overflow-y: auto;
 
 }
 
@@ -1009,7 +1010,7 @@ body {
 .product_sec_design1 {
     background-image: url("../img/bg/bgProduct.svg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     /* background-position: bottom; */
     font-family: var(--font3);
 
@@ -1335,6 +1336,7 @@ body {
     font-family: var(--font3);
     padding: 2px 25px !important;
     padding-right: 20px !important;
+    /* margin-bottom: 4rem; */
 
 }
 
@@ -1375,8 +1377,14 @@ body {
     overflow: hidden;
     font-weight: 600;
     padding-top: 8px !important;
-    /* height: 34px; */
+    height: 34px;
 
+}
+.category_bottom p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .rating_wrap {
@@ -2527,7 +2535,7 @@ body {
 }
 
 .lightThemePharmacy .header_nav {
-    height: 45vh !important;
+    /* height: 45vh !important; */
 }
 
 .product_img {
@@ -2655,7 +2663,8 @@ body {
 }
 
 .pharmacy_page {
-    margin-top: 5.5rem;
+    margin-top: 1.5rem;
+    /* margin-top: 5.5rem; */
 }
 
 .order_box_pharmacy {
@@ -4684,11 +4693,12 @@ button.coupon_btn.apply-btn {
     width: 20%;
     z-index: 2;
     margin-top: 3.7rem;
+    margin-top: 3.8rem;
     padding: 4px;
     padding-right: 0;
     top: 0;
     left: 0;
-
+padding-bottom: 15vh;
 }
 
 
@@ -5104,6 +5114,7 @@ button.coupon_btn.apply-btn {
 
 .search_data_wrap {
     margin-top: 2rem;
+    margin-bottom: 4rem;
 }
 
 .not_found {
