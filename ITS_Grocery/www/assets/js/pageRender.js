@@ -414,14 +414,12 @@ function renderCategory(name) {
                         <div class="seeAllProduct" id="productFashionHeading3"></div>
 
           </div>
-          <div class="green_banner">
+          <div class="fashion_banner_Sec_crousel">
              <div
             class="owl-carousel owl-carousel5 banner_crousel "
             id="carousel5"
           ></div>
-            <!-- <div class="green_banner_img">
-              <img src="../assets/img/green_banner.svg" alt="" />
-            </div> -->
+           
           </div>
           <div class="reuse_product">
             <div class="fashion_header">

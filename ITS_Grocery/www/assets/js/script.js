@@ -14,17 +14,17 @@ if (cartData && cartData.length > 0) {
   }
 }
 
-// let apiUrl =
-//   "https://indiantechsolution.com/demos/multibranch/its-cart/apis/app/";
-
-// let imgUrl =
-//   "https://indiantechsolution.com/demos/multibranch/its-cart/admin/";
-
 let apiUrl =
-  "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/apis/app/";
+  "https://indiantechsolution.com/demos/multibranch/its-cart/apis/app/";
 
 let imgUrl =
-  "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/admin/";
+  "https://indiantechsolution.com/demos/multibranch/its-cart/admin/";
+
+// let apiUrl =
+//   "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/apis/app/";
+
+// let imgUrl =
+//   "http://localhost/indian%20tech%20solution-Branch/Dashboard_multiBranch/admin/";
 
 let categoryId = localStorage.getItem("currentCategoryId") || '';
 
@@ -65,102 +65,102 @@ document.addEventListener("deviceready", async function () {
 
 
 
-   let loaderTl;
+let loaderTl;
 
-    function showLoader() {
+function showLoader() {
 
-      // console.log("hello inner....");
+  // console.log("hello inner....");
 
-      const loader = document.getElementById("loader");
+  const loader = document.getElementById("loader");
 
-      // IMPORTANT: show loader again
-      loader.style.display = "flex";
+  // IMPORTANT: show loader again
+  loader.style.display = "flex";
 
-      // Reset loader opacity
-      gsap.set(loader, {
-        opacity: 1
-      });
+  // Reset loader opacity
+  gsap.set(loader, {
+    opacity: 1
+  });
 
-      // Kill previous timeline if exists
-      if (loaderTl) {
-        loaderTl.kill();
-      }
+  // Kill previous timeline if exists
+  if (loaderTl) {
+    loaderTl.kill();
+  }
 
-      // Heading
-      gsap.set(".data_loader h6", {
-        opacity: 0
-      });
+  // Heading
+  gsap.set(".data_loader h6", {
+    opacity: 0
+  });
 
-      gsap.to(".data_loader h6", {
-        opacity: 1,
-        duration: 0.3
-      });
+  gsap.to(".data_loader h6", {
+    opacity: 1,
+    duration: 0.3
+  });
 
-      // Images
-      const images = gsap.utils.toArray(".loader-img");
+  // Images
+  const images = gsap.utils.toArray(".loader-img");
 
-      // Reset images
-      gsap.set(images, {
-        opacity: 0,
-        y: 40
-      });
+  // Reset images
+  gsap.set(images, {
+    opacity: 0,
+    y: 40
+  });
 
-      // Create new timeline
-      loaderTl = gsap.timeline({
-        repeat: -1
-      });
+  // Create new timeline
+  loaderTl = gsap.timeline({
+    repeat: -1
+  });
 
-      images.forEach((img) => {
+  images.forEach((img) => {
 
-        loaderTl
-          .fromTo(
-            img,
-            {
-              opacity: 0,
-              y: 40
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.45,
-              ease: "power2.out"
-            }
-          )
-
-          .to({}, {
-            duration: 0.7
-          })
-
-          .to(img, {
-            opacity: 0,
-            y: -40,
-            duration: 0.35,
-            ease: "power2.in"
-          });
-
-      });
-    }
-
-
-    function hideLoader() {
-
-      // Stop animation
-      if (loaderTl) {
-        loaderTl.kill();
-        loaderTl = null;
-      }
-
-      const loader = document.getElementById("loader");
-
-      gsap.to(loader, {
-        opacity: 0,
-        duration: 0.4,
-
-        onComplete() {
-          loader.style.display = "none";
+    loaderTl
+      .fromTo(
+        img,
+        {
+          opacity: 0,
+          y: 40
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.45,
+          ease: "power2.out"
         }
+      )
+
+      .to({}, {
+        duration: 0.7
+      })
+
+      .to(img, {
+        opacity: 0,
+        y: -40,
+        duration: 0.35,
+        ease: "power2.in"
       });
+
+  });
+}
+
+
+function hideLoader() {
+
+  // Stop animation
+  if (loaderTl) {
+    loaderTl.kill();
+    loaderTl = null;
+  }
+
+  const loader = document.getElementById("loader");
+
+  gsap.to(loader, {
+    opacity: 0,
+    duration: 0.4,
+
+    onComplete() {
+      loader.style.display = "none";
     }
+  });
+}
 
 
 
@@ -261,6 +261,62 @@ function getCategory() {
 }
 
 
+// function getTopLeftBanner() {
+//   categoryId = localStorage.getItem("currentCategoryId");
+//   const branchId = localStorage.getItem("branchId");
+
+//   return $.ajax({
+//     url: apiUrl,
+//     method: "POST",
+//     dataType: "JSON",
+//     data: {
+//       type: "getFlashSalePrd",
+//       categoryId,
+//       branchId
+//     },
+//     success: function (response) {
+//       if (response.status === "success") {
+//         console.log("response.data============ 44444");
+//         console.log(response.data);
+//         console.log("response.data==========");
+//         let carouselItems = "";
+
+
+//         response.data.forEach((item, index) => {
+//           carouselItems += `
+//         <div class="carousel-item  ${index === 0 ? "active" : ""}">
+//         <div class="top_left_banner" onclick="location.href='productDetail.html?id=${item.p_id}'">
+//         <h4>Flash Sale</h4>
+//         <div class="sell_price">₹${item.v_seliing_price}</div>
+//         <div class="mrp_price"><del>₹${item.v_mrp}</del></div>
+//         <h6>${item.name}</h6>
+
+//         <img src="${imgUrl + item.image_path}" class="d-block w-100" alt="Banner"> 
+//        </div>
+//         </div>
+//       `;
+//         });
+
+//         const bannerHTML = `
+//       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+//         <div class="carousel-inner">
+//           ${carouselItems}
+//         </div>
+//       </div>
+//     `;
+
+
+//         $("#topLeftBanner").html(bannerHTML);
+
+//         $(".slide").css("background", `url("${imgUrl + response.bg.img_path}")`);
+//       } else {
+//         console.log(response.message);
+//       }
+//     },
+//   });
+// }
+
+
 function getTopLeftBanner() {
   categoryId = localStorage.getItem("currentCategoryId");
   const branchId = localStorage.getItem("branchId");
@@ -280,35 +336,51 @@ function getTopLeftBanner() {
         console.log(response.data);
         console.log("response.data==========");
         let carouselItems = "";
-        
+
 
         response.data.forEach((item, index) => {
           carouselItems += `
-        <div class="carousel-item  ${index === 0 ? "active" : ""}">
+        <div class="swiper-slide">
         <div class="top_left_banner" onclick="location.href='productDetail.html?id=${item.p_id}'">
         <h4>Flash Sale</h4>
         <div class="sell_price">₹${item.v_seliing_price}</div>
         <div class="mrp_price"><del>₹${item.v_mrp}</del></div>
-        <h6>${item.name}</h6>
-          
+        <h6>${item.name}</h6>   
         <img src="${imgUrl + item.image_path}" class="d-block w-100" alt="Banner"> 
        </div>
-        </div>
+          </div>
       `;
         });
 
         const bannerHTML = `
-      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          ${carouselItems}
-        </div>
+
+     <div class="swiper mySwiper slide">
+      <div class="swiper-wrapper">
+                 ${carouselItems}
+
       </div>
-    `;
+     
+    </div>
+        `;
+
 
 
         $("#topLeftBanner").html(bannerHTML);
 
-$(".slide").css("background", `url("${imgUrl+response.bg.img_path}")`);
+        var swiper = new Swiper('.mySwiper', {
+          grabCursor: true,
+          loop: true,
+          parallax: true,
+          spaceBetween: 30,
+          centeredSlides: true,
+          autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+          },
+
+        });
+
+        $(".slide").css("background", `url("${imgUrl + response.bg.img_path}")`);
       } else {
         console.log(response.message);
       }
@@ -911,11 +983,8 @@ function createSubCategoryHTML2(categories = []) {
       <div class="cateogy_box_new_design"
            onclick="renderInSubCategory('${item.under_category}','${item.id}')">
 
-        <div class="category_img_new_design">
-          <img src="${imgUrl + item.image_path}" alt="${item.name}">
-        </div>
+           <img src="${imgUrl + item.image_path}" alt="${item.name}">
 
-        <h6>${item.name}</h6>
       </div>
     `,
     )
@@ -923,7 +992,7 @@ function createSubCategoryHTML2(categories = []) {
 }
 function createSubCategoryHTML1(categories = []) {
   return categories
-  .slice(0, 8)
+    .slice(0, 8)
     .map(
       (item) => `
       <div class="cateogy_box"
@@ -2096,10 +2165,12 @@ function handleIncrement(id, varId, type, idfr) {
 
   const prdData = products[id];
   const allPrdData = AllProduct[id];
+
   console.log(products)
 
-  console.log(prdData, allPrdData, "prdData, allPrdData");
-  console.log("id, varId, type, idfr :", id, varId, type, idfr)
+  console.log("ZEENAT -  prdData : ", prdData);
+  console.log("ZEENAT -  allPrdData : ", allPrdData);
+  console.log("ZEENAT -  id, varId, type, idfr :", id, varId, type, idfr)
 
   // ================= Variant Data =================
   let varData;
@@ -2153,9 +2224,14 @@ function handleIncrement(id, varId, type, idfr) {
 
   // ================= Local Cart =================
   if (type === "prdDataVar") {
-    updateCartLocal(prdData, varData, varId, qty);
-    console.log("Zeenat......")
-    console.log(prdData, varData, varId, qty)
+    if (prdData !== undefined && prdData !== null) {
+      updateCartLocal(prdData, varData, varId, qty);
+    } else {
+      updateCartLocal(allPrdData, varData, varId, qty);
+    }
+    // updateCartLocal(prdData, varData, varId, qty);
+    // console.log("Zeenat......")
+    // console.log(prdData, varData, varId, qty)
   } else {
     updateCartLocal(allPrdData, varData, varId, qty);
     console.log("NOT - Zeenat......")
@@ -2170,8 +2246,17 @@ function handleIncrement(id, varId, type, idfr) {
   }
 
   // ================= API =================
-  const productData =
+  let productData =
     type === "prdDataVar" ? prdData : allPrdData;
+    if(productData !== undefined || productData !== null) {
+        productData =allPrdData;
+      // console.error("Product data is undefined or null for id:", id);
+      // return;
+    }
+
+
+  console.log("ZEENAT -  productData?.p_id : ", productData);
+  // alert(productData?.p_id)
 
   const formData = {
     type: "handleIncrement",
@@ -2354,7 +2439,7 @@ function getAllHeading(type) {
           $("#producthead1").html(productHead.title1);
           $("#producthead2").html(productHead.title2);
           $("#producthead3").html(productHead.title3);
-          $("#producthead4").html(productHead.title5);
+          $("#producthead4").html(productHead.title4);
           $("#producthead5").html(productHead.title5);
           $("#producthead6").html(productHead.title6);
 
@@ -2485,6 +2570,7 @@ function getSingleProduct() {
           product.under_category,
           product.under_subcategory,
         );
+        console.log(product)
 
         if (variants.length > 0) {
           $("#footerPrice").html("₹" + variants[0].v_seliing_price);
@@ -3447,9 +3533,12 @@ function handleAddress(e) {
         $("#name").val("");
         $("#number").val("");
         $("#selectedRole").val("");
+const canvas1 = document.getElementById('offcanvasBottomAddAddress');
 
+bootstrap.Offcanvas.getOrCreateInstance(canvas1).hide();
         $("#offcanvasBottomAddressLabel").text("Add Address");
-
+ const canvas2 = document.getElementById('offcanvasBottomAddress');
+    bootstrap.Offcanvas.getOrCreateInstance(canvas2).show();
         getAddress();
       } else {
         console.log(response.message);
@@ -3590,6 +3679,13 @@ function selectAddress(
   $("#selectedRole").val(address_type);
   $(".saved_address_data").removeClass("selected_address");
   $(element).closest(".saved_address_data").addClass("selected_address");
+  const addressCanvas = document.getElementById('offcanvasBottomAddress');
+
+const offcanvas = bootstrap.Offcanvas.getInstance(addressCanvas);
+
+if (offcanvas) {
+    offcanvas.hide();
+}
   if (window.location.pathname.endsWith("home.html")) {
     getCurrentAddress();
   }
@@ -5036,7 +5132,7 @@ function getBeautyCategoryStore2() {
       if (response.status == "success") {
         console.log(response.data);
         let arrowDesign = response.data;
-        arrowDesign.map((item) => {
+        arrowDesign.slice(0, 9).map((item) => {
           categoryArrowHtml += `   <div class="category_beauty_arrow_item" 
           onclick="renderInSubCategory('${item.under_category}','${item.id}')">
                 <img src="${imgUrl + item.image_path}" alt="">
@@ -5070,7 +5166,7 @@ function getBeautyCategoryStore3() {
       if (response.status == "success") {
         console.log(response.data);
         let arrowDesign = response.data;
-        arrowDesign.map((item) => {
+        arrowDesign.slice(0, 8).map((item) => {
           categoryArrowHtml += `  <div  class="cateogy_box"
           onclick="renderInSubCategory('${item.under_category}','${item.id}')">
                 <div class="category_img_box_design">
@@ -5107,7 +5203,7 @@ function getBeautyCategoryStore4() {
       if (response.status == "success") {
         console.log(response.data);
         let arrowDesign = response.data;
-        arrowDesign.map((item) => {
+        arrowDesign.slice(0, 8).map((item) => {
           categoryArrowHtml += `  <div class="cateogy_box"
            onclick="renderInSubCategory('${item.under_category}','${item.id}')">
                 <div class="category_img_box_design">
@@ -5145,7 +5241,7 @@ function getBeautyCategoryStore5() {
       if (response.status == "success") {
         console.log(response.data);
         let arrowDesign = response.data;
-        arrowDesign.map((item) => {
+        arrowDesign.slice(0, 8).map((item) => {
           categoryArrowHtml += `  <div class="cateogy_box"
            onclick="renderInSubCategory('${item.under_category}','${item.id}')">
                 <div class="category_img_box_design">
@@ -5330,7 +5426,7 @@ function getfashionCategory2() {
       if (response.status == "success") {
         console.log(response.data);
         let data = response.data;
-        data.map((item) => {
+        data.slice(0, 6).map((item) => {
           category += `      <div class="fashion_sale_box" 
           onclick="renderInSubCategory('${item.under_category}','${item.id}')">
               <img src="${imgUrl + item.image_path}" alt="" />
@@ -5501,7 +5597,7 @@ function getFashionBanner3() {
 
       response.data.forEach((item) => {
         bannerHtml += `
-          <div class="">
+          <div class="item">
             <img src="${imgUrl + item.img_path}" alt="">
           </div>
         `;
@@ -5521,7 +5617,7 @@ function getFashionBanner3() {
       // Initialize Owl Carousel
       $carousel.owlCarousel({
         loop: true,
-        margin: 5,
+        margin: -50,
         nav: false,
         dots: true,
         autoplay: true,
@@ -5587,7 +5683,7 @@ function getFashionBanner1() {
       // Initialize Owl Carousel
       $carousel.owlCarousel({
         loop: true,
-        margin: 5,
+        margin: -50,
         nav: false,
         dots: true,
         autoplay: true,
@@ -5960,7 +6056,7 @@ function getCategoryPharmacy1() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
                      onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6000,7 +6096,7 @@ function getCategoryPharmacy2() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
                      onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6041,7 +6137,7 @@ function getCategoryPharmacy3() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
                      onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6081,7 +6177,7 @@ function getCategoryPharmacy4() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
                      onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6121,7 +6217,7 @@ function getCategoryPharmacy5() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
                      onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6202,7 +6298,7 @@ function getCategoryKids1() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box" 
            onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6241,7 +6337,7 @@ function getCategoryKids2() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box" 
            onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6280,7 +6376,7 @@ function getCategoryKids3() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
            onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6319,7 +6415,7 @@ function getCategoryKids4() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box" onclick="renderInSubCategory('${product.under_category}','${product.id}')">
                 <div class="category_img_box_design">
@@ -6357,7 +6453,7 @@ function getCategoryKids5() {
         return;
       }
 
-      response.data.forEach((product, index) => {
+      response.data.slice(0, 8).forEach((product, index) => {
         productHtml += `
            <div class="cateogy_box pharmacy_category_box"
            onclick="renderInSubCategory('${product.under_category}','${product.id}')">
@@ -6643,7 +6739,7 @@ function getCategory99store2() {
     success: function (response) {
       if (response.status == "success") {
         let categoryHtml = "";
-        response.data.map((item) => {
+        response.data.slice(0, 8).map((item) => {
           categoryHtml += `
 <div class="cateogy_box pharmacy_category_box"
      onclick="renderInSubCategory('${item.under_category}','${item.id}')">
@@ -6678,7 +6774,7 @@ function getCategory99store3() {
     success: function (response) {
       if (response.status == "success") {
         let categoryHtml = "";
-        response.data.map((item) => {
+        response.data.slice(0, 8).map((item) => {
 
           categoryHtml += `
 <div class="cateogy_box pharmacy_category_box"
@@ -6714,7 +6810,7 @@ function getCategory99store4() {
     success: function (response) {
       if (response.status == "success") {
         let categoryHtml = "";
-        response.data.map((item) => {
+        response.data.slice(0, 8).map((item) => {
           categoryHtml += `
 <div class="cateogy_box pharmacy_category_box"
      onclick="renderInSubCategory('${item.under_category}','${item.id}')">
@@ -6749,7 +6845,7 @@ function getCategory99store5() {
     success: function (response) {
       if (response.status == "success") {
         let categoryHtml = "";
-        response.data.map((item) => {
+        response.data.slice(0, 8).map((item) => {
           categoryHtml += `
 <div class="cateogy_box pharmacy_category_box"
      onclick="renderInSubCategory('${item.under_category}','${item.id}')">
@@ -7041,7 +7137,7 @@ function getCategoryElectricity2() {
         console.log(response.data);
         let storeData = response.data;
         let storeHtml = "";
-        storeData.map((item) => {
+        storeData.slice(0, 8).map((item) => {
           storeHtml += `<div class="top_electric_img"
                onclick="renderInSubCategory('${item.under_category}','${item.id}')">
               <img src="${imgUrl + item.image_path}" alt="">
@@ -7071,7 +7167,7 @@ function getCategoryElectricity3() {
         console.log(response.data);
         let storeData = response.data;
         let storeHtml = "";
-        storeData.map((item) => {
+        storeData.slice(0, 8).map((item) => {
           storeHtml += `<div class="top_electric_img"
                onclick="renderInSubCategory('${item.under_category}','${item.id}')">
               <img src="${imgUrl + item.image_path}" alt="">
@@ -7102,7 +7198,7 @@ function getCategoryElectricity4() {
         console.log(response.data);
         let storeData = response.data;
         let storeHtml = "";
-        storeData.map((item) => {
+        storeData.slice(0, 8).map((item) => {
           storeHtml += `<div class="top_electric_img"
                onclick="renderInSubCategory('${item.under_category}','${item.id}')">
               <img src="${imgUrl + item.image_path}" alt="">
@@ -7133,7 +7229,7 @@ function getCategoryElectricity5() {
         console.log(response.data);
         let storeData = response.data;
         let storeHtml = "";
-        storeData.map((item) => {
+        storeData.slice(0, 8).map((item) => {
           storeHtml += `<div class="top_electric_img"
                onclick="renderInSubCategory('${item.under_category}','${item.id}')">
               <img src="${imgUrl + item.image_path}" alt="">
@@ -7171,7 +7267,7 @@ function getElectricityBanner1() {
       let bannerHtml = "";
       response.data.forEach((banner) => {
         bannerHtml += `
-          <div class="item">
+          <div class="item c6">
             <img src="${imgUrl + banner.img_path}" alt="">
           </div>
         `;
@@ -7241,7 +7337,7 @@ function getElectricityBanner2() {
       let bannerHtml = "";
       response.data.forEach((banner) => {
         bannerHtml += `
-          <div class="item">
+          <div class="item c6">
             <img src="${imgUrl + banner.img_path}" alt="">
           </div>
         `;
@@ -7312,7 +7408,7 @@ function getElectricityBanner3() {
       let bannerHtml = "";
       response.data.forEach((banner) => {
         bannerHtml += `
-          <div class="item">
+          <div class="item c6">
             <img src="${imgUrl + banner.img_path}" alt="">
           </div>
         `;
@@ -7618,10 +7714,10 @@ function getCurrentUserData() {
         $("#phone").val(data.mobile);
         if (location.pathname.includes("wallet.html")) {
 
-          $("#walletAmt").html(`₹ ${data?.wallet_balance == '' ? "0" : data?.wallet_balance }`)
+          $("#walletAmt").html(`₹ ${data?.wallet_balance == '' ? "0" : data?.wallet_balance}`)
         }
         if (location.pathname.includes("home.html")) {
-          
+
 
           $("#walletAmt").html(`₹ ${data?.wallet_balance == '' ? "0" : data?.wallet_balance}`)
         }
@@ -7856,127 +7952,127 @@ async function getCurrentLocation() {
 }
 async function getCurrentLatLong() {
 
-    // Check geolocation support
-    if (!navigator.geolocation) {
-        alert("Geolocation is not supported.");
-        return null;
-    }
+  // Check geolocation support
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported.");
+    return null;
+  }
 
-    const getLocation = (highAccuracy = true) => {
+  const getLocation = (highAccuracy = true) => {
 
-        return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
 
-            navigator.geolocation.getCurrentPosition(
+      navigator.geolocation.getCurrentPosition(
 
-                (position) => {
+        (position) => {
 
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
 
-                    console.log("Latitude:", lat);
-                    console.log("Longitude:", lng);
-                    console.log("Accuracy:", position.coords.accuracy);
+          console.log("Latitude:", lat);
+          console.log("Longitude:", lng);
+          console.log("Accuracy:", position.coords.accuracy);
 
-                    resolve({
-                        lat: lat,
-                        lng: lng,
-                        accuracy: position.coords.accuracy
-                    });
-                },
+          resolve({
+            lat: lat,
+            lng: lng,
+            accuracy: position.coords.accuracy
+          });
+        },
 
-                (error) => {
+        (error) => {
 
-                    console.log(
-                        `Location Error (${highAccuracy ? "High" : "Low"} Accuracy):`,
-                        error
-                    );
+          console.log(
+            `Location Error (${highAccuracy ? "High" : "Low"} Accuracy):`,
+            error
+          );
 
-                    reject(error);
-                },
+          reject(error);
+        },
 
-                {
-                    enableHighAccuracy: highAccuracy,
-                    timeout: highAccuracy ? 20000 : 10000,
-                    maximumAge: highAccuracy ? 0 : 60000
-                }
-            );
+        {
+          enableHighAccuracy: highAccuracy,
+          timeout: highAccuracy ? 20000 : 10000,
+          maximumAge: highAccuracy ? 0 : 60000
+        }
+      );
 
-        });
+    });
 
-    };
+  };
 
+
+  try {
+
+    // --------------------------------
+    // First attempt: GPS
+    // --------------------------------
+
+    console.log("Getting high accuracy location...");
+
+    const location = await getLocation(true);
+
+    return location;
+
+  } catch (error) {
+
+    console.log("High accuracy failed.");
+
+    // --------------------------------
+    // Second attempt: Network location
+    // --------------------------------
 
     try {
 
-        // --------------------------------
-        // First attempt: GPS
-        // --------------------------------
+      console.log("Trying low accuracy location...");
 
-        console.log("Getting high accuracy location...");
+      const location = await getLocation(false);
 
-        const location = await getLocation(true);
+      return location;
 
-        return location;
+    } catch (error2) {
 
-    } catch (error) {
+      console.log("Second location attempt failed:", error2);
 
-        console.log("High accuracy failed.");
+      switch (error2.code) {
 
-        // --------------------------------
-        // Second attempt: Network location
-        // --------------------------------
+        case error2.PERMISSION_DENIED:
 
-        try {
+          alert(
+            "Location permission denied. Please allow location permission from App Settings."
+          );
 
-            console.log("Trying low accuracy location...");
-
-            const location = await getLocation(false);
-
-            return location;
-
-        } catch (error2) {
-
-            console.log("Second location attempt failed:", error2);
-
-            switch (error2.code) {
-
-                case error2.PERMISSION_DENIED:
-
-                    alert(
-                        "Location permission denied. Please allow location permission from App Settings."
-                    );
-
-                    break;
+          break;
 
 
-                case error2.POSITION_UNAVAILABLE:
+        case error2.POSITION_UNAVAILABLE:
 
-                    alert(
-                        "Location is currently unavailable. Please turn ON GPS and try again."
-                    );
+          alert(
+            "Location is currently unavailable. Please turn ON GPS and try again."
+          );
 
-                    break;
-
-
-                case error2.TIMEOUT:
-
-                    alert(
-                        "Location request timed out. Please check your GPS and try again."
-                    );
-
-                    break;
+          break;
 
 
-                default:
+        case error2.TIMEOUT:
 
-                    alert(
-                        "Unable to get your current location."
-                    );
-            }
+          alert(
+            "Location request timed out. Please check your GPS and try again."
+          );
 
-            return null;
-        }
+          break;
+
+
+        default:
+
+          alert(
+            "Unable to get your current location."
+          );
+      }
+
+      return null;
     }
+  }
 }
 function handleCurrentAddress(item) {
 

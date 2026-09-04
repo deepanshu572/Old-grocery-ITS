@@ -5216,3 +5216,24 @@ transition: .2s ease;
     }
 }
 
+
+@media screen and (max-width: 375px) {
+
+
+.banner_Sec1 {
+    width: 100%;
+    height: 115px;
+}
+.banner_Sec2{
+  width: 100%;
+}
+
+.banner_Sec2 div {
+    width: 180px;
+    height: 112px;
+    padding: 10px;
+    box-shadow: 0px 0px 4px 4px rgba(237, 237, 237, 0.519);
+    border-radius: 10px;
+    overflow: hidden;
+}
+}
